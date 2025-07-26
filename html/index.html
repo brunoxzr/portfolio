@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bruno Yudi Kay - Desenvolvedor & Especialista em IA</title>
+    <meta name="description" content="Desenvolvedor apaixonado por IA, dados e soluções públicas. Transformando código em soluções reais para a sociedade.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+    
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Bruno Yudi Kay</div>
+            <div class="loading-subtitle">Carregando experiência...</div>
+        </div>
+    </div>
+
+    <!-- Custom Particles System -->
+    <canvas id="particles-canvas" class="particles-canvas"></canvas>
+
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="bg-animation"></div>
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <div class="nav__logo">
+                <a href="#home" class="nav__logo-link">
+                    <span class="logo-text">Bruno Yudi Kay</span>
+                    <div class="logo-underline"></div>
+                </a>
+            </div>
+            
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="#home" class="nav__link active-link">
+                            <span>Início</span>
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#about" class="nav__link">
+                            <span>Sobre</span>
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#projects" class="nav__link">
+                            <span>Projetos</span>
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#skills" class="nav__link">
+                            <span>Habilidades</span>
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#contact" class="nav__link">
+                            <span>Contato</span>
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="nav__close" id="nav-close">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            
+            <div class="nav__actions">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Alternar tema">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </button>
+                
+                <div class="nav__toggle" id="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="hero-section" id="home">
+            <div class="container hero-content">
+                <div class="hero-text">
+                    <div class="hero-greeting">
+                        <span class="greeting-text">Olá, eu sou</span>
+                        <div class="greeting-line"></div>
+                    </div>
+                    <h1 class="hero-title">
+                        <span class="title-line">Bruno Yudi</span>
+                        <span class="title-line">Kay</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Transformando <span class="text-gradient">código</span> em soluções reais para a <span class="text-gradient">sociedade</span>
+                    </p>
+                    <p class="hero-description">
+                        Estagiário em Ciência, Tecnologia e Inovação na Prefeitura de Assaí/PR, especializado em IA, dados e desenvolvimento de soluções públicas que geram impacto social.
+                    </p>
+                    
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn-primary">
+                            <span class="btn-text">Entrar em Contato</span>
+                            <i class="fas fa-arrow-right btn-icon"></i>
+                            <div class="btn-bg"></div>
+                        </a>
+                        <a href="#" class="btn-secondary" download>
+                            <span class="btn-text">Ver Currículo</span>
+                            <i class="fas fa-download btn-icon"></i>
+                            <div class="btn-bg"></div>
+                        </a>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="3">0</div>
+                            <div class="stat-label">Projetos</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="2">0</div>
+                            <div class="stat-label">Anos Experiência</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="100">0</div>
+                            <div class="stat-label">% Dedicação</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hero-visual">
+                    <div class="hero-image-container">
+                        <div class="image-bg-effect"></div>
+                        <img src="../imgs/bruno.png" alt="Bruno Yudi Kay" class="hero-img">
+                        <div class="image-overlay"></div>
+                        <div class="orbit-ring ring-1"></div>
+                        <div class="orbit-ring ring-2"></div>
+                        <div class="orbit-ring ring-3"></div>
+                    </div>
+                    
+                    <!-- Floating Icons -->
+                    <div class="floating-icons">
+                        <div class="floating-icon icon-1">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <div class="floating-icon icon-2">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="floating-icon icon-3">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="floating-icon icon-4">
+                            <i class="fas fa-database"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="scroll-indicator">
+                <a href="#about" class="scroll-link">
+                    <div class="scroll-text">Scroll</div>
+                    <div class="scroll-arrow">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag">Sobre Mim</div>
+                    <h2 class="section-title">
+                        <span class="title-word">Conheça</span>
+                        <span class="title-word">minha</span>
+                        <span class="title-word">trajetória</span>
+                    </h2>
+                    <p class="section-subtitle">Desenvolvedor apaixonado por criar soluções que fazem a diferença</p>
+                </div>
+                
+                <div class="about-content">
+                    <div class="about-text">
+                        <div class="text-block">
+                            <h3>Minha Jornada</h3>
+                            <p>Sou um desenvolvedor apaixonado por <strong>inteligência artificial</strong>, <strong>análise de dados</strong> e <strong>soluções públicas</strong>. Atualmente trabalho como estagiário na Prefeitura de Assaí/PR, onde desenvolvo sistemas que geram transformação social através da tecnologia.</p>
+                        </div>
+                        
+                        <div class="text-block">
+                            <h3>Minha Missão</h3>
+                            <p>Criar soluções inovadoras que impactem positivamente a sociedade, sempre buscando a excelência técnica e o desenvolvimento sustentável. Acredito que a tecnologia deve servir às pessoas e contribuir para um mundo melhor.</p>
+                        </div>
+                        
+                        <div class="expertise-list">
+                            <div class="expertise-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Desenvolvimento de sistemas inteligentes com IA</span>
+                            </div>
+                            <div class="expertise-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Análise de dados para tomada de decisões</span>
+                            </div>
+                            <div class="expertise-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Soluções públicas que geram impacto social</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-visual">
+                        <div class="info-cards">
+                            <div class="info-card">
+                                <div class="card-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="card-content">
+                                    <h4>Localização</h4>
+                                    <p>Assaí - Paraná, Brasil</p>
+                                </div>
+                            </div>
+                            
+                            <div class="info-card">
+                                <div class="card-icon">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <div class="card-content">
+                                    <h4>Status</h4>
+                                    <p>Disponível para projetos</p>
+                                </div>
+                            </div>
+                            
+                            <div class="info-card">
+                                <div class="card-icon">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <div class="card-content">
+                                    <h4>Foco</h4>
+                                    <p>IA & Soluções Públicas</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag">Meu Trabalho</div>
+                    <h2 class="section-title">
+                        <span class="title-word">Projeto</span>
+                        <span class="title-word">em</span>
+                        <span class="title-word">Destaque</span>
+                    </h2>
+                    <p class="section-subtitle">Conheça meu principal projeto de IA</p>
+                </div>
+                
+                <div class="project-showcase">
+                    <div class="project-main">
+                        <div class="project-visual">
+                            <div class="project-image-container">
+                                <img src="sources/site.png" alt="ClassEye Sistema" class="project-image">
+                                <div class="project-overlay">
+                                    <div class="overlay-content">
+                                        <a href="classeye.html" class="project-link" target="_blank">
+                                            <i class="fas fa-external-link-alt"></i>
+                                            <span>Ver Projeto</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="project-tech-stack">
+                                <div class="tech-item">
+                                    <i class="fab fa-python"></i>
+                                    <span>Python</span>
+                                </div>
+                                <div class="tech-item">
+                                    <i class="fas fa-eye"></i>
+                                    <span>YOLO</span>
+                                </div>
+                                <div class="tech-item">
+                                    <i class="fas fa-camera"></i>
+                                    <span>OpenCV</span>
+                                </div>
+                                <div class="tech-item">
+                                    <i class="fas fa-server"></i>
+                                    <span>Flask</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="project-content">
+                            <div class="project-category">
+                                <i class="fas fa-brain"></i>
+                                <span>Inteligência Artificial</span>
+                            </div>
+                            
+                            <h3 class="project-title">ClassEye</h3>
+                            
+                            <p class="project-description">
+                                Sistema de monitoramento educacional inteligente que utiliza YOLO e Flask para análise em tempo real de ambientes de aprendizagem, otimizando a experiência educacional através de visão computacional avançada.
+                            </p>
+                            
+                            <div class="project-features">
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>Detecção em tempo real de objetos e pessoas</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>Análise comportamental de estudantes</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>Dashboard interativo para professores</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>Relatórios automáticos de engajamento</span>
+                                </div>
+                            </div>
+                            
+                            <div class="project-stats">
+                                <div class="stat">
+                                    <div class="stat-value">82%</div>
+                                    <div class="stat-label">Precisão</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value">30fps</div>
+                                    <div class="stat-label">Performance</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value">Real-time</div>
+                                    <div class="stat-label">Análise</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag">Competências</div>
+                    <h2 class="section-title">
+                        <span class="title-word">Habilidades</span>
+                        <span class="title-word">&</span>
+                        <span class="title-word">Tecnologias</span>
+                    </h2>
+                    <p class="section-subtitle">Minhas competências técnicas e interpessoais</p>
+                </div>
+                
+                <div class="skills-container">
+                    <div class="skills-grid">
+                        <!-- Programming Languages -->
+                        <div class="skill-category">
+                            <div class="category-header">
+                                <div class="category-icon">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <h3>Linguagens</h3>
+                            </div>
+                            <div class="skills-list">
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Python</span>
+                                        <span class="skill-percent">90%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="90"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">JavaScript</span>
+                                        <span class="skill-percent">85%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="85"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">PHP</span>
+                                        <span class="skill-percent">75%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="75"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Frameworks -->
+                        <div class="skill-category">
+                            <div class="category-header">
+                                <div class="category-icon">
+                                    <i class="fas fa-layer-group"></i>
+                                </div>
+                                <h3>Frameworks</h3>
+                            </div>
+                            <div class="skills-list">
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Flask</span>
+                                        <span class="skill-percent">85%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="85"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Laravel</span>
+                                        <span class="skill-percent">80%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="80"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">OpenCV</span>
+                                        <span class="skill-percent">75%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="75"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- AI & ML -->
+                        <div class="skill-category">
+                            <div class="category-header">
+                                <div class="category-icon">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <h3>IA & ML</h3>
+                            </div>
+                            <div class="skills-list">
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">YOLO</span>
+                                        <span class="skill-percent">80%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="80"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Scikit-learn</span>
+                                        <span class="skill-percent">75%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="75"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">TensorFlow</span>
+                                        <span class="skill-percent">70%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="70"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Databases -->
+                        <div class="skill-category">
+                            <div class="category-header">
+                                <div class="category-icon">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <h3>Banco de Dados</h3>
+                            </div>
+                            <div class="skills-list">
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">PostgreSQL</span>
+                                        <span class="skill-percent">85%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="85"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">SQLite</span>
+                                        <span class="skill-percent">80%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="80"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag">Contato</div>
+                    <h2 class="section-title">
+                        <span class="title-word">Vamos</span>
+                        <span class="title-word">trabalhar</span>
+                        <span class="title-word">juntos</span>
+                    </h2>
+                    <p class="section-subtitle">Entre em contato e vamos criar algo incrível</p>
+                </div>
+                
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-card">
+                            <div class="card-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>Email</h3>
+                                <p>Envie-me um email</p>
+                                <a href="mailto:bruno.kay2304@gmail.com">bruno.kay2304@gmail.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-card">
+                            <div class="card-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>WhatsApp</h3>
+                                <p>Vamos conversar</p>
+                                <a href="https://wa.me/5543988506395" target="_blank">(43) 98850-6395</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-card">
+                            <div class="card-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>Localização</h3>
+                                <p>Onde estou</p>
+                                <span>Assaí - PR, Brasil</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <form class="contact-form" id="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Nome completo</label>
+                                <input type="text" id="name" name="name" required>
+                                <div class="input-line"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                                <div class="input-line"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Assunto</label>
+                            <input type="text" id="subject" name="subject" required>
+                            <div class="input-line"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Mensagem</label>
+                            <textarea id="message" name="message" rows="6" required></textarea>
+                            <div class="input-line"></div>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">
+                            <span class="btn-text">Enviar Mensagem</span>
+                            <i class="fas fa-paper-plane btn-icon"></i>
+                            <div class="btn-bg"></div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>Bruno Yudi Kay</h3>
+                    <p>Desenvolvedor especializado em IA e soluções públicas, transformando código em impacto social.</p>
+                    
+                    <div class="footer-social">
+                        <a href="https://github.com/brunoxzr" target="_blank" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/bruno-yudi-kay-383201317/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="mailto:bruno.kay2304@gmail.com" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Navegação</h4>
+                        <a href="#home">Início</a>
+                        <a href="#about">Sobre</a>
+                        <a href="#projects">Projetos</a>
+                        <a href="#skills">Habilidades</a>
+                        <a href="#contact">Contato</a>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4>Contato</h4>
+                        <a href="mailto:bruno.kay2304@gmail.com">Email</a>
+                        <a href="https://wa.me/5543988506395" target="_blank">WhatsApp</a>
+                        <a href="#" download>Currículo</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Bruno Yudi Kay. Todos os direitos reservados.</p>
+                
+                <button class="scroll-top" id="scroll-top" aria-label="Voltar ao topo">
+                    <i class="fas fa-arrow-up"></i>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
