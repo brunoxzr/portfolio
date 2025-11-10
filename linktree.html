@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bruno Yudi Kay | Links Oficiais</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            fundo: "#0a0a0a",
+            ouro: "#c7a24c",
+            primario: "#00f2fe",
+            secundario: "#4facfe",
+          },
+          fontFamily: {
+            inter: ["Inter", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body class="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-[#0a0a0a] via-[#111] to-[#0a0a0a] text-white font-inter px-6">
+
+  <!-- Avatar aprimorado -->
+  <div class="relative mb-6 group">
+    <div class="relative w-40 h-40 rounded-full border-4 border-transparent bg-gradient-to-tr from-secundario to-primario p-[3px] shadow-[0_0_30px_rgba(79,172,254,0.25)] transition-transform duration-500 group-hover:scale-105">
+      <div class="absolute inset-0 bg-black/40 rounded-full z-10"></div>
+      <img src="imgs/bruno.jpg" alt="Bruno Yudi Kay" class="w-full h-full object-cover rounded-full brightness-90">
+    </div>
+  </div>
+
+  <!-- Nome -->
+  <h1 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primario via-secundario to-ouro text-center">
+    Bruno Yudi Kay
+  </h1>
+
+  <!-- Subtítulo -->
+  <p class="text-gray-400 mt-3 mb-10 text-center text-sm md:text-base max-w-md leading-relaxed">
+    <span class="text-white/90 font-medium">Desenvolvedor Web</span> & Criador de Conteúdo.  
+    <br class="hidden sm:block">
+    Tecnologia, design e comunicação com propósito.
+  </p>
+
+  <!-- Links -->
+  <div class="flex flex-col w-full max-w-sm gap-4 animate-fadeIn">
+    <a href="https://wa.me/5543988506395" target="_blank"
+      class="flex items-center justify-center gap-3 py-3 rounded-xl bg-gradient-to-r from-primario to-secundario font-semibold text-gray-900 hover:opacity-90 hover:scale-[1.02] shadow-md hover:shadow-lg transition-all">
+      <i class="fab fa-whatsapp text-lg"></i> WhatsApp
+    </a>
+
+    <a href="https://instagram.com/brunoyudikay" target="_blank"
+      class="flex items-center justify-center gap-3 py-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:scale-[1.02] transition-all">
+      <i class="fab fa-instagram text-pink-400 text-lg"></i> Instagram
+    </a>
+
+    <a href="https://github.com/brunoxzr" target="_blank"
+      class="flex items-center justify-center gap-3 py-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:scale-[1.02] transition-all">
+      <i class="fab fa-github text-gray-300 text-lg"></i> GitHub
+    </a>
+
+    <a href="https://www.linkedin.com/in/bruno-yudi-kay-383201317/?originalSubdomain=br" target="_blank"
+      class="flex items-center justify-center gap-3 py-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:scale-[1.02] transition-all">
+      <i class="fab fa-linkedin text-blue-400 text-lg"></i> LinkedIn
+    </a>
+
+    <a href="index.html"
+      class="flex items-center justify-center gap-3 py-3 rounded-xl bg-gradient-to-r from-ouro to-yellow-500 font-semibold text-gray-900 hover:opacity-90 hover:scale-[1.02] shadow-md hover:shadow-lg transition-all">
+      <i class="fa-solid fa-globe text-lg"></i> Portfólio Profissional
+    </a>
+  </div>
+
+  <!-- Rodapé -->
+  <footer class="mt-12 text-gray-500 text-xs text-center">
+    © 2025 <span class="text-white font-semibold">Bruno Yudi Kay</span>
+  </footer>
+
+  <!-- Efeito suave de entrada -->
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 1s ease-out both;
+    }
+  </style>
+
+</body>
+</html>
