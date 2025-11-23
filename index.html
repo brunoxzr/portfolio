@@ -1,701 +1,1688 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bruno Yudi Kay - Desenvolvedor & Especialista em IA</title>
-    <meta name="description" content="Desenvolvedor apaixonado por IA, dados e soluções públicas. Transformando código em soluções reais para a sociedade.">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
-    
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Bruno Yudi Kay — Portfólio</title>
+  <meta name="description" content="Portfólio de Bruno Yudi Kay — Desenvolvedor Full-Stack, IA e soluções públicas.">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font + Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js" defer></script>
+<script>
+const c2 = document.createElement("canvas");
+c2.id = "neural";
+document.body.appendChild(c2);
+
+const cx = c2.getContext("2d");
+
+function resizeNet(){
+  c2.width = innerWidth;
+  c2.height = innerHeight;
+}
+resizeNet();
+addEventListener("resize", resizeNet);
+
+let nodes = Array.from({length: 40},()=>({
+  x: Math.random()*c2.width,
+  y: Math.random()*c2.height,
+  vx: (Math.random()-.5)*0.8,
+  vy: (Math.random()-.5)*0.8
+}));
+
+function animateNet(){
+  cx.clearRect(0,0,c2.width,c2.height);
+
+  for(let a of nodes){
+    a.x+=a.vx; a.y+=a.vy;
+    if(a.x<0||a.x>c2.width) a.vx*=-1;
+    if(a.y<0||a.y>c2.height) a.vy*=-1;
+
+    cx.beginPath();
+    cx.fillStyle="rgba(120,180,255,.15)";
+    cx.arc(a.x,a.y,3,0,Math.PI*2);
+    cx.fill();
+  }
+
+  for(let i=0;i<nodes.length;i++){
+    for(let j=i+1;j<nodes.length;j++){
+      const dx = nodes[i].x-nodes[j].x;
+      const dy = nodes[i].y-nodes[j].y;
+      const d = Math.hypot(dx,dy);
+
+      if(d<180){
+        cx.beginPath();
+        cx.strokeStyle=`rgba(80,150,255,${(180-d)/600})`;
+        cx.lineWidth=1;
+        cx.moveTo(nodes[i].x,nodes[i].y);
+        cx.lineTo(nodes[j].x,nodes[j].y);
+        cx.stroke();
+      }
+    }
+  }
+
+  requestAnimationFrame(animateNet);
+}
+animateNet();
+</script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { inter: ["Inter", "system-ui", "sans-serif"] },
+          colors: {
+            night: {
+              900: "#050507",
+              800: "#0a0b0f",
+              700: "#11131a",
+              600: "#171a24",
+              500: "#1f2330",
+            }
+          },
+          boxShadow: {
+            glow: "0 0 80px rgba(56,189,248,.35)",
+            glowStrong: "0 0 140px rgba(56,189,248,.55)",
+            soft: "0 20px 60px rgba(0,0,0,.55)"
+          },
+          keyframes: {
+            floaty: { "0%,100%": { transform: "translateY(0px)" }, "50%": { transform: "translateY(-14px)" } },
+            orbit: { "0%": { transform: "rotate(0deg)" }, "100%": { transform: "rotate(360deg)" } },
+            pulseSoft: { "0%,100%": { opacity: .35 }, "50%": { opacity: .7 } },
+            shimmer: { "0%": { transform: "translateX(-120%)" }, "100%": { transform: "translateX(120%)" } },
+            rise: { "0%": { opacity: 0, transform: "translateY(24px) scale(.98)" }, "100%": { opacity: 1, transform: "translateY(0) scale(1)" } }
+          },
+          animation: {
+            floaty: "floaty 6s ease-in-out infinite",
+            orbitSlow: "orbit 28s linear infinite",
+            orbitMed: "orbit 20s linear infinite reverse",
+            orbitFast: "orbit 14s linear infinite",
+            pulseSoft: "pulseSoft 3.5s ease-in-out infinite",
+            shimmer: "shimmer 2.4s ease-in-out infinite",
+            rise: "rise 1s ease-out both"
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root{ color-scheme: dark; }
+    body { font-family: Inter, system-ui, sans-serif; }
+
+    /* background cinematic */
+    .bg-grid {
+      background-image:
+        radial-gradient(circle at 10% 10%, rgba(56,189,248,.14), transparent 40%),
+        radial-gradient(circle at 90% 20%, rgba(168,85,247,.12), transparent 40%),
+        radial-gradient(circle at 30% 90%, rgba(34,197,94,.10), transparent 40%),
+        linear-gradient(to bottom, #050507, #0a0b0f 40%, #050507);
+    }
+
+    /* glass */
+    .glass{
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(10px);
+    }
+
+
+
+    /* particles canvas behind */
+    #particles {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: .9;
+    }
+
+    /* buttons socials */
+    .social-btn{
+      height:56px; width:56px; border-radius:18px;
+      background: rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.10);
+      display:grid; place-items:center;
+      color: rgba(255,255,255,.75);
+      transition: .25s ease;
+      backdrop-filter: blur(10px);
+    }
+    .social-btn:hover{
+      background: rgba(255,255,255,.10);
+      color: rgb(125 211 252);
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 0 25px rgba(56,189,248,0.35);
+    }
+
+    /* glowing shadow */
+    .shadow-glow { box-shadow: 0 0 25px rgba(56,189,248,0.35); }
+    .shadow-glowStrong { box-shadow: 0 0 40px rgba(56,189,248,0.55); }
+
+    /* skillbar */
+    .skillbar{
+      width:100%; height:12px; border-radius:999px;
+      background: rgba(255,255,255,.08);
+      overflow:hidden; position:relative;
+    }
+    .skillbar-progress{
+      height:100%;
+      width:0%;
+      border-radius:999px;
+      background: linear-gradient(90deg, #7dd3fc, #67e8f9, #c4b5fd);
+      transition: width 1.7s ease;
+    }
+
+    /* tilt cards */
+    .tilt3d{ transform-style: preserve-3d; transition: transform .2s ease; }
+    .tilt3d:hover{ transform: perspective(900px) rotateX(6deg) rotateY(-6deg) scale(1.03); }
+
+    /* tech tags */
+    .tech-tag{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:.35rem .6rem; border-radius:999px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      font-size:12px; color:rgba(255,255,255,.85);
+    }
+
+    /* fade in app */
+    .fade-start{ opacity:0; transform: translateY(8px); }
+    .fade-in{ opacity:1; transform: translateY(0); transition: 1s ease; }
+  </style>
 </head>
-<body>
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loading-screen">
-        <div class="loading-content">
-            <div class="loading-spinner"></div>
-            <div class="loading-text">Bruno Yudi Kay</div>
-            <div class="loading-subtitle">Carregando experiência...</div>
+
+<body class="bg-grid text-white min-h-screen relative overflow-x-hidden">
+
+  <!-- Particles -->
+  <canvas id="particles"></canvas>
+<!-- NAV -->
+<header class="fixed top-0 inset-x-0 z-50">
+  <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="glass mt-4 rounded-2xl px-4 sm:px-6 py-3 flex items-center justify-between shadow-soft">
+
+      <!-- LOGO -->
+      <a href="#home" class="flex items-center gap-3 group">
+        <span class="h-9 w-9 rounded-xl bg-sky-400/15 grid place-items-center ring-1 ring-sky-300/30 group-hover:ring-sky-300/60 transition">
+          <i class="fa-solid fa-code text-sky-300"></i>
+        </span>
+        <div>
+          <p class="font-extrabold tracking-tight leading-none" data-i18n="header.name">Bruno Yudi Kay</p>
+          <p class="text-[11px] text-white/60 -mt-0.5" data-i18n="header.subtitle">Full-Stack • IA • GovTech</p>
         </div>
+      </a>
+
+      <!-- LINKS DESKTOP -->
+      <div class="hidden md:flex items-center gap-2 text-sm">
+        <a class="px-3 py-2 rounded-lg hover:bg-white/5 text-white/80 hover:text-white transition" href="#about" data-i18n="nav.about">Sobre</a>
+        <a class="px-3 py-2 rounded-lg hover:bg-white/5 text-white/80 hover:text-white transition" href="#projects" data-i18n="nav.projects">Projetos</a>
+        <a class="px-3 py-2 rounded-lg hover:bg-white/5 text-white/80 hover:text-white transition" href="#skills" data-i18n="nav.skills">Skills</a>
+        <a class="px-3 py-2 rounded-lg hover:bg-white/5 text-white/80 hover:text-white transition" href="#contact" data-i18n="nav.contact">Contato</a>
+      </div>
+
+      <!-- BOTÕES DIREITA -->
+      <div class="flex items-center gap-2">
+
+        <!-- Botão Idiomas -->
+        <button id="langBtn" class="h-10 px-3 rounded-xl glass text-xs font-semibold tracking-wide hover:bg-white/10 transition">
+          PT / EN
+        </button>
+
+        <!-- Menu mobile -->
+        <button id="menuBtn" class="md:hidden h-10 w-10 rounded-xl glass grid place-items-center hover:bg-white/10 transition" aria-label="Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+      </div>
     </div>
 
-    <!-- Custom Particles System -->
-    <canvas id="particles-canvas" class="particles-canvas"></canvas>
-
-    <!-- Animated Background -->
-    <div class="animated-bg">
-        <div class="bg-animation"></div>
-        <div class="floating-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
-            <div class="shape shape-4"></div>
-            <div class="shape shape-5"></div>
-        </div>
+    <!-- MOBILE MENU -->
+    <div id="menuPanel" class="md:hidden hidden mt-3 glass rounded-2xl p-3">
+      <a class="block px-3 py-2 rounded-lg hover:bg-white/5" href="#about" data-i18n="nav.about">Sobre</a>
+      <a class="block px-3 py-2 rounded-lg hover:bg-white/5" href="#projects" data-i18n="nav.projects">Projetos</a>
+      <a class="block px-3 py-2 rounded-lg hover:bg-white/5" href="#skills" data-i18n="nav.skills">Skills</a>
+      <a class="block px-3 py-2 rounded-lg hover:bg-white/5" href="#contact" data-i18n="nav.contact">Contato</a>
     </div>
+  </nav>
+</header>
+
+
+
+  <!-- HERO -->
+  <main id="home" class="relative z-10 fade-start">
+    <section class="min-h-screen flex items-center pt-32 md:pt-36">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
+        <div class="grid lg:grid-cols-2 gap-10 lg:gap-8 items-center">
+
+          <!-- TEXT -->
+          <div>
+            <div class="inline-flex items-center gap-2 glass rounded-full px-4 py-1.5 text-xs text-white/80 mb-5">
+              <span class="h-2 w-2 rounded-full bg-sky-300 animate-pulse"></span>
+              <span data-i18n="hero.badge">Disponível para projetos • Assaí-PR</span>
+            </div>
+
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-black leading-[1.08] tracking-tight">
+              <span data-i18n="hero.title">Construindo soluções reais</span>
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-cyan-400 to-violet-400" data-i18n="hero.titleAccent">com código, IA e impacto público.</span>
+            </h1>
+
+            <p class="mt-5 text-base sm:text-lg text-white/70 max-w-xl" data-i18n="hero.desc">
+              Sou Bruno Yudi Kay, dev Full-Stack com foco em Laravel, Python e Visão Computacional,
+              criando sistemas reais para escolas, prefeitura e projetos locais.
+            </p>
+
+            <div class="mt-7 flex flex-col sm:flex-row gap-3">
+              <a href="#projects"
+                 class="group inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-sky-400 to-cyan-300 text-night-900 font-bold px-6 py-3 shadow-glow hover:shadow-glowStrong transition">
+                <span data-i18n="hero.ctaProjects">Ver Projetos</span>
+                <i class="fa-solid fa-arrow-right group-hover:translate-x-0.5 transition"></i>
+              </a>
+              <a href="#contact"
+                 class="inline-flex items-center justify-center gap-2 rounded-xl glass px-6 py-3 font-semibold text-white/90 hover:bg-white/10 transition">
+                <span data-i18n="hero.ctaContact">Entrar em Contato</span>
+                <i class="fa-regular fa-paper-plane"></i>
+              </a>
+            </div>
+
+            <!-- counters -->
+            <div class="mt-9 grid grid-cols-3 max-w-md gap-3">
+              <div class="glass rounded-xl p-4 text-center">
+                <div class="text-2xl font-extrabold text-sky-300 counter" data-target="12">0</div>
+                <div class="text-[11px] uppercase tracking-widest text-white/60 mt-1" data-i18n="hero.statProjects">Projetos</div>
+              </div>
+              <div class="glass rounded-xl p-4 text-center">
+                <div class="text-2xl font-extrabold text-cyan-200 counter" data-target="2">0</div>
+                <div class="text-[11px] uppercase tracking-widest text-white/60 mt-1" data-i18n="hero.statYears">Anos XP</div>
+              </div>
+              <div class="glass rounded-xl p-4 text-center">
+                <div class="text-2xl font-extrabold text-violet-300 counter" data-target="100">0</div>
+                <div class="text-[11px] uppercase tracking-widest text-white/60 mt-1" data-i18n="hero.statDedication">Dedicação</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PHOTO -->
+          <div class="relative lg:justify-self-end order-first lg:order-last">
+            <div class="relative mx-auto w-[260px] h-[260px] sm:w-[340px] sm:h-[340px] md:w-[420px] md:h-[420px] tilt3d vignette"
+                 id="tiltCard">
+
+              <div class="absolute -inset-8 rounded-full bg-gradient-to-tr from-sky-500/25 via-cyan-300/20 to-violet-500/25 blur-3xl animate-pulseSoft"></div>
+
+              <div class="absolute inset-0 rounded-full ring-2 ring-sky-300/30 animate-orbitSlow"></div>
+              <div class="absolute inset-[-8%] rounded-full ring-2 ring-cyan-300/20 animate-orbitMed"></div>
+              <div class="absolute inset-[-16%] rounded-full ring-2 ring-violet-300/20 animate-orbitFast"></div>
+
+              <!-- floating nodes (smaller on mobile) -->
+              <div class="absolute inset-0 pointer-events-none">
+                <div class="absolute top-[8%] left-[-6%] glass w-12 h-12 sm:w-14 sm:h-14 rounded-2xl grid place-items-center animate-floaty shadow-soft">
+                  <i class="fa-brands fa-python text-sky-300 text-xl sm:text-2xl"></i>
+                </div>
+                <div class="absolute top-[18%] right-[-8%] glass w-12 h-12 sm:w-14 sm:h-14 rounded-2xl grid place-items-center animate-floaty shadow-soft" style="animation-delay:1.2s">
+                  <i class="fa-solid fa-brain text-violet-200 text-lg sm:text-xl"></i>
+                </div>
+                <div class="absolute bottom-[20%] left-[-10%] glass w-12 h-12 sm:w-14 sm:h-14 rounded-2xl grid place-items-center animate-floaty shadow-soft" style="animation-delay:2.2s">
+                  <i class="fa-solid fa-code text-cyan-200 text-lg sm:text-xl"></i>
+                </div>
+                <div class="absolute bottom-[8%] right-[-6%] glass w-12 h-12 sm:w-14 sm:h-14 rounded-2xl grid place-items-center animate-floaty shadow-soft" style="animation-delay:3.2s">
+                  <i class="fa-solid fa-database text-sky-200 text-lg sm:text-xl"></i>
+                </div>
+              </div>
+
+              <!-- photo circle -->
+              <div class="absolute inset-[10%] rounded-full overflow-hidden ring-4 ring-sky-300/70 shadow-soft bg-night-800">
+                <img
+                  src="/imgs/bruno.jpg"
+                  alt="Bruno Yudi Kay"
+                  class="w-full h-full object-cover scale-[1.02]"
+                />
+                <div class="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-black/30"></div>
+              </div>
+
+              <div class="absolute inset-[10%] rounded-full overflow-hidden pointer-events-none">
+                <div class="absolute inset-y-0 -left-1/2 w-1/2 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer"></div>
+              </div>
+            </div>
+
+            <div class="mt-6 mx-auto w-fit glass rounded-2xl px-5 py-3 text-sm text-white/80 shadow-soft" data-i18n="hero.stack">
+              <span class="text-white font-semibold" data-i18n="hero.stack.main">Full-Stack</span> • Laravel • Python • YOLO • PostgreSQL
+            </div>
+          </div>
+
+        </div>
+
+        <!-- scroll hint -->
+        <div class="mt-14 flex justify-center">
+          <a href="#about" class="group flex flex-col items-center gap-2 text-white/60 hover:text-white transition">
+            <span class="text-[11px] tracking-[0.35em] uppercase" data-i18n="nav.scroll">scroll</span>
+            <span class="h-9 w-9 rounded-full grid place-items-center glass group-hover:bg-white/10 transition">
+              <i class="fa-solid fa-arrow-down"></i>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  
+  
+<!-- SOBRE — VERSÃO SUPREMA -->
+<section id="about" class="py-28 md:py-36 relative overflow-hidden fade-start">
+
+  <!-- background glow -->
+  <div class="absolute inset-0 pointer-events-none opacity-40 blur-3xl"
+       style="background:
+         radial-gradient(circle at 20% 30%, rgba(56,189,248,.25), transparent 55%),
+         radial-gradient(circle at 80% 70%, rgba(168,85,247,.22), transparent 55%);">
+  </div>
+
+  <div class="relative z-10 mx-auto max-w-6xl px-6">
+
+    <!-- TITLE -->
+    <div class="text-center mb-20">
+      <h2 class="text-4xl md:text-5xl font-black tracking-tight 
+                 text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-cyan-300 to-violet-300" data-i18n="about.title">
+        Sobre Mim
+      </h2>
+      <p class="text-white/60 max-w-2xl mx-auto mt-4 text-lg leading-relaxed" data-i18n="about.subtitle">
+        Uma trajetória de tecnologia, visão e impacto real — tudo começando em Assaí-PR.
+      </p>
+    </div>
+
+    <!-- MAIN GRID -->
+    <div class="grid lg:grid-cols-2 gap-14 items-center">
+
+<!-- FOTO DE APRESENTAÇÃO — VERSÃO AJUSTADA -->
+<div class="relative flex items-center justify-center">
+  <div class="absolute -inset-12 bg-gradient-to-br from-sky-400/20 via-cyan-300/20 to-violet-400/20 blur-3xl"></div>
+
+  <div class="relative rounded-3xl overflow-hidden shadow-2xl shadow-black/40 tilt3d
+              w-full h-[420px] md:h-[500px]"> <!-- AQUI: mais vertical -->
+
+    <img src="imgs/palestra.jpg"
+         class="w-full h-full object-cover object-center">
+
+    <!-- overlay de acabamento -->
+    <div class="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-black/40"></div>
+  </div>
+</div>
+
+
+      <!-- TEXTO PRINCIPAL -->
+      <div class="space-y-8 text-white/85 text-lg leading-relaxed">
+
+        <p>
+          <span data-i18n="about.intro">Meu nome é Bruno Yudi Kay. Sou desenvolvedor Full-Stack especializado em Inteligência Artificial e Visão Computacional.</span>
+        </p>
+        <p data-i18n="about.work">
+          Meu trabalho nasceu da necessidade real: criar soluções que funcionam na vida das pessoas — escolas, prefeitura, setores públicos, empresas locais. Cada projeto que desenvolvo tem um propósito direto: melhorar rotinas, otimizar processos e entregar tecnologia aplicada de verdade.
+        </p>
+        <p data-i18n="about.impact">
+          Sou movido por impacto: já desenvolvi sistemas oficiais para o município de Assaí, realizei projetos educacionais reconhecidos, implementei IA em cenários reais e construí ferramentas de análise de vídeo, automação, monitoramento e atendimento inteligente.
+        </p>
+        <p data-i18n="about.belief">
+          Acredito que tecnologia não é só código: é transformação. E é isso que me guia — criar soluções completas, com design, performance, dados e inteligência, que conectam pessoas ao que realmente importa.
+        </p>
+        <p class="text-white font-semibold text-xl" data-i18n="about.focus">
+          Meu foco hoje é simples: IA aplicada, sistemas reais e inovação pública.
+        </p>
+
+        <a href="#projects"
+           class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-sky-300 to-cyan-300 font-bold text-night-900 shadow-xl hover:shadow-glowStrong transition">
+          <span data-i18n="about.cta">Ver meus projetos</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICAÇÕES -->
+<section id="awards" class="py-24 md:py-32 relative overflow-hidden fade-start">
+  <div class="absolute inset-0 pointer-events-none opacity-40 blur-3xl"
+       style="background: radial-gradient(circle at 20% 20%, #38bdf833 0%, transparent 60%),
+              radial-gradient(circle at 80% 70%, #a855f733 0%, transparent 60%);"></div>
+
+  <div class="mx-auto max-w-6xl px-6 relative z-10">
+    <div class="text-center mb-16 md:mb-20">
+      <h2 class="text-4xl md:text-5xl font-black tracking-tight
+                 text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-cyan-300 to-violet-300" data-i18n="awards.title">
+        Certificações & Reconhecimentos
+      </h2>
+      <p class="text-white/60 max-w-2xl mx-auto mt-4 text-lg leading-relaxed" data-i18n="awards.subtitle">
+        Conquistas reais em inovação, educação e tecnologia.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8 md:gap-12">
+
+      <!-- Card -->
+      <div class="relative p-[2px] rounded-3xl bg-gradient-to-br from-sky-400/20 via-cyan-300/20 to-violet-400/20">
+        <div class="bg-night-900/60 backdrop-blur-xl p-8 rounded-3xl border border-white/10 shadow-xl tilt3d">
+          <i class="fa-solid fa-award text-sky-300 text-3xl mb-5"></i>
+          <h3 class="text-xl font-bold text-white mb-2" data-i18n="awards.card1.title">Hackathon Educatech UniFil</h3>
+          <p class="text-white/60 text-sm leading-relaxed" data-i18n="awards.card1.desc">Destaque com o ClassEye na categoria de inovação educacional.</p>
+        </div>
+      </div>
+
+      <div class="relative p-[2px] rounded-3xl bg-gradient-to-br from-violet-300/20 via-sky-300/20 to-cyan-300/20">
+        <div class="bg-night-900/60 backdrop-blur-xl p-8 rounded-3xl border border-white/10 shadow-xl tilt3d">
+          <i class="fa-solid fa-trophy text-violet-300 text-3xl mb-5"></i>
+          <h3 class="text-xl font-bold text-white mb-2" data-i18n="awards.card2.title">GreenTech - 2º lugar</h3>
+          <p class="text-white/60 text-sm leading-relaxed" data-i18n="awards.card2.desc">Reconhecimento no maior Hackathon Verde do País-Brasil.</p>
+        </div>
+      </div>
+
+      <div class="relative p-[2px] rounded-3xl bg-gradient-to-br from-cyan-300/20 via-violet-300/20 to-sky-300/20">
+        <div class="bg-night-900/60 backdrop-blur-xl p-8 rounded-3xl border border-white/10 shadow-xl tilt3d">
+          <i class="fa-solid fa-medal text-cyan-300 text-3xl mb-5"></i>
+          <h3 class="text-xl font-bold text-white mb-2" data-i18n="awards.card3.title">Prefeitura de Assaí — Tecnologia</h3>
+          <p class="text-white/60 text-sm leading-relaxed" data-i18n="awards.card3.desc">Desenvolvimento de sistemas oficiais como Gov.Assaí e Conecta Assaí.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- PROJETOS -->
+<section id="projects" class="py-28 md:py-32 relative overflow-hidden fade-start">
+  <div class="absolute inset-0 blur-3xl opacity-40 pointer-events-none"
+       style="background: radial-gradient(circle at 30% 20%, #38bdf833 0%, transparent 55%),
+              radial-gradient(circle at 70% 80%, #a855f733 0%, transparent 55%);"></div>
+
+  <div class="mx-auto max-w-6xl px-6 relative z-10">
+    <div class="text-center mb-16 md:mb-20">
+      <h2 class="text-4xl md:text-5xl font-black tracking-tight">
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-cyan-300 to-violet-300" data-i18n="projects.title">
+          Projetos em Destaque
+        </span>
+      </h2>
+      <p class="text-white/60 max-w-2xl mx-auto mt-4 text-lg leading-relaxed" data-i18n="projects.subtitle">
+        Sistemas reais que desenvolvi unindo IA, visão computacional, web moderna e impacto social.
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-10 md:gap-14">
+
+      <!-- 1 ClassEye -->
+      <article class="group relative">
+        <div class="relative p-[2px] rounded-3xl bg-gradient-to-br from-sky-300/30 via-cyan-300/30 to-violet-300/30">
+          <div class="bg-night-900/55 backdrop-blur-xl p-8 rounded-3xl border border-white/10 tilt3d">
+
+            <div class="flex justify-between items-center mb-6">
+              <span class="px-4 py-1.5 text-sm rounded-full bg-sky-300/10 text-sky-300 font-semibold" data-i18n="projects.card1.badge">IA • Visão Computacional</span>
+              <i class="fa-solid fa-brain text-cyan-300 text-xl"></i>
+            </div>
+
+            <div class="relative rounded-2xl overflow-hidden shadow-lg">
+              <img src="imgs/classeye.png"
+                   class="w-full h-56 sm:h-64 object-cover group-hover:scale-105 transition duration-700"
+                   alt="ClassEye preview">
+              <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-500 flex items-center justify-center">
+                <a href="https://brunoxzr.github.io/classeye-pub" target="_blank"
+                   class="px-6 py-3 rounded-xl font-semibold bg-gradient-to-r from-sky-300 to-cyan-300 text-night-900 shadow-glow">
+                  <span data-i18n="projects.card1.more">Ver Mais</span> <i class="fa-solid fa-arrow-up-right-from-square ml-2"></i>
+                </a>
+              </div>
+            </div>
+
+            <h3 class="text-2xl font-bold mt-6 text-white" data-i18n="projects.card1.title">ClassEye</h3>
+            <p class="text-white/60 mt-3 leading-relaxed" data-i18n="projects.card1.desc">
+              Sistema real em Python + Flask com YOLO para detectar atenção em sala de aula, gerar relatórios (CSV/gráficos) e análise em tempo real. Integrado ao Tkinter e usado no Vale do Sol.
+            </p>
+
+            <div class="flex flex-wrap gap-2 mt-5">
+              <span class="tech-tag" data-i18n="projects.card1.tech1"><i class="fa-brands fa-python"></i> Python</span>
+              <span class="tech-tag" data-i18n="projects.card1.tech2"><i class="fa-solid fa-eye"></i> YOLO</span>
+              <span class="tech-tag" data-i18n="projects.card1.tech3"><i class="fa-solid fa-camera"></i> OpenCV</span>
+              <span class="tech-tag" data-i18n="projects.card1.tech4"><i class="fa-solid fa-server"></i> Flask</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+
+      <!-- 2 CEEP+ — Portal Acadêmico com Banco -->
+      <article class="group relative">
+        <div class="relative p-[2px] rounded-3xl bg-gradient-to-br from-violet-300/30 via-sky-300/30 to-cyan-300/30">
+          <div class="bg-night-900/55 backdrop-blur-xl p-8 rounded-3xl border border-white/10 tilt3d">
+
+            <div class="flex justify-between items-center mb-6">
+              <span class="px-4 py-1.5 text-sm rounded-full bg-violet-300/10 text-violet-300 font-semibold" data-i18n="projects.card2.badge">Plataforma • Acadêmico</span>
+              <i class="fa-solid fa-graduation-cap text-violet-300 text-xl"></i>
+            </div>
+
+            <div class="relative rounded-2xl overflow-hidden shadow-lg">
+              <img src="imgs/ceep.png"
+                   class="w-full h-56 sm:h-64 object-cover group-hover:scale-105 transition duration-700"
+                   alt="CEEP+ portal">
+            </div>
+
+            <h3 class="text-2xl font-bold mt-6 text-white" data-i18n="projects.card2.title">CEEP+ — Portal Acadêmico</h3>
+            <p class="text-white/60 mt-3 leading-relaxed" data-i18n="projects.card2.desc">
+              Plataforma acadêmica criada em Laravel + MySQL com login, permissões, gerenciamento de alunos, cursos, turmas e dashboard administrativo. Puxa informações reais do banco em todos os módulos.
+            </p>
+
+            <div class="flex flex-wrap gap-2 mt-5">
+              <span class="tech-tag" data-i18n="projects.card2.tech1"><i class="fa-brands fa-php"></i> Laravel</span>
+              <span class="tech-tag" data-i18n="projects.card2.tech2"><i class="fa-solid fa-database"></i> MySQL</span>
+              <span class="tech-tag" data-i18n="projects.card2.tech3"><i class="fa-solid fa-layer-group"></i> Painéis</span>
+            </div>
+
+          </div>
+        </div>
+      </article>
+
+
+      <!-- 3 Chatbot Inteligente com Banco -->
+      <article class="group relative">
+        <div class="relative p-[2px] rounded-3xl bg-gradient-to-br from-sky-300/30 via-cyan-300/30 to-violet-300/30">
+          <div class="bg-night-900/55 backdrop-blur-xl p-8 rounded-3xl border border-white/10 tilt3d">
+
+            <div class="flex justify-between items-center mb-6">
+              <span class="px-4 py-1.5 text-sm rounded-full bg-sky-300/10 text-sky-300 font-semibold" data-i18n="projects.card3.badge">Chatbots • Banco de Dados</span>
+              <i class="fa-solid fa-robot text-sky-300 text-xl"></i>
+            </div>
+
+            <div class="relative rounded-2xl overflow-hidden shadow-lg">
+              <img src="imgs/chatbot.png"
+                   class="w-full h-56 sm:h-64 object-cover group-hover:scale-105 transition duration-700"
+                   alt="Chatbot Banco de Dados">
+            </div>
+
+            <h3 class="text-2xl font-bold mt-6 text-white" data-i18n="projects.card3.title">Chatbot Inteligente Integrado ao Banco</h3>
+            <p class="text-white/60 mt-3 leading-relaxed" data-i18n="projects.card3.desc">
+              Chatbot profissional usando wwjs + PostgreSQL + Laravel API. Ele consulta o banco e responde automaticamente com informações oficiais: horários, setores, serviços, documentos, contatos e dúvidas frequentes. Mesma base usada pelo Conecta Assaí.
+            </p>
+
+            <div class="flex flex-wrap gap-2 mt-5">
+              <span class="tech-tag" data-i18n="projects.card3.tech1"><i class="fa-brands fa-node-js"></i> wwjs</span>
+              <span class="tech-tag" data-i18n="projects.card3.tech2"><i class="fa-solid fa-database"></i> PostgreSQL</span>
+              <span class="tech-tag" data-i18n="projects.card3.tech3"><i class="fa-solid fa-robot"></i> Automação Inteligente</span>
+            </div>
+
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK EXPANDIDO -->
+<section id="stack" class="py-24 md:py-32 relative overflow-hidden fade-start">
+  <div class="absolute inset-0 blur-3xl opacity-30 pointer-events-none"
+       style="background: radial-gradient(circle at 30% 20%, #38bdf833 0%, transparent 55%),
+              radial-gradient(circle at 70% 80%, #a855f733 0%, transparent 55%);"></div>
+
+  <div class="mx-auto max-w-6xl px-6 relative z-10">
+    <div class="text-center mb-16 md:mb-20">
+      <h2 class="text-4xl md:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-cyan-300 to-violet-300" data-i18n="stack.title">
+        Tech Stack
+      </h2>
+      <p class="text-white/60 max-w-xl mx-auto mt-4 text-lg leading-relaxed" data-i18n="stack.subtitle">
+        Tecnologias que uso diariamente para construir sistemas reais.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-8 md:gap-12 text-center">
+
+      <!-- Icons -->
+      <div class="group">
+        <i class="fa-brands fa-python text-5xl text-sky-300 group-hover:text-sky-200 transition"></i>
+        <p class="mt-3 text-white/70 text-sm" data-i18n="stack.tech1">Python</p>
+      </div>
+
+      <div class="group">
+        <i class="fa-brands fa-js text-5xl text-yellow-300 group-hover:text-yellow-200 transition"></i>
+        <p class="mt-3 text-white/70 text-sm" data-i18n="stack.tech2">JavaScript</p>
+      </div>
+
+      <div class="group">
+        <i class="fa-brands fa-php text-5xl text-violet-300 group-hover:text-violet-200 transition"></i>
+        <p class="mt-3 text-white/70 text-sm" data-i18n="stack.tech3">PHP</p>
+      </div>
+
+      <div class="group">
+        <i class="fa-solid fa-database text-5xl text-sky-200 group-hover:text-sky-100 transition"></i>
+        <p class="mt-3 text-white/70 text-sm" data-i18n="stack.tech4">PostgreSQL</p>
+      </div>
+
+      <div class="group">
+        <i class="fa-solid fa-brain text-5xl text-cyan-300 group-hover:text-cyan-200 transition"></i>
+        <p class="mt-3 text-white/70 text-sm" data-i18n="stack.tech5">IA / YOLO</p>
+      </div>
+
+      <div class="group">
+        <i class="fa-solid fa-camera text-5xl text-sky-300 group-hover:text-sky-200 transition"></i>
+        <p class="mt-3 text-white/70 text-sm" data-i18n="stack.tech6">OpenCV</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+  <!-- SKILLS -->
+  <section id="skills" class="py-28 md:py-32 relative overflow-hidden fade-start">
+    <div class="absolute inset-0 blur-3xl opacity-40 pointer-events-none"
+         style="background: radial-gradient(circle at 25% 30%, #38bdf833 0%, transparent 55%),
+                radial-gradient(circle at 80% 70%, #a855f733 0%, transparent 55%);"></div>
+
+    <div class="mx-auto max-w-6xl px-6 relative z-10">
+      <div class="text-center mb-16 md:mb-20">
+        <h2 class="text-4xl md:text-5xl font-black tracking-tight">
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-cyan-300 to-violet-300" data-i18n="skills.title">
+            Habilidades & Tecnologias
+          </span>
+        </h2>
+        <p class="text-white/60 max-w-2xl mx-auto mt-4 text-lg leading-relaxed" data-i18n="skills.subtitle">
+          Stack moderna, forte e focada em IA, back-end e web profissional.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-10 md:gap-12">
+
+        <!-- Linguagens -->
+        <div class="group relative">
+          <div class="absolute inset-0 bg-gradient-to-br from-sky-300/20 via-cyan-300/20 to-violet-300/20 blur-3xl opacity-50 rounded-3xl"></div>
+          <div class="relative bg-night-900/60 backdrop-blur-xl p-8 md:p-10 rounded-3xl border border-white/10 shadow-2xl tilt3d">
+            <div class="flex items-center gap-4 mb-8">
+              <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-sky-300 to-cyan-300 flex items-center justify-center text-night-900 text-2xl shadow-glow">
+                <i class="fa-solid fa-code"></i>
+              </div>
+              <h3 class="text-2xl font-bold text-white" data-i18n="skills.lang.title">Linguagens</h3>
+            </div>
+
+            <div class="space-y-6">
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>Python</span>
+                  <span class="text-sky-300 font-semibold">90%</span>
+                </div>
+                <div class="skillbar"><div class="skillbar-progress" data-width="90"></div></div>
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>JavaScript</span>
+                  <span class="text-cyan-300 font-semibold">85%</span>
+                </div>
+                <div class="skillbar"><div class="skillbar-progress" data-width="85"></div></div>
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>PHP</span>
+                  <span class="text-violet-300 font-semibold">75%</span>
+                </div>
+                <div class="skillbar"><div class="skillbar-progress" data-width="75"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Frameworks -->
+        <div class="group relative">
+          <div class="absolute inset-0 bg-gradient-to-br from-violet-300/20 via-sky-300/20 to-cyan-300/20 blur-3xl opacity-50 rounded-3xl"></div>
+          <div class="relative bg-night-900/60 backdrop-blur-xl p-8 md:p-10 rounded-3xl border border-white/10 shadow-2xl tilt3d">
+            <div class="flex items-center gap-4 mb-8">
+              <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-violet-300 to-cyan-300 flex items-center justify-center text-night-900 text-2xl shadow-glow">
+                <i class="fa-solid fa-layer-group"></i>
+              </div>
+              <h3 class="text-2xl font-bold text-white" data-i18n="skills.frame.title">Frameworks</h3>
+            </div>
+
+            <div class="space-y-6">
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>Laravel</span>
+                  <span class="text-violet-300 font-semibold">80%</span>
+                </div>
+                <div class="skillbar"><div class="skillbar-progress" data-width="80"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>Flask</span>
+                  <span class="text-cyan-300 font-semibold">85%</span>
+                </div>
+                <div class="skillbar"><div class="skillbar-progress" data-width="85"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>OpenCV</span>
+                  <span class="text-sky-300 font-semibold">75%</span>
+                </div>
+                <div class="skillbar"><div class="skillbar-progress" data-width="75"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- IA & ML -->
+        <div class="group relative">
+          <div class="absolute inset-0 bg-gradient-to-br from-cyan-300/20 via-violet-300/20 to-sky-300/20 blur-3xl opacity-50 rounded-3xl"></div>
+          <div class="relative bg-night-900/60 backdrop-blur-xl p-8 md:p-10 rounded-3xl border border-white/10 shadow-2xl tilt3d">
+            <div class="flex items-center gap-4 mb-8">
+              <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-300 to-sky-300 flex items-center justify-center text-night-900 text-2xl shadow-glow">
+                <i class="fa-solid fa-brain"></i>
+              </div>
+              <h3 class="text-2xl font-bold text-white" data-i18n="skills.ai.title">IA & ML</h3>
+            </div>
+
+            <div class="space-y-6">
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>YOLO</span>
+                  <span class="text-sky-300 font-semibold">80%</span>
+                </div>
+                <div class="skillbar"><div class="skillbar-progress" data-width="80"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>MediaPipe</span>
+                  <span class="text-cyan-300 font-semibold">78%</span>
+                </div>
+                <div class="skillbar"><div class="skillbar-progress" data-width="78"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>TensorFlow</span>
+                  <span class="text-violet-300 font-semibold">70%</span>
+                </div>
+                <div class="skillbar"><div class="skillbar-progress" data-width="70"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bancos -->
+        <div class="group relative">
+          <div class="absolute inset-0 bg-gradient-to-br from-sky-300/20 via-violet-300/20 to-cyan-300/20 blur-3xl opacity-50 rounded-3xl"></div>
+          <div class="relative bg-night-900/60 backdrop-blur-xl p-8 md:p-10 rounded-3xl border border-white/10 shadow-2xl tilt3d">
+            <div class="flex items-center gap-4 mb-8">
+              <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-sky-300 to-violet-300 flex items-center justify-center text-night-900 text-2xl shadow-glow">
+                <i class="fa-solid fa-database"></i>
+              </div>
+              <h3 class="text-2xl font-bold text-white" data-i18n="skills.db.title">Banco de Dados</h3>
+            </div>
+
+            <div class="space-y-6">
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>PostgreSQL</span>
+                  <span class="text-cyan-300 font-semibold">85%</span>
+                </div>
+                <div class="skillbar"><div class="skillbar-progress" data-width="85"></div></div>
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>SQLite</span>
+                  <span class="text-violet-300 font-semibold">80%</span>
+                </div>
+                <div class="skillbar"><div class="skillbar-progress" data-width="80"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Soft skills -->
+      <div class="mt-14 md:mt-16 glass rounded-3xl p-8 md:p-10 border border-white/10 shadow-soft">
+        <h3 class="text-2xl font-bold mb-5 text-white" data-i18n="skills.softskills">Soft Skills</h3>
+        <div class="flex flex-wrap gap-3" id="softskills-tags">
+          <span class="tech-tag" data-i18n="skills.softskills.tags.1">Comunicação clara</span>
+          <span class="tech-tag" data-i18n="skills.softskills.tags.2">Trabalho em equipe</span>
+          <span class="tech-tag" data-i18n="skills.softskills.tags.3">Criatividade</span>
+          <span class="tech-tag" data-i18n="skills.softskills.tags.4">Resolução de problemas</span>
+          <span class="tech-tag" data-i18n="skills.softskills.tags.5">Autonomia</span>
+          <span class="tech-tag" data-i18n="skills.softskills.tags.6">Foco em impacto real</span>
+          <span class="tech-tag" data-i18n="skills.softskills.tags.7">Aprendizado rápido</span>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- DEPOIMENTOS -->
+<section id="testimonials" class="py-24 md:py-32 relative overflow-hidden fade-start">
+  <div class="absolute inset-0 opacity-40 blur-3xl pointer-events-none"
+       style="background: radial-gradient(circle at 20% 20%, #38bdf833 0%, transparent 55%),
+              radial-gradient(circle at 90% 80%, #a855f733 0%, transparent 55%);"></div>
+
+  <div class="mx-auto max-w-6xl px-6 relative z-10">
+
+    <div class="text-center mb-16 md:mb-20">
+      <h2 class="text-4xl md:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-cyan-300 to-violet-300" data-i18n="testimonials.title">
+        Depoimentos
+      </h2>
+      <p class="text-white/60 max-w-xl mx-auto mt-4 text-lg leading-relaxed" data-i18n="testimonials.subtitle">
+        Pessoas que acompanharam meu trabalho e impacto real.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-10 md:gap-14">
+
+      <!-- Adenilson Pereira -->
+      <div class="glass p-8 rounded-3xl border border-white/10 shadow-xl tilt3d">
+        <p class="text-white/80 leading-relaxed" data-i18n="testimonials.card1.text">
+          “O ClassEye é um dos projetos mais completos e inovadores já desenvolvidos por um aluno do curso. O Bruno uniu IA, visão computacional e impacto educacional de forma rara para alguém da idade dele.”
+        </p>
+
+        <div class="flex items-center gap-4 mt-6">
+          <img src="imgs/adenilson.png" class="h-14 w-14 rounded-full object-cover bg-white/10" alt="Adenilson Pereira">
+          <div>
+            <h4 class="font-bold text-white" data-i18n="testimonials.card1.name">Prof. Adenilson Pereira</h4>
+            <p class="text-white/60 text-sm" data-i18n="testimonials.card1.role">Coordenador — Desenvolvimento de Sistemas (CEEP)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aislan Melo -->
+      <div class="glass p-8 rounded-3xl border border-white/10 shadow-xl tilt3d">
+        <p class="text-white/80 leading-relaxed" data-i18n="testimonials.card2.text">
+          “O Bruno foi um dos maiores destaques do CEEP: liderança em eventos, participação ativa no ecossistema de inovação e uma postura profissional admirável. É um estudante que realmente impacta quem está ao redor.”
+        </p>
+
+        <div class="flex items-center gap-4 mt-6">
+          <img src="imgs/aislan.png" class="h-14 w-14 rounded-full object-cover bg-white/10" alt="Aislan Melo">
+          <div>
+            <h4 class="font-bold text-white" data-i18n="testimonials.card2.name">Aislan Melo</h4>
+            <p class="text-white/60 text-sm" data-i18n="testimonials.card2.role">Diretor — CEEP</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- TIMELINE SUPREMA -->
+<section id="timeline" class="py-28 md:py-36 relative overflow-hidden fade-start">
+
+  <!-- BG Glow -->
+  <div class="absolute inset-0 blur-3xl opacity-30 pointer-events-none"
+       style="background: radial-gradient(circle at 25% 20%, #38bdf833 0%, transparent 60%),
+              radial-gradient(circle at 75% 80%, #a855f733 0%, transparent 60%);"></div>
+
+  <div class="relative z-10 max-w-5xl mx-auto px-6">
+
+    <!-- TITLE -->
+    <div class="text-center mb-20">
+      <h2 class="text-4xl md:text-6xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-cyan-300 to-violet-300" data-i18n="timeline.title">
+        Minha Evolução
+      </h2>
+      <p class="text-white/60 mt-4 text-lg max-w-xl mx-auto leading-relaxed" data-i18n="timeline.subtitle">
+        Uma jornada real — da lógica ao GovTech e IA aplicada, criando impacto em Assaí-PR.
+      </p>
+    </div>
+
+    <!-- TIMELINE CENTRAL -->
+    <div class="relative">
+
+      <!-- Vertical line -->
+      <div class="absolute left-1/2 top-0 -translate-x-1/2 w-[3px] bg-white/15 h-full rounded-full"></div>
+
+      <!-- ITEM -->
+      <div class="relative flex items-center mb-20">
+        <!-- Dot -->
+        <div class="absolute left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-sky-300 shadow-glow"></div>
+
+        <!-- Card -->
+        <div class="w-full md:w-1/2 md:pr-10 md:text-right">
+          <div class="glass p-6 rounded-2xl border border-white/10 backdrop-blur-xl tilt3d shadow-xl inline-block">
+            <h3 class="text-xl font-bold text-white" data-i18n="timeline.2023.title">2023 — Python & Algoritmos</h3>
+            <p class="text-white/60 mt-1" data-i18n="timeline.2023.desc">Primeiros scripts, lógica e automações.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEM -->
+      <div class="relative flex items-center mb-20">
+        <div class="absolute left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-cyan-300 shadow-glow"></div>
+
+        <div class="w-full md:w-1/2 md:pl-10 md:ml-auto">
+          <div class="glass p-6 rounded-2xl border border-white/10 backdrop-blur-xl tilt3d shadow-xl inline-block">
+            <h3 class="text-xl font-bold text-white" data-i18n="timeline.2024.title">2024 — Web Moderna & Banco de Dados</h3>
+            <p class="text-white/60 mt-1" data-i18n="timeline.2024.desc">HTML, JS, SQL e sistemas completos.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEM -->
+      <div class="relative flex items-center mb-20">
+        <div class="absolute left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-violet-300 shadow-glow"></div>
+
+        <div class="w-full md:w-1/2 md:pr-10 md:text-right">
+          <div class="glass p-6 rounded-2xl border border-white/10 backdrop-blur-xl tilt3d shadow-xl inline-block">
+            <h3 class="text-xl font-bold text-white" data-i18n="timeline.2025.title">2025 — Laravel, GovTech</h3>
+            <p class="text-white/60 mt-1" data-i18n="timeline.2025.desc">Gov.Assaí, Conecta Assaí, plataformas reais.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEM -->
+      <div class="relative flex items-center mb-20">
+        <div class="absolute left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-sky-200 shadow-glow"></div>
+
+        <div class="w-full md:w-1/2 md:pl-10 md:ml-auto">
+          <div class="glass p-6 rounded-2xl border border-white/10 backdrop-blur-xl tilt3d shadow-xl inline-block">
+            <h3 class="text-xl font-bold text-white" data-i18n="timeline.2025ai.title">2025–2026 — IA, YOLO & Vision AI</h3>
+            <p class="text-white/60 mt-1" data-i18n="timeline.2025ai.desc">ClassEye, chatbots conectados ao BD, análise inteligente.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEM FINAL -->
+      <div class="relative flex items-center">
+        <div class="absolute left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-green-300 shadow-glow"></div>
+
+        <div class="w-full md:w-1/2 md:pr-10 md:text-right">
+          <div class="glass p-6 rounded-2xl border border-white/10 backdrop-blur-xl tilt3d shadow-xl inline-block">
+            <h3 class="text-xl font-bold text-white" data-i18n="timeline.today.title">Hoje — Impacto Real</h3>
+            <p class="text-white/60 mt-1" data-i18n="timeline.today.desc">Educação, IA aplicada e GovTech que transforma rotinas reais.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA FINAL PREMIUM – FOCO TOTAL NO BRUNO -->
+<section class="relative py-40 overflow-hidden fade-start">
+
+  <!-- FUNDO CINEMATOGRÁFICO HORIZONTAL -->
+  <div class="absolute inset-0 overflow-hidden">
+
+    <!-- IMAGEM DE FUNDO (ESCURECIDA + DESFOCADA) -->
+    <img src="imgs/fundo.jpg"
+         class="absolute inset-0 w-full h-full object-cover opacity-[0.35] blur-[3px]"
+         style="object-position: center 40%;">
+    
+    <!-- GRADIENTE DRAMÁTICO -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/70 to-black/85"></div>
+  </div>
+
+<!-- IMAGEM DO BRUNO – CORTE PRECISO + ZOOM + MENOS HORIZONTAL + MENOS VERTICAL -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+  <div class="relative
+              w-[42vw]             /* MENOR na horizontal */
+              max-w-[620px]        /* limite horizontal */
+              h-[360px]            /* MENOR na vertical */
+              rounded-[32px]
+              overflow-hidden
+              shadow-[0_0_60px_rgba(0,200,255,0.35)]
+              backdrop-blur-xl">
+
+    <!-- IMAGEM COM ZOOM DIGITAL E FOCO EM VOCÊ -->
+    <img src="imgs/fundo.jpg"
+         class="w-full h-full object-cover"
+         style="
+           object-position: 57% 38%;   /* foco no seu rosto */
+           transform: scale(1.28);     /* zoom natural */
+         ">
+
+    <!-- VINHETA SUAVE -->
+    <div class="absolute inset-0 bg-black/60"></div>
+
+    <!-- BORDA NEON SUAVE -->
+    <div class="absolute inset-0 pointer-events-none rounded-[32px]
+                ring-1 ring-cyan-300/30 ring-offset-2 ring-offset-black/40"></div>
+
+  </div>
+</div>
+
+  </div>
+
+  <!-- GLOW ORB -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute left-1/2 -translate-x-1/2 top-24 w-[480px] h-[480px]
+                bg-gradient-to-br from-sky-300/40 via-cyan-400/30 to-violet-300/40
+                blur-[130px] rounded-full opacity-70 animate-pulseSoft"></div>
+  </div>
+
+  <!-- CONTEÚDO -->
+  <div class="relative z-10 max-w-4xl mx-auto px-6 text-center animate-rise">
+
+    <h2 class="text-5xl md:text-6xl font-black leading-tight
+               text-transparent bg-clip-text
+               bg-gradient-to-r from-sky-300 via-cyan-300 to-violet-300
+               drop-shadow-[0_0_30px_rgba(56,189,248,0.4)]" data-i18n="cta.title">
+      Vamos Criar o Seu Próximo Grande Projeto
+    </h2>
+
+    <p class="text-white/100 mt-6 text-xl max-w-2xl mx-auto leading-relaxed font-light" data-i18n="cta.desc">
+      IA aplicada, visão computacional, GovTech, sistemas reais e impacto direto.
+      Você traz o desafio — eu construo a solução.
+    </p>
+
+    <!-- BOTÃO PREMIUM -->
+    <a href="https://wa.me/5543988506395"
+       class="group mt-10 inline-flex items-center gap-3 px-10 py-5 rounded-2xl
+              font-extrabold text-night-900 text-lg
+              bg-gradient-to-r from-sky-300 to-cyan-300
+              shadow-[0_0_45px_rgba(56,189,248,0.45)]
+              hover:shadow-[0_0_90px_rgba(56,189,248,0.8)]
+              transition-all duration-300 ease-out">
+      <span data-i18n="cta.button">Iniciar Conversa Técnica</span>
+      <i class="fa-brands fa-whatsapp text-xl group-hover:translate-x-1 transition"></i>
+    </a>
+
+    <!-- FOOTER -->
+    <div class="mt-10 text-white/80 text-sm tracking-widest uppercase" data-i18n="footer.signature">
+      IA • Web • GovTech • Inovação Real
+    </div>
+  </div>
+
+</section>
+
+
+<!-- CONTATO — LUXO SUAVE (A) -->
+<section id="contact" class="relative py-24 md:py-32 overflow-hidden fade-start">
+
+  <!-- background glow suave -->
+  <div class="absolute inset-0 pointer-events-none opacity-40 blur-3xl"
+       style="background:
+         radial-gradient(circle at 15% 20%, rgba(56,189,248,.20), transparent 55%),
+         radial-gradient(circle at 85% 80%, rgba(168,85,247,.18), transparent 55%);">
+  </div>
+
+  <!-- textura discreta -->
+  <div class="absolute inset-0 opacity-[0.05] pointer-events-none"
+       style="background-image: radial-gradient(rgba(255,255,255,.6) 1px, transparent 1px);
+              background-size: 26px 26px;">
+  </div>
+
+  <div class="relative z-10 mx-auto max-w-6xl px-6">
 
     <!-- Header -->
-    <header class="header" id="header">
-        <nav class="nav container">
-            <div class="nav__logo">
-                <a href="#home" class="nav__logo-link">
-                    <span class="logo-text">Bruno Yudi Kay</span>
-                    <div class="logo-underline"></div>
-                </a>
-            </div>
-            
-            <div class="nav__menu" id="nav-menu">
-                <ul class="nav__list">
-                    <li class="nav__item">
-                        <a href="#home" class="nav__link active-link">
-                            <span>Início</span>
-                        </a>
-                    </li>
-                    <li class="nav__item">
-                        <a href="#about" class="nav__link">
-                            <span>Sobre</span>
-                        </a>
-                    </li>
-                    <li class="nav__item">
-                        <a href="#projects" class="nav__link">
-                            <span>Projetos</span>
-                        </a>
-                    </li>
-                    <li class="nav__item">
-                        <a href="#skills" class="nav__link">
-                            <span>Habilidades</span>
-                        </a>
-                    </li>
-                    <li class="nav__item">
-                        <a href="#contact" class="nav__link">
-                            <span>Contato</span>
-                        </a>
-                    </li>
-                </ul>
-                
-                <div class="nav__close" id="nav-close">
-                    <i class="fas fa-times"></i>
-                </div>
-            </div>
-            
-            <div class="nav__actions">
-                <button class="theme-toggle" id="theme-toggle" aria-label="Alternar tema">
-                    <i class="fas fa-sun"></i>
-                    <i class="fas fa-moon"></i>
-                </button>
-                
-                <div class="nav__toggle" id="nav-toggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <div class="text-center mb-14 md:mb-16">
+      <h2 class="text-4xl md:text-5xl font-black tracking-tight">
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-cyan-300 to-violet-300" data-i18n="contact.title">
+          Vamos conversar
+        </span>
+      </h2>
+      <p class="text-white/60 max-w-2xl mx-auto mt-4 text-lg leading-relaxed" data-i18n="contact.subtitle">
+        Aberto para projetos, colaborações e ideias que realmente importam.
+      </p>
+    </div>
 
-    <main class="main">
-        <!-- Hero Section -->
-        <section class="hero-section" id="home">
-            <div class="container hero-content">
-                <div class="hero-text">
-                    <div class="hero-greeting">
-                        <span class="greeting-text">Olá, eu sou</span>
-                        <div class="greeting-line"></div>
-                    </div>
-                    <h1 class="hero-title">
-                        <span class="title-line">Bruno Yudi</span>
-                        <span class="title-line">Kay</span>
-                    </h1>
-                    <p class="hero-subtitle">
-                        Transformando <span class="text-gradient">código</span> em soluções reais para a <span class="text-gradient">sociedade</span>
-                    </p>
-                    <p class="hero-description">
-                        Desenvolvedor Full-Stack e Marketing Digital
-                    </p>
-                    
-                    <div class="hero-buttons">
-                        <a href="#contact" class="btn-primary">
-                            <span class="btn-text">Entrar em Contato</span>
-                            <i class="fas fa-arrow-right btn-icon"></i>
-                            <div class="btn-bg"></div>
-                        </a>
-                        <a href="docs/CurriculoBruno.pdf" class="btn-secondary" download>
-                            <span class="btn-text">Ver Currículo</span>
-                            <i class="fas fa-download btn-icon"></i>
-                            <div class="btn-bg"></div>
-                        </a>
-                    </div>
+    <div class="grid lg:grid-cols-2 gap-10 md:gap-12 items-stretch">
 
-                    <!-- Stats -->
-                    <div class="hero-stats">
-                        <div class="stat-item">
-                            <div class="stat-number" data-target="3">0</div>
-                            <div class="stat-label">Projetos</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" data-target="2">0</div>
-                            <div class="stat-label">Anos Experiência</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" data-target="100">0</div>
-                            <div class="stat-label">% Dedicação</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="hero-visual">
-                    <div class="hero-image-container">
-                        <div class="image-bg-effect"></div>
-                        <img src="imgs/bruno.jpg" alt="Bruno Yudi Kay" class="hero-img">
-                        <div class="image-overlay"></div>
-                        <div class="orbit-ring ring-1"></div>
-                        <div class="orbit-ring ring-2"></div>
-                        <div class="orbit-ring ring-3"></div>
-                    </div>
-                    
-                    <!-- Floating Icons -->
-                    <div class="floating-icons">
-                        <div class="floating-icon icon-1">
-                            <i class="fab fa-python"></i>
-                        </div>
-                        <div class="floating-icon icon-2">
-                            <i class="fas fa-brain"></i>
-                        </div>
-                        <div class="floating-icon icon-3">
-                            <i class="fas fa-code"></i>
-                        </div>
-                        <div class="floating-icon icon-4">
-                            <i class="fas fa-database"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Scroll Indicator -->
-            <div class="scroll-indicator">
-                <a href="#about" class="scroll-link">
-                    <div class="scroll-text">Scroll</div>
-                    <div class="scroll-arrow">
-                        <i class="fas fa-arrow-down"></i>
-                    </div>
-                </a>
-            </div>
-                </section>
-        <!-- ========================= -->
-        <!-- SOBRE MIM (ATUALIZADO) -->
-        <!-- ========================= -->
-        <section id="about" class="section">
-        <div class="container">
-            <div class="section-header">
-            <div class="section-tag">Sobre Mim</div>
-            <h2 class="section-title">
-                <span class="title-word">Quem</span>
-                <span class="title-word">sou</span>
-                <span class="title-word">eu</span>
-            </h2>
-            <p class="section-subtitle">
-                Desenvolvedor criativo e produtor de vídeos — transformando ideias em experiências digitais reais.
-            </p>
+      <!-- COLUNA ESQUERDA: cards premium -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-1 gap-6">
+
+        <!-- WhatsApp -->
+        <div class="relative group">
+          <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-green-400/20 to-emerald-400/10 blur-2xl opacity-0 group-hover:opacity-100 transition"></div>
+
+          <div class="glass rounded-3xl p-7 border border-white/10 shadow-soft tilt3d">
+            <div class="flex items-center gap-4">
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-400 to-emerald-500 grid place-items-center text-night-900 text-2xl shadow-glow">
+                <i class="fa-brands fa-whatsapp"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-extrabold text-white" data-i18n="contact.whatsapp">WhatsApp</h3>
+                <p class="text-white/60 text-sm" data-i18n="contact.whatsapp.desc">Resposta rápida e direta</p>
+              </div>
             </div>
 
-            <div class="about-content">
-            <!-- Texto -->
-            <div class="about-text">
-                <div class="text-block">
-                <h3>Minha Jornada</h3>
-                <p>
-                    Sou <strong>Bruno Yudi Kay</strong>, desenvolvedor e criador de conteúdo apaixonado por unir 
-                    <strong>tecnologia</strong> e <strong>comunicação</strong>.  
-                    Trabalho com <strong>aplicações web modernas</strong>, design digital e 
-                    <strong>produção de vídeos de marketing</strong> que ajudam marcas e projetos a se destacarem.
-                </p>
-                </div>
-
-                <div class="text-block">
-                <h3>O Que Faço</h3>
-                <p>
-                    Crio interfaces funcionais e bonitas, desenvolvo sites e painéis administrativos personalizados e 
-                    produzo vídeos criativos — desde roteiros e filmagens até a edição final.  
-                    Meu foco é construir soluções completas, que comuniquem bem e gerem resultados reais.
-                </p>
-                </div>
-
-                <div class="expertise-list">
-                <div class="expertise-item">
-                    <i class="fas fa-laptop-code"></i>
-                    <span>Desenvolvimento de Aplicações Web</span>
-                </div>
-                <div class="expertise-item">
-                    <i class="fas fa-video"></i>
-                    <span>Produção e Edição de Vídeos</span>
-                </div>
-                <div class="expertise-item">
-                    <i class="fas fa-bullhorn"></i>
-                    <span>Marketing Digital e Identidade Visual</span>
-                </div>
-                <div class="expertise-item">
-                    <i class="fas fa-lightbulb"></i>
-                    <span>Criação de Conteúdos Criativos e Estratégicos</span>
-                </div>
-                </div>
-            </div>
-
-            <!-- Visual -->
-            <div class="about-visual">
-                <div class="info-cards">
-                <div class="info-card">
-                    <div class="card-icon">
-                    <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <div class="card-content">
-                    <h4>Localização</h4>
-                    <p>Assaí - Paraná, Brasil</p>
-                    </div>
-                </div>
-
-                <div class="info-card">
-                    <div class="card-icon">
-                    <i class="fas fa-briefcase"></i>
-                    </div>
-                    <div class="card-content">
-                    <h4>Status</h4>
-                    <p>Aberto a projetos e parcerias</p>
-                    </div>
-                </div>
-
-                <div class="info-card">
-                    <div class="card-icon">
-                    <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <div class="card-content">
-                    <h4>Foco</h4>
-                    <p>Web, Vídeos e Comunicação Criativa</p>
-                    </div>
-                </div>
-
-                <div class="info-card">
-                    <div class="card-icon">
-                    <i class="fas fa-heart"></i>
-                    </div>
-                    <div class="card-content">
-                    <h4>Motivação</h4>
-                    <p>Unir tecnologia e criatividade para gerar impacto real</p>
-                    </div>
-                </div>
-                </div>
-            </div>
-            </div>
+            <a href="https://wa.me/5543988506395" target="_blank"
+               class="mt-5 inline-flex w-full items-center justify-center gap-2 px-5 py-3 rounded-xl
+                      bg-gradient-to-r from-green-400 to-emerald-500 font-bold text-night-900
+                      shadow-glow hover:shadow-glowStrong transition">
+              <span data-i18n="contact.whatsapp.button">Iniciar conversa</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
         </div>
-        </section>
 
-        <!-- Projects Section -->
-        <section id="projects" class="section">
-            <div class="container">
-                <div class="section-header">
-                    <div class="section-tag">Meu Trabalho</div>
-                    <h2 class="section-title">
-                        <span class="title-word">Projeto</span>
-                        <span class="title-word">em</span>
-                        <span class="title-word">Destaque</span>
-                    </h2>
-                    <p class="section-subtitle">Conheça meu principal projeto de IA</p>
-                </div>
-                
-                <div class="project-showcase">
-                    <div class="project-main">
-                        <div class="project-visual">
-                            <div class="project-image-container">
-                                <img src="html/sources/site.png" alt="ClassEye Sistema" class="project-image">
-                                <div class="project-overlay">
-                                    <div class="overlay-content">
-                                        <a href="html/classeye.html" class="project-link" target="_blank">
-                                            <i class="fas fa-external-link-alt"></i>
-                                            <span>Ver Projeto</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="project-tech-stack">
-                                <div class="tech-item">
-                                    <i class="fab fa-python"></i>
-                                    <span>Python</span>
-                                </div>
-                                <div class="tech-item">
-                                    <i class="fas fa-eye"></i>
-                                    <span>YOLO</span>
-                                </div>
-                                <div class="tech-item">
-                                    <i class="fas fa-camera"></i>
-                                    <span>OpenCV</span>
-                                </div>
-                                <div class="tech-item">
-                                    <i class="fas fa-server"></i>
-                                    <span>Flask</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="project-content">
-                            <div class="project-category">
-                                <i class="fas fa-brain"></i>
-                                <span>Inteligência Artificial</span>
-                            </div>
-                            
-                            <h3 class="project-title">ClassEye</h3>
-                            
-                            <p class="project-description">
-                                Sistema de monitoramento educacional inteligente que utiliza YOLO e Flask para análise em tempo real de ambientes de aprendizagem, otimizando a experiência educacional através de visão computacional avançada.
-                            </p>
-                            
-                            <div class="project-features">
-                                <div class="feature-item">
-                                    <i class="fas fa-check"></i>
-                                    <span>Detecção em tempo real de objetos e pessoas</span>
-                                </div>
-                                <div class="feature-item">
-                                    <i class="fas fa-check"></i>
-                                    <span>Análise comportamental de estudantes</span>
-                                </div>
-                                <div class="feature-item">
-                                    <i class="fas fa-check"></i>
-                                    <span>Dashboard interativo para professores</span>
-                                </div>
-                                <div class="feature-item">
-                                    <i class="fas fa-check"></i>
-                                    <span>Relatórios automáticos de engajamento</span>
-                                </div>
-                            </div>
-                            
-                            <div class="project-stats">
-                                <div class="stat">
-                                    <div class="stat-value">82%</div>
-                                    <div class="stat-label">Precisão</div>
-                                </div>
-                                <div class="stat">
-                                    <div class="stat-value">30fps</div>
-                                    <div class="stat-label">Performance</div>
-                                </div>
-                                <div class="stat">
-                                    <div class="stat-value">Real-time</div>
-                                    <div class="stat-label">Análise</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <!-- Email -->
+        <div class="relative group">
+          <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-violet-400/20 to-sky-400/10 blur-2xl opacity-0 group-hover:opacity-100 transition"></div>
+
+          <div class="glass rounded-3xl p-7 border border-white/10 shadow-soft tilt3d">
+            <div class="flex items-center gap-4">
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-300 to-sky-400 grid place-items-center text-night-900 text-2xl shadow-glow">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-extrabold text-white" data-i18n="contact.email">Email</h3>
+                <p class="text-white/60 text-sm" data-i18n="contact.email.desc">Profissional e organizado</p>
+              </div>
             </div>
-        </section>
 
-        <!-- Skills Section -->
-        <section id="skills" class="section">
-            <div class="container">
-                <div class="section-header">
-                    <div class="section-tag">Competências</div>
-                    <h2 class="section-title">
-                        <span class="title-word">Habilidades</span>
-                        <span class="title-word">&</span>
-                        <span class="title-word">Tecnologias</span>
-                    </h2>
-                    <p class="section-subtitle">Minhas competências técnicas e interpessoais</p>
-                </div>
-                
-                <div class="skills-container">
-                    <div class="skills-grid">
-                        <!-- Programming Languages -->
-                        <div class="skill-category">
-                            <div class="category-header">
-                                <div class="category-icon">
-                                    <i class="fas fa-code"></i>
-                                </div>
-                                <h3>Linguagens</h3>
-                            </div>
-                            <div class="skills-list">
-                                <div class="skill-item">
-                                    <div class="skill-info">
-                                        <span class="skill-name">Python</span>
-                                        <span class="skill-percent">90%</span>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-progress" data-width="90"></div>
-                                    </div>
-                                </div>
-                                <div class="skill-item">
-                                    <div class="skill-info">
-                                        <span class="skill-name">JavaScript</span>
-                                        <span class="skill-percent">85%</span>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-progress" data-width="85"></div>
-                                    </div>
-                                </div>
-                                <div class="skill-item">
-                                    <div class="skill-info">
-                                        <span class="skill-name">PHP</span>
-                                        <span class="skill-percent">75%</span>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-progress" data-width="75"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Frameworks -->
-                        <div class="skill-category">
-                            <div class="category-header">
-                                <div class="category-icon">
-                                    <i class="fas fa-layer-group"></i>
-                                </div>
-                                <h3>Frameworks</h3>
-                            </div>
-                            <div class="skills-list">
-                                <div class="skill-item">
-                                    <div class="skill-info">
-                                        <span class="skill-name">Flask</span>
-                                        <span class="skill-percent">85%</span>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-progress" data-width="85"></div>
-                                    </div>
-                                </div>
-                                <div class="skill-item">
-                                    <div class="skill-info">
-                                        <span class="skill-name">Laravel</span>
-                                        <span class="skill-percent">80%</span>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-progress" data-width="80"></div>
-                                    </div>
-                                </div>
-                                <div class="skill-item">
-                                    <div class="skill-info">
-                                        <span class="skill-name">OpenCV</span>
-                                        <span class="skill-percent">75%</span>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-progress" data-width="75"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- AI & ML -->
-                        <div class="skill-category">
-                            <div class="category-header">
-                                <div class="category-icon">
-                                    <i class="fas fa-brain"></i>
-                                </div>
-                                <h3>IA & ML</h3>
-                            </div>
-                            <div class="skills-list">
-                                <div class="skill-item">
-                                    <div class="skill-info">
-                                        <span class="skill-name">YOLO</span>
-                                        <span class="skill-percent">80%</span>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-progress" data-width="80"></div>
-                                    </div>
-                                </div>
-                                <div class="skill-item">
-                                    <div class="skill-info">
-                                        <span class="skill-name">Scikit-learn</span>
-                                        <span class="skill-percent">75%</span>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-progress" data-width="75"></div>
-                                    </div>
-                                </div>
-                                <div class="skill-item">
-                                    <div class="skill-info">
-                                        <span class="skill-name">TensorFlow</span>
-                                        <span class="skill-percent">70%</span>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-progress" data-width="70"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Databases -->
-                        <div class="skill-category">
-                            <div class="category-header">
-                                <div class="category-icon">
-                                    <i class="fas fa-database"></i>
-                                </div>
-                                <h3>Banco de Dados</h3>
-                            </div>
-                            <div class="skills-list">
-                                <div class="skill-item">
-                                    <div class="skill-info">
-                                        <span class="skill-name">PostgreSQL</span>
-                                        <span class="skill-percent">85%</span>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-progress" data-width="85"></div>
-                                    </div>
-                                </div>
-                                <div class="skill-item">
-                                    <div class="skill-info">
-                                        <span class="skill-name">SQLite</span>
-                                        <span class="skill-percent">80%</span>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-progress" data-width="80"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="section">
-            <div class="container">
-                <div class="section-header">
-                    <div class="section-tag">Contato</div>
-                    <h2 class="section-title">
-                        <span class="title-word">Vamos</span>
-                        <span class="title-word">trabalhar</span>
-                        <span class="title-word">juntos</span>
-                    </h2>
-                    <p class="section-subtitle">Entre em contato e vamos criar algo incrível</p>
-                </div>
-                
-                <div class="contact-content">
-                    <div class="contact-info">
-                        <div class="contact-card">
-                            <div class="card-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div class="card-content">
-                                <h3>Email</h3>
-                                <p>Envie-me um email</p>
-                                <a href="mailto:bruno.kay2304@gmail.com">bruno.kay2304@gmail.com</a>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-card">
-                            <div class="card-icon">
-                                <i class="fab fa-whatsapp"></i>
-                            </div>
-                            <div class="card-content">
-                                <h3>WhatsApp</h3>
-                                <p>Vamos conversar</p>
-                                <a href="https://wa.me/5543988506395" target="_blank">(43) 98850-6395</a>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-card">
-                            <div class="card-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div class="card-content">
-                                <h3>Localização</h3>
-                                <p>Onde estou</p>
-                                <span>Assaí - PR, Brasil</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <form class="contact-form" id="contact-form">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="name">Nome completo</label>
-                                <input type="text" id="name" name="name" required>
-                                <div class="input-line"></div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" name="email" required>
-                                <div class="input-line"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="subject">Assunto</label>
-                            <input type="text" id="subject" name="subject" required>
-                            <div class="input-line"></div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message">Mensagem</label>
-                            <textarea id="message" name="message" rows="6" required></textarea>
-                            <div class="input-line"></div>
-                        </div>
-                        
-                        <button type="submit" class="btn-primary">
-                            <span class="btn-text">Enviar Mensagem</span>
-                            <i class="fas fa-paper-plane btn-icon"></i>
-                            <div class="btn-bg"></div>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-info">
-                    <h3>Bruno Yudi Kay</h3>
-                    <p>Desenvolvedor especializado em IA e soluções públicas, transformando código em impacto social.</p>
-                    
-                    <div class="footer-social">
-                        <a href="https://github.com/brunoxzr" target="_blank" aria-label="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/bruno-yudi-kay-383201317/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" aria-label="LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="mailto:bruno.kay2304@gmail.com" aria-label="Email">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="footer-links">
-                    <div class="link-group">
-                        <h4>Navegação</h4>
-                        <a href="#home">Início</a>
-                        <a href="#about">Sobre</a>
-                        <a href="#projects">Projetos</a>
-                        <a href="#skills">Habilidades</a>
-                        <a href="#contact">Contato</a>
-                    </div>
-                    
-                    <div class="link-group">
-                        <h4>Contato</h4>
-                        <a href="mailto:bruno.kay2304@gmail.com">Email</a>
-                        <a href="https://wa.me/5543988506395" target="_blank">WhatsApp</a>
-                        <a href="docs/CurriculoBruno.pdf" download>Currículo</a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 Bruno Yudi Kay. Todos os direitos reservados.</p>
-                
-                <button class="scroll-top" id="scroll-top" aria-label="Voltar ao topo">
-                    <i class="fas fa-arrow-up"></i>
-                </button>
-            </div>
+            <a href="mailto:bruno.kay2304@gmail.com"
+               class="mt-5 inline-flex w-full items-center justify-center gap-2 px-5 py-3 rounded-xl
+                      bg-gradient-to-r from-violet-300 to-sky-300 font-bold text-night-900
+                      shadow-glow hover:shadow-glowStrong transition">
+              <span data-i18n="contact.email.button">Enviar email</span>
+              <i class="fa-regular fa-paper-plane"></i>
+            </a>
+          </div>
         </div>
-    </footer>
 
-    <script src="js/script.js"></script>
+        <!-- mini card extra opcional (luxo suave) -->
+        <div class="glass rounded-3xl p-7 border border-white/10 shadow-soft">
+          <p class="text-white/80 leading-relaxed" data-i18n="contact.extra">
+            Curte ideia maluca? Produto real?  
+            Bora tirar do papel.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="tech-tag" data-i18n="contact.extra.tags.1">IA aplicada</span>
+            <span class="tech-tag" data-i18n="contact.extra.tags.2">GovTech</span>
+            <span class="tech-tag" data-i18n="contact.extra.tags.3">Visão Computacional</span>
+            <span class="tech-tag" data-i18n="contact.extra.tags.4">Web moderna</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLUNA DIREITA: form mais premium -->
+      <div class="relative">
+        <div class="absolute -inset-3 bg-gradient-to-br from-sky-300/15 via-cyan-300/15 to-violet-300/15 blur-3xl rounded-3xl"></div>
+
+        <form id="contactForm"
+              class="relative glass rounded-3xl border border-white/10 shadow-2xl p-8 md:p-10 space-y-6">
+
+          <div class="grid md:grid-cols-2 gap-5">
+            <div>
+              <label class="text-white/80 font-semibold text-sm" id="ct-label-name" data-i18n="contact.form.name">Nome</label>
+              <input type="text" id="ct-name" required
+                     class="mt-2 w-full p-4 rounded-xl bg-white/5 border border-white/10 text-white
+                            focus:border-sky-300 focus:ring-2 focus:ring-sky-300/20 transition placeholder:text-white/30"
+                     placeholder="Seu nome" data-i18n-placeholder="contact.form.name.placeholder">
+            </div>
+
+            <div>
+              <label class="text-white/80 font-semibold text-sm" id="ct-label-email" data-i18n="contact.form.email">Email</label>
+              <input type="email" id="ct-email" required
+                     class="mt-2 w-full p-4 rounded-xl bg-white/5 border border-white/10 text-white
+                            focus:border-cyan-300 focus:ring-2 focus:ring-cyan-300/20 transition placeholder:text-white/30"
+                     placeholder="seuemail@email.com" data-i18n-placeholder="contact.form.email.placeholder">
+            </div>
+          </div>
+
+          <div>
+            <label class="text-white/80 font-semibold text-sm" id="ct-label-subject" data-i18n="contact.form.subject">Assunto</label>
+            <input type="text" id="ct-subject" required
+                   class="mt-2 w-full p-4 rounded-xl bg-white/5 border border-white/10 text-white
+                          focus:border-violet-300 focus:ring-2 focus:ring-violet-300/20 transition placeholder:text-white/30"
+                   placeholder="O que você quer construir?" data-i18n-placeholder="contact.form.subject.placeholder">
+          </div>
+
+          <div>
+            <label class="text-white/80 font-semibold text-sm" id="ct-label-message" data-i18n="contact.form.message">Mensagem</label>
+            <textarea id="ct-message" rows="5" required
+                      class="mt-2 w-full p-4 rounded-xl bg-white/5 border border-white/10 text-white resize-none
+                             focus:border-sky-300 focus:ring-2 focus:ring-sky-300/20 transition placeholder:text-white/30"
+                      placeholder="Me conta o desafio, ideia ou projeto..." data-i18n-placeholder="contact.form.message.placeholder"></textarea>
+          </div>
+
+          <button type="submit"
+                  class="group w-full py-4 rounded-xl bg-gradient-to-r from-sky-300 to-cyan-300
+                         font-black text-night-900 shadow-glow hover:shadow-glowStrong transition flex items-center justify-center gap-2"
+                  id="ct-btn-send" data-i18n="contact.form.button">
+            Enviar mensagem
+            <i class="fa-solid fa-arrow-right group-hover:translate-x-0.5 transition"></i>
+          </button>
+
+          <p id="ct-feedback" class="text-center text-sm text-white/70 mt-1 opacity-0 transition" data-i18n="contact.form.success">
+            Mensagem enviada com sucesso!
+          </p>
+
+          <!-- assinatura suave -->
+          <div class="pt-3 text-center text-xs text-white/40 tracking-widest uppercase" id="ct-signature" data-i18n="contact.form.signature">
+            resposta rápida • trabalho sério • impacto real
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER — LUXO SUAVE (A) -->
+<footer class="relative mt-20 py-14 md:py-16 overflow-hidden fade-start">
+
+  <div class="absolute inset-0 opacity-50 blur-3xl pointer-events-none"
+       style="background:
+         radial-gradient(circle at 20% 10%, rgba(56,189,248,.20), transparent 55%),
+         radial-gradient(circle at 80% 90%, rgba(168,85,247,.18), transparent 55%);">
+  </div>
+
+ 
+  <div class="relative z-10 mx-auto max-w-6xl px-6">
+
+    <div class="grid md:grid-cols-3 gap-10 md:gap-14 items-start">
+
+      <!-- coluna 1 -->
+      <div>
+        <h3 class="text-xl font-extrabold text-white" data-i18n="footer.name">Bruno Yudi Kay</h3>
+        <p class="text-white/60 leading-relaxed mt-3" data-i18n="footer.desc">
+          Desenvolvedor Full-Stack especializado em IA, Visão Computacional e soluções públicas.
+          Crio sistemas reais que ajudam pessoas de verdade — do código ao impacto.
+        </p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <span class="tech-tag" data-i18n="footer.tags.1">Full-Stack</span>
+          <span class="tech-tag" data-i18n="footer.tags.2">IA</span>
+          <span class="tech-tag" data-i18n="footer.tags.3">GovTech</span>
+        </div>
+      </div>
+
+      <!-- coluna 2 -->
+      <div class="md:text-center">
+        <h3 class="text-lg font-bold text-white mb-3" data-i18n="nav.social">Redes</h3>
+        <ul class="space-y-2 text-white/70 text-sm">
+          <li><a href="#home" class="hover:text-sky-300 transition" data-i18n="nav.home">Início</a></li>
+          <li><a href="#about" class="hover:text-sky-300 transition" data-i18n="nav.about">Sobre</a></li>
+          <li><a href="#projects" class="hover:text-sky-300 transition" data-i18n="nav.projects">Projetos</a></li>
+          <li><a href="#skills" class="hover:text-sky-300 transition" data-i18n="nav.skills">Skills</a></li>
+          <li><a href="#contact" class="hover:text-sky-300 transition" data-i18n="nav.contact">Contato</a></li>
+        </ul>
+      </div>
+
+      <!-- coluna 3 redes (sem TikTok) -->
+      <div class="md:text-right">
+        <h3 class="text-lg font-bold text-white mb-3" data-i18n="nav.social">Redes</h3>
+
+        <div class="flex md:justify-end gap-3">
+          <a href="https://github.com/brunoxzr" target="_blank" class="social-btn" aria-label="GitHub">
+            <i class="fa-brands fa-github text-2xl"></i>
+          </a>
+          <a href="https://instagram.com/brunoyudikay" target="_blank" class="social-btn" aria-label="Instagram">
+            <i class="fa-brands fa-instagram text-2xl"></i>
+          </a>
+          <a href="https://wa.me/5543988506395" target="_blank" class="social-btn" aria-label="WhatsApp">
+            <i class="fa-brands fa-whatsapp text-2xl"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/bruno-yudi-kay-383201317/?originalSubdomain=br" target="_blank" class="social-btn" aria-label="LinkedIn">
+            <i class="fa-brands fa-linkedin text-2xl"></i>
+          </a>
+        </div>
+
+        <p class="text-white/40 text-xs mt-4" data-i18n="footer.open">
+          Aberto a colaborações e projetos reais.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- divisor -->
+    <div class="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent my-10"></div>
+
+    <!-- bottom -->
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-white/50 text-sm" id="footer-copyright" data-i18n="footer.copyright">
+        © 2025 Bruno Yudi Kay — Todos os direitos reservados.
+      </p>
+
+      <button id="scrollTopBtn"
+              class="px-5 py-3 rounded-xl glass border border-white/10 text-white text-sm
+                     flex items-center gap-2 hover:bg-white/10 transition shadow-glow hover:shadow-glowStrong"
+              data-i18n="nav.backtotop">
+        <i class="fa-solid fa-arrow-up"></i>
+        Voltar ao topo
+      </button>
+    </div>
+
+  </div>
+</footer>
+
+
+  <!-- JS COMPLETO -->
+  <script>
+    // fade-in on load
+    window.addEventListener("load", () => {
+      document.querySelectorAll(".fade-start").forEach(el => {
+        requestAnimationFrame(() => el.classList.add("fade-in"));
+      });
+    });
+
+    // scroll top
+    document.getElementById("scrollTopBtn").addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // mobile menu
+    const menuBtn = document.getElementById("menuBtn");
+    const menuPanel = document.getElementById("menuPanel");
+    menuBtn?.addEventListener("click", () => menuPanel.classList.toggle("hidden"));
+
+    // counters
+    const counters = document.querySelectorAll(".counter");
+    const counterObs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = +el.dataset.target;
+        let cur = 0;
+        const step = Math.max(1, Math.floor(target / 60));
+        const timer = setInterval(() => {
+          cur += step;
+          if(cur >= target){ cur = target; clearInterval(timer); }
+          el.textContent = cur;
+        }, 20);
+        counterObs.unobserve(el);
+      })
+    }, { threshold: 0.7 });
+    counters.forEach(c => counterObs.observe(c));
+
+    // skill bars
+    const skillBars = document.querySelectorAll(".skillbar-progress");
+    const barObs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.style.width = entry.target.dataset.width + "%";
+          barObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    skillBars.forEach(b => barObs.observe(b));
+
+    // tilt hero
+    const tilt = document.getElementById("tiltCard");
+    if(tilt){
+      tilt.addEventListener("mousemove", (e) => {
+        const r = tilt.getBoundingClientRect();
+        const x = e.clientX - r.left;
+        const y = e.clientY - r.top;
+        const rx = ((y / r.height) - 0.5) * -10;
+        const ry = ((x / r.width) - 0.5) * 10;
+        tilt.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+      });
+      tilt.addEventListener("mouseleave", () => tilt.style.transform = "rotateX(0deg) rotateY(0deg)");
+    }
+
+    // tilt about
+    const aboutTilt = document.getElementById("aboutTilt");
+    if(aboutTilt){
+      aboutTilt.addEventListener("mousemove", e => {
+        const r = aboutTilt.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width;
+        const y = (e.clientY - r.top) / r.height;
+        const rx = (y - .5) * -8;
+        const ry = (x - .5) * 8;
+        aboutTilt.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) scale(1.03)`;
+      });
+      aboutTilt.addEventListener("mouseleave", () => aboutTilt.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)");
+    }
+
+    // particles
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
+    let w, h, particles;
+    function resize(){
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+      const count = Math.floor((w*h)/70000);
+      particles = Array.from({length: count}, () => ({
+        x: Math.random()*w,
+        y: Math.random()*h,
+        vx: (Math.random()-.5)*0.35,
+        vy: (Math.random()-.5)*0.35,
+        r: Math.random()*1.6+0.6,
+        a: Math.random()*0.5+0.25
+      }));
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    function draw(){
+      ctx.clearRect(0,0,w,h);
+      for(const p of particles){
+        p.x += p.vx; p.y += p.vy;
+        if(p.x<0||p.x>w) p.vx*=-1;
+        if(p.y<0||p.y>h) p.vy*=-1;
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(180,220,255,${p.a})`;
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fill();
+      }
+      for(let i=0;i<particles.length;i++){
+        for(let j=i+1;j<particles.length;j++){
+          const a = particles[i], b = particles[j];
+          const dx=a.x-b.x, dy=a.y-b.y;
+          const d = Math.sqrt(dx*dx+dy*dy);
+          if(d<140){
+            ctx.strokeStyle = `rgba(120,190,255,${(1-d/140)*0.12})`;
+            ctx.lineWidth=1;
+            ctx.beginPath();
+            ctx.moveTo(a.x,a.y);
+            ctx.lineTo(b.x,b.y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+
+    // theme toggle
+    const themeBtn = document.getElementById("themeBtn");
+    let dark = true;
+    themeBtn?.addEventListener("click", () => {
+      dark = !dark;
+      document.documentElement.style.colorScheme = dark ? "dark" : "light";
+      document.body.classList.toggle("bg-white");
+      document.body.classList.toggle("text-night-900");
+      themeBtn.innerHTML = dark
+        ? `<i class="fa-solid fa-moon text-white/90"></i>`
+        : `<i class="fa-solid fa-sun text-yellow-400"></i>`;
+    });
+
+    // translations
+    const translations = {
+      pt: {
+        "nav.about": "Sobre",
+        "nav.projects": "Projetos",
+        "nav.skills": "Skills",
+        "nav.contact": "Contato",
+        "nav.home": "Início",
+        "nav.stack": "Tech Stack",
+        "nav.awards": "Certificações & Reconhecimentos",
+        "nav.timeline": "Minha Evolução",
+        "nav.testimonials": "Depoimentos",
+        "nav.social": "Redes",
+        "nav.scroll": "scroll",
+        "nav.backtotop": "Voltar ao topo",
+        "footer.copyright": "© 2025 Bruno Yudi Kay — Todos os direitos reservados.",
+        "footer.open": "Aberto a colaborações e projetos reais.",
+        "footer.tags": "Full-Stack IA GovTech",
+        "footer.signature": "IA • Web • GovTech • Inovação Real",
+        "hero.badge":"Disponível para projetos • Assaí-PR",
+        "hero.title":"Construindo soluções reais",
+        "hero.titleAccent":"com código, IA e impacto público.",
+        "hero.desc":"Sou Bruno Yudi Kay, dev Full-Stack com foco em Laravel, Python e Visão Computacional, criando sistemas reais para escolas, prefeitura e projetos locais.",
+        "hero.ctaProjects":"Ver Projetos",
+        "hero.ctaContact":"Entrar em Contato",
+        "hero.statProjects":"Projetos",
+        "hero.statYears":"Anos XP",
+        "hero.statDedication":"Dedicação",
+        "about.title":"Sobre Mim",
+        "about.subtitle":"Uma trajetória de tecnologia, visão e impacto real — tudo começando em Assaí-PR.",
+        "about.cta":"Ver meus projetos",
+        "about.t1.title":"Início no Desenvolvimento",
+        "about.t1.desc":"Comecei estudando programação e evoluí para projetos reais com Python, JavaScript e web moderna.",
+        "about.t2.title":"Visão Computacional & IA",
+        "about.t2.desc":"Avancei com YOLO, OpenCV e machine learning criando sistemas inteligentes para educação e segurança.",
+        "about.t3.title":"Full-Stack & GovTech",
+        "about.t3.desc":"Desenvolvo plataformas completas em Laravel + PostgreSQL que ajudam escolas, prefeituras e pessoas.",
+        "projects.title":"Projetos em Destaque",
+        "projects.subtitle":"Sistemas reais que desenvolvi unindo IA, visão computacional, web moderna e impacto social.",
+        "awards.title": "Certificações & Reconhecimentos",
+        "awards.subtitle": "Conquistas reais em inovação, educação e tecnologia.",
+        "stack.title": "Tech Stack",
+        "stack.subtitle": "Tecnologias que uso diariamente para construir sistemas reais.",
+        "skills.title": "Habilidades & Tecnologias",
+        "skills.subtitle": "Stack moderna, forte e focada em IA, back-end e web profissional.",
+        "skills.softskills": "Soft Skills",
+        "skills.softskills.tags": "Comunicação clara Trabalho em equipe Criatividade Resolução de problemas Autonomia Foco em impacto real Aprendizado rápido",
+        "testimonials.title": "Depoimentos",
+        "testimonials.subtitle": "Pessoas que acompanharam meu trabalho e impacto real.",
+        "timeline.title": "Minha Evolução",
+        "timeline.subtitle": "Uma jornada real — da lógica ao GovTech e IA aplicada, criando impacto em Assaí-PR.",
+        "cta.title": "Vamos Criar o Seu Próximo Grande Projeto",
+        "cta.desc": "IA aplicada, visão computacional, GovTech, sistemas reais e impacto direto. Você traz o desafio — eu construo a solução.",
+        "cta.button": "Iniciar Conversa Técnica",
+        "contact.title":"Vamos conversar",
+        "contact.subtitle":"Aberto para projetos, colaborações e ideias que realmente importam.",
+        "contact.whatsapp": "WhatsApp",
+        "contact.whatsapp.desc": "Resposta rápida e direta",
+        "contact.whatsapp.button": "Iniciar conversa",
+        "contact.email": "Email",
+        "contact.email.desc": "Profissional e organizado",
+        "contact.email.button": "Enviar email",
+        "contact.extra": "Curte ideia maluca? Produto real? Bora tirar do papel.",
+        "contact.extra.tags": "IA aplicada GovTech Visão Computacional Web moderna",
+        "contact.form.name": "Nome",
+        "contact.form.email": "Email",
+        "contact.form.subject": "Assunto",
+        "contact.form.message": "Mensagem",
+        "contact.form.name.placeholder": "Seu nome",
+        "contact.form.email.placeholder": "seuemail@email.com",
+        "contact.form.subject.placeholder": "O que você quer construir?",
+        "contact.form.message.placeholder": "Me conta o desafio, ideia ou projeto...",
+        "contact.form.button": "Enviar mensagem",
+        "contact.form.success": "Mensagem enviada com sucesso!",
+        "contact.form.error": "Preencha todos os campos.",
+        "contact.form.signature": "resposta rápida • trabalho sério • impacto real"
+      },
+      en: {
+        "nav.about": "About",
+        "nav.projects": "Projects",
+        "nav.skills": "Skills",
+        "nav.contact": "Contact",
+        "nav.home": "Home",
+        "nav.stack": "Tech Stack",
+        "nav.awards": "Certifications & Recognitions",
+        "nav.timeline": "My Evolution",
+        "nav.testimonials": "Testimonials",
+        "nav.social": "Social",
+        "nav.scroll": "scroll",
+        "nav.backtotop": "Back to top",
+        "footer.copyright": "© 2025 Bruno Yudi Kay — All rights reserved.",
+        "footer.open": "Open to collaborations and real projects.",
+        "footer.tags": "Full-Stack AI GovTech",
+        "footer.signature": "AI • Web • GovTech • Real Innovation",
+        "hero.badge":"Available for projects • Assaí-PR",
+        "hero.title":"Building real solutions",
+        "hero.titleAccent":"with code, AI and public impact.",
+        "hero.desc":"I'm Bruno Yudi Kay, a Full-Stack developer focused on Laravel, Python and Computer Vision, building real systems for schools, government and local projects.",
+        "hero.ctaProjects":"See Projects",
+        "hero.ctaContact":"Contact",
+        "hero.statProjects":"Projects",
+        "hero.statYears":"Years XP",
+        "hero.statDedication":"Dedication",
+        "about.title":"About Me",
+        "about.subtitle":"A journey of technology, vision and real impact — all starting in Assaí-PR.",
+        "about.cta":"See my projects",
+        "about.t1.title":"Starting in Development",
+        "about.t1.desc":"I began studying programming and evolved into real-world projects using Python, JavaScript and modern web.",
+        "about.t2.title":"Computer Vision & AI",
+        "about.t2.desc":"I advanced with YOLO, OpenCV and machine learning, creating intelligent systems for education and security.",
+        "about.t3.title":"Full-Stack & GovTech",
+        "about.t3.desc":"I build complete Laravel + PostgreSQL platforms that help schools, city halls and people.",
+        "projects.title":"Featured Projects",
+        "projects.subtitle":"Real systems I developed combining AI, computer vision, modern web and social impact.",
+        "awards.title": "Certifications & Recognitions",
+        "awards.subtitle": "Real achievements in innovation, education and technology.",
+        "stack.title": "Tech Stack",
+        "stack.subtitle": "Technologies I use daily to build real systems.",
+        "skills.title": "Skills & Technologies",
+        "skills.subtitle": "Modern, strong stack focused on AI, back-end and professional web.",
+        "skills.softskills": "Soft Skills",
+        "skills.softskills.tags": "Clear communication Teamwork Creativity Problem solving Autonomy Focus on real impact Fast learning",
+        "testimonials.title": "Testimonials",
+        "testimonials.subtitle": "People who followed my work and real impact.",
+        "timeline.title": "My Evolution",
+        "timeline.subtitle": "A real journey — from logic to GovTech and applied AI, creating impact in Assaí-PR.",
+        "cta.title": "Let's Build Your Next Big Project",
+        "cta.desc": "Applied AI, computer vision, GovTech, real systems and direct impact. You bring the challenge — I build the solution.",
+        "cta.button": "Start Technical Chat",
+        "contact.title":"Let's talk",
+        "contact.subtitle":"Open to projects, collaborations and ideas that truly matter.",
+        "contact.whatsapp": "WhatsApp",
+        "contact.whatsapp.desc": "Quick and direct response",
+        "contact.whatsapp.button": "Start chat",
+        "contact.email": "Email",
+        "contact.email.desc": "Professional and organized",
+        "contact.email.button": "Send email",
+        "contact.extra": "Like crazy ideas? Real product? Let's make it happen.",
+        "contact.extra.tags": "Applied AI GovTech Computer Vision Modern web",
+        "contact.form.name": "Name",
+        "contact.form.email": "Email",
+        "contact.form.subject": "Subject",
+        "contact.form.message": "Message",
+        "contact.form.name.placeholder": "Your name",
+        "contact.form.email.placeholder": "youremail@email.com",
+        "contact.form.subject.placeholder": "What do you want to build?",
+        "contact.form.message.placeholder": "Tell me the challenge, idea or project...",
+        "contact.form.button": "Send message",
+        "contact.form.success": "Message sent successfully!",
+        "contact.form.error": "Please fill all fields.",
+        "contact.form.signature": "quick response • serious work • real impact"
+      }
+    };
+
+    function applyTranslations(lang){
+      document.querySelectorAll("[data-i18n]").forEach(el=>{
+        const k = el.getAttribute("data-i18n");
+        if(translations[lang][k]) el.textContent = translations[lang][k];
+      });
+      // Placeholders
+      document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{
+        const k = el.getAttribute("data-i18n-placeholder");
+        if(translations[lang][k]) el.placeholder = translations[lang][k];
+      });
+    }
+
+    // translations init
+    const langBtn = document.getElementById("langBtn");
+    let lang = localStorage.getItem("lang") || "pt";
+    applyTranslations(lang);
+    langBtn.textContent = lang === "pt" ? "PT / EN" : "EN / PT";
+
+    langBtn.addEventListener("click", ()=>{
+      lang = (lang === "pt") ? "en" : "pt";
+      localStorage.setItem("lang", lang);
+      langBtn.textContent = lang === "pt" ? "PT / EN" : "EN / PT";
+      applyTranslations(lang);
+    });
+
+    // form validation + feedback
+    const form = document.getElementById("contactForm");
+    const feedback = document.getElementById("ct-feedback");
+    form.addEventListener("submit", (e)=>{
+      e.preventDefault();
+      const name = document.getElementById("ct-name").value.trim();
+      const email = document.getElementById("ct-email").value.trim();
+      const subject = document.getElementById("ct-subject").value.trim();
+      const message = document.getElementById("ct-message").value.trim();
+
+      if(!name || !email || !subject || !message){
+        feedback.textContent = lang==="pt" ? "Preencha todos os campos." : "Please fill all fields.";
+        feedback.classList.remove("opacity-0");
+        feedback.classList.add("text-red-300");
+        return;
+      }
+
+      feedback.textContent = lang==="pt" ? "Mensagem enviada com sucesso!" : "Message sent successfully!";
+      feedback.classList.remove("opacity-0","text-red-300");
+      feedback.classList.add("text-green-300");
+      form.reset();
+      setTimeout(()=> feedback.classList.add("opacity-0"), 2500);
+    });
+  </script>
 </body>
 </html>
