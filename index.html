@@ -193,6 +193,34 @@ animateNet();
     /* fade in app */
     .fade-start{ opacity:0; transform: translateY(8px); }
     .fade-in{ opacity:1; transform: translateY(0); transition: 1s ease; }
+    .about-card{
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 22px;
+  padding: 28px;
+  backdrop-filter: blur(14px);
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+.about-card:hover{
+  transform: translateY(-8px);
+  box-shadow: 0 30px 80px rgba(0,0,0,.6);
+}
+.about-card i{
+  font-size: 26px;
+  color: rgb(125 211 252);
+  margin-bottom: 12px;
+}
+.about-card h4{
+  font-weight: 700;
+  font-size: 18px;
+  color: white;
+}
+.about-card p{
+  margin-top: 6px;
+  color: rgba(255,255,255,.7);
+  font-size: 15px;
+}
+
   </style>
 </head>
 
@@ -367,77 +395,110 @@ animateNet();
     </section>
   </main>
   
-  
-  
-<!-- SOBRE — VERSÃO SUPREMA -->
-<section id="about" class="py-28 md:py-36 relative overflow-hidden fade-start">
+  <!-- SOBRE — EXPERIÊNCIA PREMIUM -->
+<section id="about" class="relative py-32 md:py-40 bg-night-900 overflow-hidden">
 
-  <!-- background glow -->
-  <div class="absolute inset-0 pointer-events-none opacity-40 blur-3xl"
-       style="background:
-         radial-gradient(circle at 20% 30%, rgba(56,189,248,.25), transparent 55%),
-         radial-gradient(circle at 80% 70%, rgba(168,85,247,.22), transparent 55%);">
+  <!-- FUNDO SUTIL -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute inset-0 bg-gradient-to-b from-night-900 via-night-800 to-night-900"></div>
+    <div class="absolute inset-0 opacity-30 blur-3xl"
+         style="background:
+           radial-gradient(circle at 25% 30%, rgba(56,189,248,.18), transparent 55%),
+           radial-gradient(circle at 75% 70%, rgba(168,85,247,.16), transparent 55%);">
+    </div>
   </div>
 
   <div class="relative z-10 mx-auto max-w-6xl px-6">
 
-    <!-- TITLE -->
+    <!-- HEADER -->
     <div class="text-center mb-20">
-      <h2 class="text-4xl md:text-5xl font-black tracking-tight 
-                 text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-cyan-300 to-violet-300" data-i18n="about.title">
+      <h2 class="text-4xl md:text-5xl font-black
+                 text-transparent bg-clip-text
+                 bg-gradient-to-r from-sky-300 via-cyan-300 to-violet-300">
         Sobre Mim
       </h2>
-      <p class="text-white/60 max-w-2xl mx-auto mt-4 text-lg leading-relaxed" data-i18n="about.subtitle">
-        Uma trajetória de tecnologia, visão e impacto real — tudo começando em Assaí-PR.
+      <p class="mt-4 text-white/60 max-w-2xl mx-auto text-lg">
+        Tecnologia aplicada, impacto real e sistemas que funcionam fora do portfólio.
       </p>
     </div>
 
-    <!-- MAIN GRID -->
-    <div class="grid lg:grid-cols-2 gap-14 items-center">
+    <!-- GRID -->
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
 
-<!-- FOTO DE APRESENTAÇÃO — VERSÃO AJUSTADA -->
-<div class="relative flex items-center justify-center">
-  <div class="absolute -inset-12 bg-gradient-to-br from-sky-400/20 via-cyan-300/20 to-violet-400/20 blur-3xl"></div>
+      <!-- IMAGEM (HUMANA, SEM EFEITÃO) -->
+      <div class="relative">
+        <div class="absolute -inset-10 bg-gradient-to-br
+                    from-sky-400/20 via-cyan-300/20 to-violet-400/20
+                    blur-3xl"></div>
 
-  <div class="relative rounded-3xl overflow-hidden shadow-2xl shadow-black/40 tilt3d
-              w-full h-[420px] md:h-[500px]"> <!-- AQUI: mais vertical -->
+        <div class="relative rounded-3xl overflow-hidden
+                    shadow-[0_40px_100px_rgba(0,0,0,.6)]
+                    parallax-img">
 
-    <img src="imgs/palestra.jpg"
-         class="w-full h-full object-cover object-center">
+          <img src="imgs/palestra.jpg"
+               alt="Bruno Yudi Kay"
+               class="w-full h-[420px] md:h-[520px] object-cover">
 
-    <!-- overlay de acabamento -->
-    <div class="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-black/40"></div>
-  </div>
-</div>
+          <div class="absolute inset-0 bg-gradient-to-b
+                      from-white/10 via-transparent to-black/40"></div>
+        </div>
+      </div>
 
-
-      <!-- TEXTO PRINCIPAL -->
-      <div class="space-y-8 text-white/85 text-lg leading-relaxed">
+      <!-- TEXTO -->
+      <div class="space-y-6 text-white/85 text-lg leading-relaxed">
 
         <p>
-          <span data-i18n="about.intro">Meu nome é Bruno Yudi Kay. Sou desenvolvedor Full-Stack especializado em Inteligência Artificial e Visão Computacional.</span>
+          Meu nome é <strong class="text-white">Bruno Yudi Kay</strong>.
+          Sou desenvolvedor Full-Stack focado em
+          <span class="text-sky-300 font-semibold">IA aplicada</span>,
+          <span class="text-cyan-300 font-semibold">Visão Computacional</span> e
+          <span class="text-violet-300 font-semibold">GovTech</span>.
         </p>
-        <p data-i18n="about.work">
-          Meu trabalho nasceu da necessidade real: criar soluções que funcionam na vida das pessoas — escolas, prefeitura, setores públicos, empresas locais. Cada projeto que desenvolvo tem um propósito direto: melhorar rotinas, otimizar processos e entregar tecnologia aplicada de verdade.
+
+        <p>
+          Desenvolvo sistemas usados por escolas, prefeitura e ecossistemas de inovação,
+          sempre com foco em impacto direto, dados reais e tecnologia que resolve problema.
         </p>
-        <p data-i18n="about.impact">
-          Sou movido por impacto: já desenvolvi sistemas oficiais para o município de Assaí, realizei projetos educacionais reconhecidos, implementei IA em cenários reais e construí ferramentas de análise de vídeo, automação, monitoramento e atendimento inteligente.
-        </p>
-        <p data-i18n="about.belief">
-          Acredito que tecnologia não é só código: é transformação. E é isso que me guia — criar soluções completas, com design, performance, dados e inteligência, que conectam pessoas ao que realmente importa.
-        </p>
-        <p class="text-white font-semibold text-xl" data-i18n="about.focus">
-          Meu foco hoje é simples: IA aplicada, sistemas reais e inovação pública.
+
+        <p class="font-semibold text-white text-xl">
+          Tecnologia não é vitrine. É execução.
         </p>
 
         <a href="#projects"
-           class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-sky-300 to-cyan-300 font-bold text-night-900 shadow-xl hover:shadow-glowStrong transition">
-          <span data-i18n="about.cta">Ver meus projetos</span>
+           class="inline-flex items-center gap-2 px-7 py-4 rounded-xl
+                  bg-gradient-to-r from-sky-300 to-cyan-300
+                  font-bold text-night-900
+                  shadow-glow hover:shadow-glowStrong transition">
+          Ver projetos reais
           <i class="fa-solid fa-arrow-right"></i>
         </a>
       </div>
 
     </div>
+
+    <!-- MINI TIMELINE (IMPORTADO DE SITES BONS) -->
+    <div class="mt-32 grid md:grid-cols-3 gap-8">
+
+      <div class="about-card">
+        <i class="fa-solid fa-school"></i>
+        <h4>Educação</h4>
+        <p>Sistemas reais usados em escolas e projetos educacionais.</p>
+      </div>
+
+      <div class="about-card">
+        <i class="fa-solid fa-city"></i>
+        <h4>GovTech</h4>
+        <p>Plataformas oficiais para prefeitura e serviços públicos.</p>
+      </div>
+
+      <div class="about-card">
+        <i class="fa-solid fa-brain"></i>
+        <h4>IA Aplicada</h4>
+        <p>Visão computacional, automação e análise de dados em produção.</p>
+      </div>
+
+    </div>
+
   </div>
 </section>
 
@@ -490,254 +551,190 @@ animateNet();
 </section>
 
 
-<!-- PROJETOS -->
-<section id="projects" class="py-28 md:py-32 relative overflow-hidden fade-start">
-  <div class="absolute inset-0 blur-3xl opacity-40 pointer-events-none"
-       style="background: radial-gradient(circle at 30% 20%, #38bdf833 0%, transparent 55%),
-              radial-gradient(circle at 70% 80%, #a855f733 0%, transparent 55%);"></div>
+<!-- PROJETOS — SISTEMAS EM PRODUÇÃO -->
+<section id="projects" class="relative py-36 overflow-hidden fade-start">
 
-  <div class="mx-auto max-w-6xl px-6 relative z-10">
-    <div class="text-center mb-16 md:mb-20">
-      <h2 class="text-4xl md:text-5xl font-black tracking-tight">
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-cyan-300 to-violet-300" data-i18n="projects.title">
-          Projetos em Destaque
+  <!-- transição visual -->
+  <div class="absolute inset-x-0 -top-24 h-24 bg-gradient-to-b from-transparent to-night-900"></div>
+
+  <!-- glow integrado ao site -->
+  <div class="absolute inset-0 pointer-events-none blur-3xl opacity-40"
+       style="background:
+         radial-gradient(circle at 25% 25%, rgba(56,189,248,.22), transparent 55%),
+         radial-gradient(circle at 75% 70%, rgba(16,185,129,.20), transparent 55%);">
+  </div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6">
+
+    <!-- Header -->
+    <header class="max-w-3xl mb-24">
+      <p class="uppercase tracking-[0.35em] text-xs text-sky-300 font-semibold">
+        Sistemas Reais
+      </p>
+      <h2 class="text-4xl md:text-6xl font-black mt-4 leading-tight">
+        Projetos que funcionam<br>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-emerald-300">
+          fora do portfólio
         </span>
       </h2>
-      <p class="text-white/60 max-w-2xl mx-auto mt-4 text-lg leading-relaxed" data-i18n="projects.subtitle">
-        Sistemas reais que desenvolvi unindo IA, visão computacional, web moderna e impacto social.
+      <p class="mt-6 text-white/60 text-lg">
+        Educação, segurança pública, agronegócio e GovTech.
+        Sistemas com uso real, dados reais e impacto direto.
       </p>
-    </div>
+    </header>
 
-    <div class="grid lg:grid-cols-2 gap-10 md:gap-14">
+    <!-- ========================= -->
+    <!-- BLOCO PRINCIPAL -->
+    <!-- ========================= -->
+    <div class="grid lg:grid-cols-2 gap-16 mb-32">
 
-      <!-- 1 ClassEye -->
-      <article class="group relative">
-        <div class="relative p-[2px] rounded-3xl bg-gradient-to-br from-sky-300/30 via-cyan-300/30 to-violet-300/30">
-          <div class="bg-night-900/55 backdrop-blur-xl p-8 rounded-3xl border border-white/10 tilt3d">
+      <!-- ClassEye -->
+      <article class="glass rounded-3xl p-10 border border-white/10 tilt3d">
 
-            <div class="flex justify-between items-center mb-6">
-              <span class="px-4 py-1.5 text-sm rounded-full bg-sky-300/10 text-sky-300 font-semibold" data-i18n="projects.card1.badge">IA • Visão Computacional</span>
-              <i class="fa-solid fa-brain text-cyan-300 text-xl"></i>
-            </div>
+        <div class="flex items-center justify-between mb-6">
+          <span class="px-4 py-1.5 rounded-full bg-sky-300/10 text-sky-300 text-sm font-semibold">
+            Educação • Visão Computacional
+          </span>
+          <i class="fa-solid fa-brain text-sky-300 text-xl"></i>
+        </div>
 
-            <div class="relative rounded-2xl overflow-hidden shadow-lg">
-              <img src="imgs/classeye.png"
-                   class="w-full h-56 sm:h-64 object-cover group-hover:scale-105 transition duration-700"
-                   alt="ClassEye preview">
-              <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-500 flex items-center justify-center">
-                <a href="https://brunoxzr.github.io/classeye-pub" target="_blank"
-                   class="px-6 py-3 rounded-xl font-semibold bg-gradient-to-r from-sky-300 to-cyan-300 text-night-900 shadow-glow">
-                  <span data-i18n="projects.card1.more">Ver Mais</span> <i class="fa-solid fa-arrow-up-right-from-square ml-2"></i>
-                </a>
-              </div>
-            </div>
+        <h3 class="text-3xl font-black text-white">ClassEye</h3>
 
-            <h3 class="text-2xl font-bold mt-6 text-white" data-i18n="projects.card1.title">ClassEye</h3>
-            <p class="text-white/60 mt-3 leading-relaxed" data-i18n="projects.card1.desc">
-              Sistema real em Python + Flask com YOLO para detectar atenção em sala de aula, gerar relatórios (CSV/gráficos) e análise em tempo real. Integrado ao Tkinter e usado no Vale do Sol.
-            </p>
+        <p class="mt-4 text-white/70 leading-relaxed">
+          Sistema de visão computacional aplicado à educação para análise de atenção
+          em sala de aula, geração de relatórios automáticos e dados reais para tomada
+          de decisão pedagógica. Utilizado no ecossistema CEEP-Assaí.
+        </p>
 
-            <div class="flex flex-wrap gap-2 mt-5">
-              <span class="tech-tag" data-i18n="projects.card1.tech1"><i class="fa-brands fa-python"></i> Python</span>
-              <span class="tech-tag" data-i18n="projects.card1.tech2"><i class="fa-solid fa-eye"></i> YOLO</span>
-              <span class="tech-tag" data-i18n="projects.card1.tech3"><i class="fa-solid fa-camera"></i> OpenCV</span>
-              <span class="tech-tag" data-i18n="projects.card1.tech4"><i class="fa-solid fa-server"></i> Flask</span>
-            </div>
-          </div>
+        <div class="flex flex-wrap gap-2 mt-6">
+          <span class="tech-tag"><i class="fa-brands fa-python"></i> Python</span>
+          <span class="tech-tag"><i class="fa-solid fa-eye"></i> YOLO</span>
+          <span class="tech-tag"><i class="fa-solid fa-camera"></i> OpenCV</span>
+          <span class="tech-tag"><i class="fa-solid fa-server"></i> Flask</span>
+          <span class="tech-tag"><i class="fa-solid fa-chart-line"></i> Relatórios</span>
+        </div>
+
+        <!-- Botões -->
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="https://github.com/brunoxzr/ClassEye" target="_blank"
+             class="inline-flex items-center gap-2 px-5 py-3 rounded-xl
+                    glass border border-white/10 text-white font-semibold
+                    hover:bg-white/10 transition">
+            <i class="fa-brands fa-github"></i> GitHub
+          </a>
+          <a href="https://brunoxzr.github.io/classeye-pub" target="_blank"
+             class="inline-flex items-center gap-2 px-5 py-3 rounded-xl
+                    bg-gradient-to-r from-sky-300 to-cyan-300
+                    text-night-900 font-extrabold shadow-glow
+                    hover:shadow-glowStrong transition">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Visitar
+          </a>
         </div>
       </article>
 
-      <!-- 2 UrbanEye -->
-<article class="group relative">
-  <div class="relative p-[2px] rounded-3xl bg-gradient-to-br from-emerald-300/30 via-teal-300/30 to-cyan-300/30">
-    <div class="bg-night-900/55 backdrop-blur-xl p-8 rounded-3xl border border-white/10 tilt3d">
+      <!-- UrbanEye -->
+      <article class="glass rounded-3xl p-10 border border-white/10 tilt3d">
 
-      <!-- Badge + Ícone -->
-      <div class="flex justify-between items-center mb-6">
-        <span class="px-4 py-1.5 text-sm rounded-full bg-emerald-300/10 text-emerald-300 font-semibold"
-              data-i18n="projects.cardUrban.badge">
-          IA • Segurança Pública
-        </span>
-        <i class="fa-solid fa-shield-halved text-teal-300 text-xl"></i>
-      </div>
+        <div class="flex items-center justify-between mb-6">
+          <span class="px-4 py-1.5 rounded-full bg-emerald-300/10 text-emerald-300 text-sm font-semibold">
+            Segurança Pública • IA Urbana
+          </span>
+          <i class="fa-solid fa-shield-halved text-emerald-300 text-xl"></i>
+        </div>
 
-      <!-- Imagem -->
-      <div class="relative rounded-2xl overflow-hidden shadow-lg">
-        <img src="imgs/urbaneye.png"
-             class="w-full h-56 sm:h-64 object-cover group-hover:scale-105 transition duration-700"
-             alt="UrbanEye preview">
-        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-500 flex items-center justify-center">
+        <h3 class="text-3xl font-black text-white">UrbanEye</h3>
+
+        <p class="mt-4 text-white/70 leading-relaxed">
+          Sistema de vigilância urbana com IA para detecção de perseguição,
+          comportamentos anômalos e riscos em vias públicas, com alertas em
+          tempo real. Projeto apresentado à CMTU Londrina.
+        </p>
+
+        <div class="flex flex-wrap gap-2 mt-6">
+          <span class="tech-tag"><i class="fa-brands fa-python"></i> Python</span>
+          <span class="tech-tag"><i class="fa-solid fa-eye"></i> YOLO</span>
+          <span class="tech-tag"><i class="fa-solid fa-video"></i> OpenCV</span>
+          <span class="tech-tag"><i class="fa-solid fa-server"></i> Flask</span>
+          <span class="tech-tag"><i class="fa-solid fa-tower-broadcast"></i> Real-time</span>
+        </div>
+
+        <!-- Botões -->
+        <div class="mt-8 flex flex-wrap gap-3">
           <a href="https://github.com/brunoxzr/UrbanEye" target="_blank"
-             class="px-6 py-3 rounded-xl font-semibold bg-gradient-to-r from-teal-300 to-emerald-300 text-night-900 shadow-glow">
-            <span data-i18n="projects.cardUrban.more">Ver Mais</span>
-            <i class="fa-solid fa-arrow-up-right-from-square ml-2"></i>
+             class="inline-flex items-center gap-2 px-5 py-3 rounded-xl
+                    glass border border-white/10 text-white font-semibold
+                    hover:bg-white/10 transition">
+            <i class="fa-brands fa-github"></i> GitHub
           </a>
-        </div>
-      </div>
-
-      <!-- Título -->
-      <h3 class="text-2xl font-bold mt-6 text-white" data-i18n="projects.cardUrban.title">
-        UrbanEye
-      </h3>
-
-      <!-- Descrição -->
-      <p class="text-white/60 mt-3 leading-relaxed" data-i18n="projects.cardUrban.desc">
-        Sistema avançado de vigilância urbana com YOLO e Flask focado em segurança pública. Detecta
-        comportamentos suspeitos como perseguição, fluxo anormal e risco à integridade de mulheres em vias públicas,
-        enviando alertas em tempo real. Projeto apresentado para CMTU Londrina.
-      </p>
-
-      <!-- Tecnologias -->
-      <div class="flex flex-wrap gap-2 mt-5">
-        <span class="tech-tag" data-i18n="projects.cardUrban.tech1">
-          <i class="fa-brands fa-python"></i> Python
-        </span>
-        <span class="tech-tag" data-i18n="projects.cardUrban.tech2">
-          <i class="fa-solid fa-eye"></i> YOLO
-        </span>
-        <span class="tech-tag" data-i18n="projects.cardUrban.tech3">
-          <i class="fa-solid fa-video"></i> OpenCV
-        </span>
-        <span class="tech-tag" data-i18n="projects.cardUrban.tech4">
-          <i class="fa-solid fa-server"></i> Flask
-        </span>
-      </div>
-
-    </div>
-  </div>
-</article>
-
-<!-- 3 SCOUTIS -->
-<article class="group relative">
-  <div class="relative p-[2px] rounded-3xl bg-gradient-to-br from-sky-300/30 via-cyan-300/30 to-indigo-300/30">
-    <div class="bg-night-900/55 backdrop-blur-xl p-8 rounded-3xl border border-white/10 tilt3d">
-
-      <!-- Badge + Ícone -->
-      <div class="flex justify-between items-center mb-6">
-        <span class="px-4 py-1.5 text-sm rounded-full bg-sky-300/10 text-sky-300 font-semibold"
-              data-i18n="projects.cardScoutis.badge">
-          IA • Machine Learning • Agro
-        </span>
-        <i class="fa-solid fa-robot text-cyan-300 text-xl"></i>
-      </div>
-
-      <!-- Imagem -->
-      <div class="relative rounded-2xl overflow-hidden shadow-lg">
-        <img
-          src="imgs/scoutis.png"
-          class="w-full h-56 sm:h-64 object-cover group-hover:scale-105 transition duration-700"
-          alt="SCOUTIS preview">
-        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-500 flex items-center justify-center">
-          <a href="https://github.com/brunoxzr/SCOUTIS" target="_blank"
-             class="px-6 py-3 rounded-xl font-semibold bg-gradient-to-r from-cyan-300 to-sky-300 text-night-900 shadow-glow">
-            <span data-i18n="projects.cardScoutis.more">Ver Mais</span>
-            <i class="fa-solid fa-arrow-up-right-from-square ml-2"></i>
+          <a href="#" target="_blank"
+             class="inline-flex items-center gap-2 px-5 py-3 rounded-xl
+                    bg-gradient-to-r from-emerald-300 to-teal-300
+                    text-night-900 font-extrabold shadow-glow
+                    hover:shadow-glowStrong transition">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Visitar
           </a>
-        </div>
-      </div>
-
-      <!-- Título -->
-      <h3 class="text-2xl font-bold mt-6 text-white"
-          data-i18n="projects.cardScoutis.title">
-        SCOUTIS
-      </h3>
-
-      <!-- Descrição -->
-      <p class="text-white/60 mt-3 leading-relaxed"
-         data-i18n="projects.cardScoutis.desc">
-        Projeto experimental de monitoramento autônomo para o agronegócio utilizando visão computacional,
-        YOLO e aprendizado de máquina não supervisionado. O SCOUTIS explora arquiteturas de IA capazes de
-        aprender padrões visuais de ambientes agrícolas, detectar desvios ao longo do tempo e registrar
-        métricas em banco de dados para análise histórica.
-      </p>
-
-      <!-- Tecnologias -->
-      <div class="flex flex-wrap gap-2 mt-5">
-        <span class="tech-tag" data-i18n="projects.cardScoutis.tech1">
-          <i class="fa-brands fa-python"></i> Python
-        </span>
-        <span class="tech-tag" data-i18n="projects.cardScoutis.tech2">
-          <i class="fa-solid fa-eye"></i> YOLO
-        </span>
-        <span class="tech-tag" data-i18n="projects.cardScoutis.tech3">
-          <i class="fa-solid fa-brain"></i> Machine Learning
-        </span>
-        <span class="tech-tag" data-i18n="projects.cardScoutis.tech4">
-          <i class="fa-solid fa-database"></i> PostgreSQL
-        </span>
-      </div>
-
-    </div>
-  </div>
-</article>
-
-
-      <!-- 2 CEEP+ — Portal Acadêmico com Banco -->
-      <article class="group relative">
-        <div class="relative p-[2px] rounded-3xl bg-gradient-to-br from-violet-300/30 via-sky-300/30 to-cyan-300/30">
-          <div class="bg-night-900/55 backdrop-blur-xl p-8 rounded-3xl border border-white/10 tilt3d">
-
-            <div class="flex justify-between items-center mb-6">
-              <span class="px-4 py-1.5 text-sm rounded-full bg-violet-300/10 text-violet-300 font-semibold" data-i18n="projects.card2.badge">Plataforma • Acadêmico</span>
-              <i class="fa-solid fa-graduation-cap text-violet-300 text-xl"></i>
-            </div>
-
-            <div class="relative rounded-2xl overflow-hidden shadow-lg">
-              <img src="imgs/ceep.png"
-                   class="w-full h-56 sm:h-64 object-cover group-hover:scale-105 transition duration-700"
-                   alt="CEEP+ portal">
-            </div>
-
-            <h3 class="text-2xl font-bold mt-6 text-white" data-i18n="projects.card2.title">CEEP+ — Portal Acadêmico</h3>
-            <p class="text-white/60 mt-3 leading-relaxed" data-i18n="projects.card2.desc">
-              Plataforma acadêmica criada em Laravel + MySQL com login, permissões, gerenciamento de alunos, cursos, turmas e dashboard administrativo. Puxa informações reais do banco em todos os módulos.
-            </p>
-
-            <div class="flex flex-wrap gap-2 mt-5">
-              <span class="tech-tag" data-i18n="projects.card2.tech1"><i class="fa-brands fa-php"></i> Laravel</span>
-              <span class="tech-tag" data-i18n="projects.card2.tech2"><i class="fa-solid fa-database"></i> MySQL</span>
-              <span class="tech-tag" data-i18n="projects.card2.tech3"><i class="fa-solid fa-layer-group"></i> Painéis</span>
-            </div>
-
-          </div>
-        </div>
-      </article>
-
-
-      <!-- 3 Chatbot Inteligente com Banco -->
-      <article class="group relative">
-        <div class="relative p-[2px] rounded-3xl bg-gradient-to-br from-sky-300/30 via-cyan-300/30 to-violet-300/30">
-          <div class="bg-night-900/55 backdrop-blur-xl p-8 rounded-3xl border border-white/10 tilt3d">
-
-            <div class="flex justify-between items-center mb-6">
-              <span class="px-4 py-1.5 text-sm rounded-full bg-sky-300/10 text-sky-300 font-semibold" data-i18n="projects.card3.badge">Chatbots • Banco de Dados</span>
-              <i class="fa-solid fa-robot text-sky-300 text-xl"></i>
-            </div>
-
-            <div class="relative rounded-2xl overflow-hidden shadow-lg">
-              <img src="imgs/chatbot.png"
-                   class="w-full h-56 sm:h-64 object-cover group-hover:scale-105 transition duration-700"
-                   alt="Chatbot Banco de Dados">
-            </div>
-
-            <h3 class="text-2xl font-bold mt-6 text-white" data-i18n="projects.card3.title">Chatbot Inteligente Integrado ao Banco</h3>
-            <p class="text-white/60 mt-3 leading-relaxed" data-i18n="projects.card3.desc">
-              Chatbot profissional usando wwjs + PostgreSQL + Laravel API. Ele consulta o banco e responde automaticamente com informações oficiais: horários, setores, serviços, documentos, contatos e dúvidas frequentes. Mesma base usada pelo Conecta Assaí.
-            </p>
-
-            <div class="flex flex-wrap gap-2 mt-5">
-              <span class="tech-tag" data-i18n="projects.card3.tech1"><i class="fa-brands fa-node-js"></i> wwjs</span>
-              <span class="tech-tag" data-i18n="projects.card3.tech2"><i class="fa-solid fa-database"></i> PostgreSQL</span>
-              <span class="tech-tag" data-i18n="projects.card3.tech3"><i class="fa-solid fa-robot"></i> Automação Inteligente</span>
-            </div>
-
-          </div>
         </div>
       </article>
 
     </div>
+
+    <!-- ========================= -->
+    <!-- OUTROS SISTEMAS -->
+    <!-- ========================= -->
+    <div class="grid md:grid-cols-3 gap-10">
+
+      <!-- SCOUTIS -->
+      <article class="glass rounded-2xl p-7 border border-white/10">
+        <h4 class="text-xl font-bold text-white mb-2">SCOUTIS</h4>
+        <p class="text-white/60 text-sm mb-4">
+          Monitoramento autônomo no agronegócio com aprendizado não supervisionado.
+        </p>
+        <div class="flex flex-wrap gap-2 mb-6">
+          <span class="tech-tag"><i class="fa-brands fa-python"></i> Python</span>
+          <span class="tech-tag"><i class="fa-solid fa-brain"></i> ML</span>
+          <span class="tech-tag"><i class="fa-solid fa-database"></i> PostgreSQL</span>
+        </div>
+        <div class="flex gap-3">
+          <a href="https://github.com/brunoxzr/SCOUTIS" target="_blank" class="btn-gh">GitHub</a>
+        </div>
+      </article>
+
+      <!-- CEEP+ -->
+      <article class="glass rounded-2xl p-7 border border-white/10">
+        <h4 class="text-xl font-bold text-white mb-2">CEEP+</h4>
+        <p class="text-white/60 text-sm mb-4">
+          Portal acadêmico completo com autenticação, painéis e banco de dados real.
+        </p>
+        <div class="flex flex-wrap gap-2 mb-6">
+          <span class="tech-tag"><i class="fa-brands fa-php"></i> Laravel</span>
+          <span class="tech-tag"><i class="fa-solid fa-database"></i> MySQL</span>
+        </div>
+        <div class="flex gap-3">
+          <a href="https://github.com/brunoxzr/CEEPapp-" target="_blank" class="btn-gh">GitHub</a>
+          <a href="EM_BREVE" target="_blank" class="btn-visit">Visitar</a>
+        </div>
+      </article>
+
+      <!-- Chatbot -->
+      <article class="glass rounded-2xl p-7 border border-white/10">
+        <h4 class="text-xl font-bold text-white mb-2">Chatbot Institucional</h4>
+        <p class="text-white/60 text-sm mb-4">
+          Automação conectada a banco de dados usada em ambiente governamental.
+        </p>
+        <div class="flex flex-wrap gap-2 mb-6">
+          <span class="tech-tag"><i class="fa-brands fa-node-js"></i> wwjs</span>
+          <span class="tech-tag"><i class="fa-solid fa-database"></i> PostgreSQL</span>
+        </div>
+        <div class="flex gap-3">
+          <a href="https://github.com/brunoxzr/chatbot_assai" target="_blank" class="btn-gh">GitHub</a>
+        </div>
+      </article>
+
+    </div>
+
   </div>
 </section>
+
 
 <!-- TECH STACK EXPANDIDO -->
 <section id="stack" class="py-24 md:py-32 relative overflow-hidden fade-start">
@@ -1121,91 +1118,82 @@ animateNet();
 
   </div>
 </section>
+<!-- CTA FINAL — PRESENÇA REAL -->
+<section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden fade-start">
 
-<!-- CTA FINAL PREMIUM – FOCO TOTAL NO BRUNO -->
-<section class="relative py-40 overflow-hidden fade-start">
+<!-- IMAGEM DE FUNDO (VOCÊ) -->
+<div class="absolute inset-0 overflow-hidden">
+  <img src="imgs/sorriso.png"
+       alt="Bruno Yudi Kay"
+       class="w-full h-full object-cover scale-[1.18]
+              blur-[3px]
+              brightness-[0.85]
+              contrast-[1.05]
+              saturate-[0.9]"
+       style="object-position: center 30%;" />
 
-  <!-- FUNDO CINEMATOGRÁFICO HORIZONTAL -->
-  <div class="absolute inset-0 overflow-hidden">
-
-    <!-- IMAGEM DE FUNDO (ESCURECIDA + DESFOCADA) -->
-    <img src="imgs/fundo.jpg"
-         class="absolute inset-0 w-full h-full object-cover opacity-[0.35] blur-[3px]"
-         style="object-position: center 40%;">
-    
-    <!-- GRADIENTE DRAMÁTICO -->
-    <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/70 to-black/85"></div>
-  </div>
-
-<!-- IMAGEM DO BRUNO – CORTE PRECISO + ZOOM + MENOS HORIZONTAL + MENOS VERTICAL -->
-<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-  <div class="relative
-              w-[42vw]             /* MENOR na horizontal */
-              max-w-[620px]        /* limite horizontal */
-              h-[360px]            /* MENOR na vertical */
-              rounded-[32px]
-              overflow-hidden
-              shadow-[0_0_60px_rgba(0,200,255,0.35)]
-              backdrop-blur-xl">
-
-    <!-- IMAGEM COM ZOOM DIGITAL E FOCO EM VOCÊ -->
-    <img src="imgs/fundo.jpg"
-         class="w-full h-full object-cover"
-         style="
-           object-position: 57% 38%;   /* foco no seu rosto */
-           transform: scale(1.28);     /* zoom natural */
-         ">
-
-    <!-- VINHETA SUAVE -->
-    <div class="absolute inset-0 bg-black/60"></div>
-
-    <!-- BORDA NEON SUAVE -->
-    <div class="absolute inset-0 pointer-events-none rounded-[32px]
-                ring-1 ring-cyan-300/30 ring-offset-2 ring-offset-black/40"></div>
-
-  </div>
+  <!-- OVERLAY DE CONTRASTE -->
+  <div class="absolute inset-0 bg-gradient-to-b
+              from-black/35 via-black/60 to-black/85"></div>
 </div>
 
-  </div>
 
-  <!-- GLOW ORB -->
+  <!-- GLOW SUAVE -->
   <div class="absolute inset-0 pointer-events-none">
-    <div class="absolute left-1/2 -translate-x-1/2 top-24 w-[480px] h-[480px]
-                bg-gradient-to-br from-sky-300/40 via-cyan-400/30 to-violet-300/40
-                blur-[130px] rounded-full opacity-70 animate-pulseSoft"></div>
+    <div class="absolute left-1/2 -translate-x-1/2 top-24
+                w-[520px] h-[520px]
+                bg-cyan-400/20
+                blur-[140px] rounded-full opacity-70">
+    </div>
   </div>
 
   <!-- CONTEÚDO -->
-  <div class="relative z-10 max-w-4xl mx-auto px-6 text-center animate-rise">
+  <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
 
-    <h2 class="text-5xl md:text-6xl font-black leading-tight
-               text-transparent bg-clip-text
-               bg-gradient-to-r from-sky-300 via-cyan-300 to-violet-300
-               drop-shadow-[0_0_30px_rgba(56,189,248,0.4)]" data-i18n="cta.title">
-      Vamos Criar o Seu Próximo Grande Projeto
+    <h2 class="text-4xl sm:text-5xl md:text-6xl font-black leading-tight text-white">
+      Vamos criar o
+      <span class="text-cyan-300 drop-shadow-[0_0_20px_rgba(34,211,238,0.6)]">
+        SEU
+      </span>
+      próximo<br class="hidden sm:block">
+      sistema de impacto real
     </h2>
 
-    <p class="text-white/100 mt-6 text-xl max-w-2xl mx-auto leading-relaxed font-light" data-i18n="cta.desc">
-      IA aplicada, visão computacional, GovTech, sistemas reais e impacto direto.
-      Você traz o desafio — eu construo a solução.
+    <p class="mt-6 text-white/85 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed">
+      IA aplicada, visão computacional, GovTech e sistemas sob medida —
+      tecnologia pensada para funcionar no mundo real,
+      não só em apresentação.
     </p>
 
-    <!-- BOTÃO PREMIUM -->
-    <a href="https://wa.me/5543988506395"
-       class="group mt-10 inline-flex items-center gap-3 px-10 py-5 rounded-2xl
-              font-extrabold text-night-900 text-lg
-              bg-gradient-to-r from-sky-300 to-cyan-300
-              shadow-[0_0_45px_rgba(56,189,248,0.45)]
-              hover:shadow-[0_0_90px_rgba(56,189,248,0.8)]
-              transition-all duration-300 ease-out">
-      <span data-i18n="cta.button">Iniciar Conversa Técnica</span>
-      <i class="fa-brands fa-whatsapp text-xl group-hover:translate-x-1 transition"></i>
-    </a>
+    <!-- BOTÕES -->
+    <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
 
-    <!-- FOOTER -->
-    <div class="mt-10 text-white/80 text-sm tracking-widest uppercase" data-i18n="footer.signature">
-      IA • Web • GovTech • Inovação Real
+      <a href="https://wa.me/5543988506395"
+         class="inline-flex items-center justify-center gap-3 px-10 py-5 rounded-2xl
+                font-extrabold text-night-900 text-lg
+                bg-gradient-to-r from-cyan-300 to-sky-300
+                shadow-[0_0_45px_rgba(34,211,238,0.6)]
+                hover:shadow-[0_0_90px_rgba(34,211,238,0.9)]
+                transition-all duration-300">
+        Iniciar conversa técnica
+        <i class="fa-brands fa-whatsapp text-xl"></i>
+      </a>
+
+      <a href="#projects"
+         class="inline-flex items-center justify-center gap-2 px-8 py-5 rounded-2xl
+                border border-white/25 text-white font-semibold
+                hover:bg-white/10 transition">
+        Ver projetos
+        <i class="fa-solid fa-arrow-down"></i>
+      </a>
+
     </div>
+
+    <!-- ASSINATURA -->
+    <div class="mt-12 text-white/70 text-xs tracking-[0.35em] uppercase">
+      Bruno Yudi Kay • Sistemas Reais • IA • GovTech
+    </div>
+
   </div>
 
 </section>
