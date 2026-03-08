@@ -13,6 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js" defer></script>
 <script>
 const c2 = document.createElement("canvas");
@@ -112,6 +113,15 @@ animateNet();
   </script>
 
   <style>
+    #cinema-end{
+  height: 2px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+
+    
     :root{ color-scheme: dark; }
     body { font-family: Inter, system-ui, sans-serif; }
 
@@ -140,6 +150,89 @@ animateNet();
       z-index: 0;
       pointer-events: none;
       opacity: .9;
+    }
+    
+    /* Animated Background Grid Premium */
+    .animated-bg-grid {
+      position: fixed;
+      inset: 0;
+      z-index: -4;
+      opacity: 0.15;
+      pointer-events: none;
+      background-image: 
+        linear-gradient(rgba(56, 189, 248, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56, 189, 248, 0.1) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: gridMove 20s linear infinite;
+      mask-image: radial-gradient(ellipse 80% 50% at 50% 50%, black 40%, transparent 100%);
+    }
+    
+    @keyframes gridMove {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
+    }
+    
+    /* Floating Orbs Premium */
+    .floating-orbs {
+      position: fixed;
+      inset: 0;
+      z-index: -4;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.4;
+      animation: floatOrb 20s ease-in-out infinite;
+    }
+    
+    .orb-1 {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.6), rgba(56, 189, 248, 0));
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+    
+    .orb-2 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.6), rgba(168, 85, 247, 0));
+      top: 60%;
+      right: 15%;
+      animation-delay: -7s;
+    }
+    
+    .orb-3 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(34, 211, 238, 0.6), rgba(34, 211, 238, 0));
+      bottom: 20%;
+      left: 50%;
+      animation-delay: -14s;
+    }
+    
+    @keyframes floatOrb {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+      }
+      33% {
+        transform: translate(30px, -50px) scale(1.1);
+      }
+      66% {
+        transform: translate(-20px, 30px) scale(0.9);
+      }
+    }
+    
+    /* Garantir que orbs não aparecem após awards */
+    body.after-cinema .animated-bg-grid,
+    body.after-cinema .floating-orbs {
+      opacity: 0;
+      transition: opacity 0.8s ease-out;
     }
 
     /* buttons socials */
@@ -190,9 +283,38 @@ animateNet();
       font-size:12px; color:rgba(255,255,255,.85);
     }
 
-    /* fade in app */
-    .fade-start{ opacity:0; transform: translateY(8px); }
-    .fade-in{ opacity:1; transform: translateY(0); transition: 1s ease; }
+    /* fade in app - premium */
+    .fade-start{ 
+      opacity: 0; 
+      transform: translateY(32px) scale(0.96); 
+      filter: blur(4px);
+      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .fade-in{ 
+      opacity: 1; 
+      transform: translateY(0) scale(1); 
+      filter: blur(0);
+    }
+    
+    /* Stagger para elementos filhos */
+    .fade-start > * {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .fade-in > *:nth-child(1) { transition-delay: 0.1s; }
+    .fade-in > *:nth-child(2) { transition-delay: 0.2s; }
+    .fade-in > *:nth-child(3) { transition-delay: 0.3s; }
+    .fade-in > *:nth-child(4) { transition-delay: 0.4s; }
+    .fade-in > *:nth-child(5) { transition-delay: 0.5s; }
+    .fade-in > *:nth-child(6) { transition-delay: 0.6s; }
+    .fade-in > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
     .about-card{
   background: rgba(255,255,255,.04);
   border: 1px solid rgba(255,255,255,.08);
@@ -228,8 +350,18 @@ animateNet();
 
   <!-- Particles -->
   <canvas id="particles"></canvas>
+  
+  <!-- Animated Background Grid Premium -->
+  <div class="animated-bg-grid" aria-hidden="true"></div>
+  
+  <!-- Floating Orbs Premium -->
+  <div class="floating-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
 <!-- NAV -->
-<header class="fixed top-0 inset-x-0 z-50">
+<header class="fixed top-0 inset-x-0 z-50" style="backdrop-filter: blur(20px); background: rgba(5, 5, 7, 0.4);">
   <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="glass mt-4 rounded-2xl px-4 sm:px-6 py-3 flex items-center justify-between shadow-soft">
 
@@ -277,47 +409,76 @@ animateNet();
     </div>
   </nav>
 </header>
+<!-- =========================================================
+  ✅ OBJETIVO (do jeito que você pediu)
+  1) Só UMA imagem de fundo: bg-work (sem bg-stage)
+  2) Quando descer pro #about, a SUA imagem fica FULLSCREEN (cover real)
+  3) No celular fica bonito (sem sticky zoado / sem layout quebrando)
+  4) Desktop tem “zoom” suave (cinemático) + fade do conteúdo
+========================================================= -->
+
+<style>
+:root{
+  --hero-bg: url('imgs/bg-work.jpg');
+
+  --heroOverlay: .72;
+  --aboutOverlay: .82;
+}
+</style>
 
 
+<!-- 🎥 FUNDO CINEMÁTICO -->
+<div class="shared-bg shared-bg--hero" aria-hidden="true"></div>
 
-  <!-- HERO -->
-  <main id="home" class="relative z-10 fade-start">
-    <section class="min-h-screen flex items-center pt-32 md:pt-36">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
-        <div class="grid lg:grid-cols-2 gap-10 lg:gap-8 items-center">
 
+<!-- overlays -->
+<div class="shared-overlay shared-overlay--hero" aria-hidden="true"></div>
+<div class="shared-overlay shared-overlay--about" aria-hidden="true"></div>
+<div class="shared-grain" aria-hidden="true"></div>
+
+<!-- =========================
+     HERO CINEMÁTICO (1 BG)
+========================= -->
+<section id="home" class="cinema">
+  <div class="cinema__sticky">
+
+    <!-- ===== HERO CONTENT ===== -->
+    <div class="cinema__scene cinema__scene--hero" id="heroScene">
+      <div class="cinema__container">
+
+        <div class="heroGrid">
           <!-- TEXT -->
           <div>
-            <div class="inline-flex items-center gap-2 glass rounded-full px-4 py-1.5 text-xs text-white/80 mb-5">
+            <div class="inline-flex items-center gap-2 glass rounded-full px-4 py-2 text-xs text-white/80 mb-6">
               <span class="h-2 w-2 rounded-full bg-sky-300 animate-pulse"></span>
               <span data-i18n="hero.badge">Disponível para projetos • Assaí-PR</span>
             </div>
 
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-black leading-[1.08] tracking-tight">
-              <span data-i18n="hero.title">Construindo soluções reais</span>
-              <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-cyan-400 to-violet-400" data-i18n="hero.titleAccent">com código, IA e impacto público.</span>
+            <h1 class="heroTitle">
+              <span data-i18n="hero.title">Construindo soluções reais</span><br>
+              <span class="heroAccent" data-i18n="hero.titleAccent">com código, IA e impacto público.</span>
             </h1>
 
-            <p class="mt-5 text-base sm:text-lg text-white/70 max-w-xl" data-i18n="hero.desc">
+            <p class="heroDesc" data-i18n="hero.desc">
               Sou Bruno Yudi Kay, dev Full-Stack com foco em Laravel, Python e Visão Computacional,
               criando sistemas reais para escolas, prefeitura e projetos locais.
             </p>
 
-            <div class="mt-7 flex flex-col sm:flex-row gap-3">
+            <div class="mt-8 flex flex-col sm:flex-row gap-3">
               <a href="#projects"
-                 class="group inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-sky-400 to-cyan-300 text-night-900 font-bold px-6 py-3 shadow-glow hover:shadow-glowStrong transition">
+                 class="group inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-sky-400 to-cyan-300 text-night-900 font-bold px-7 py-3 shadow-glow hover:shadow-glowStrong transition">
                 <span data-i18n="hero.ctaProjects">Ver Projetos</span>
                 <i class="fa-solid fa-arrow-right group-hover:translate-x-0.5 transition"></i>
               </a>
+
               <a href="#contact"
-                 class="inline-flex items-center justify-center gap-2 rounded-xl glass px-6 py-3 font-semibold text-white/90 hover:bg-white/10 transition">
+                 class="inline-flex items-center justify-center gap-2 rounded-xl glass px-7 py-3 font-semibold text-white/90 hover:bg-white/10 transition">
                 <span data-i18n="hero.ctaContact">Entrar em Contato</span>
                 <i class="fa-regular fa-paper-plane"></i>
               </a>
             </div>
 
-            <!-- counters -->
-            <div class="mt-9 grid grid-cols-3 max-w-md gap-3">
+            <div class="mt-10 heroStats">
               <div class="glass rounded-xl p-4 text-center">
                 <div class="text-2xl font-extrabold text-sky-300 counter" data-target="12">0</div>
                 <div class="text-[11px] uppercase tracking-widest text-white/60 mt-1" data-i18n="hero.statProjects">Projetos</div>
@@ -334,40 +495,32 @@ animateNet();
           </div>
 
           <!-- PHOTO -->
-          <div class="relative lg:justify-self-end order-first lg:order-last">
-            <div class="relative mx-auto w-[260px] h-[260px] sm:w-[340px] sm:h-[340px] md:w-[420px] md:h-[420px] tilt3d vignette"
-                 id="tiltCard">
-
-              <div class="absolute -inset-8 rounded-full bg-gradient-to-tr from-sky-500/25 via-cyan-300/20 to-violet-500/25 blur-3xl animate-pulseSoft"></div>
+          <div class="heroPhoto">
+            <div class="relative mx-auto heroOrb tilt3d vignette" id="tiltCard">
+              <div class="absolute -inset-10 rounded-full bg-gradient-to-tr from-sky-500/25 via-cyan-300/20 to-violet-500/25 blur-3xl animate-pulseSoft"></div>
 
               <div class="absolute inset-0 rounded-full ring-2 ring-sky-300/30 animate-orbitSlow"></div>
               <div class="absolute inset-[-8%] rounded-full ring-2 ring-cyan-300/20 animate-orbitMed"></div>
               <div class="absolute inset-[-16%] rounded-full ring-2 ring-violet-300/20 animate-orbitFast"></div>
 
-              <!-- floating nodes (smaller on mobile) -->
               <div class="absolute inset-0 pointer-events-none">
-                <div class="absolute top-[8%] left-[-6%] glass w-12 h-12 sm:w-14 sm:h-14 rounded-2xl grid place-items-center animate-floaty shadow-soft">
-                  <i class="fa-brands fa-python text-sky-300 text-xl sm:text-2xl"></i>
+                <div class="absolute top-[8%] left-[-6%] glass w-14 h-14 rounded-2xl grid place-items-center animate-floaty shadow-soft">
+                  <i class="fa-brands fa-python text-sky-300 text-2xl"></i>
                 </div>
-                <div class="absolute top-[18%] right-[-8%] glass w-12 h-12 sm:w-14 sm:h-14 rounded-2xl grid place-items-center animate-floaty shadow-soft" style="animation-delay:1.2s">
-                  <i class="fa-solid fa-brain text-violet-200 text-lg sm:text-xl"></i>
+                <div class="absolute top-[18%] right-[-8%] glass w-14 h-14 rounded-2xl grid place-items-center animate-floaty shadow-soft" style="animation-delay:1.2s">
+                  <i class="fa-solid fa-brain text-violet-200 text-xl"></i>
                 </div>
-                <div class="absolute bottom-[20%] left-[-10%] glass w-12 h-12 sm:w-14 sm:h-14 rounded-2xl grid place-items-center animate-floaty shadow-soft" style="animation-delay:2.2s">
-                  <i class="fa-solid fa-code text-cyan-200 text-lg sm:text-xl"></i>
+                <div class="absolute bottom-[20%] left-[-10%] glass w-14 h-14 rounded-2xl grid place-items-center animate-floaty shadow-soft" style="animation-delay:2.2s">
+                  <i class="fa-solid fa-code text-cyan-200 text-xl"></i>
                 </div>
-                <div class="absolute bottom-[8%] right-[-6%] glass w-12 h-12 sm:w-14 sm:h-14 rounded-2xl grid place-items-center animate-floaty shadow-soft" style="animation-delay:3.2s">
-                  <i class="fa-solid fa-database text-sky-200 text-lg sm:text-xl"></i>
+                <div class="absolute bottom-[8%] right-[-6%] glass w-14 h-14 rounded-2xl grid place-items-center animate-floaty shadow-soft" style="animation-delay:3.2s">
+                  <i class="fa-solid fa-database text-sky-200 text-xl"></i>
                 </div>
               </div>
 
-              <!-- photo circle -->
               <div class="absolute inset-[10%] rounded-full overflow-hidden ring-4 ring-sky-300/70 shadow-soft bg-night-800">
-                <img
-                  src="imgs/bruno.jpg"
-                  alt="Bruno Yudi Kay"
-                  class="w-full h-full object-cover scale-[1.02]"
-                />
-                <div class="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-black/30"></div>
+                <img src="imgs/bruno.jpg" alt="Bruno Yudi Kay" class="w-full h-full object-cover scale-[1.02]" />
+                <div class="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-black/35"></div>
               </div>
 
               <div class="absolute inset-[10%] rounded-full overflow-hidden pointer-events-none">
@@ -375,14 +528,12 @@ animateNet();
               </div>
             </div>
 
-            <div class="mt-6 mx-auto w-fit glass rounded-2xl px-5 py-3 text-sm text-white/80 shadow-soft" data-i18n="hero.stack">
+            <div class="mt-6 mx-auto w-fit glass rounded-2xl px-6 py-3 text-sm text-white/80 shadow-soft" data-i18n="hero.stack">
               <span class="text-white font-semibold" data-i18n="hero.stack.main">Full-Stack</span> • Laravel • Python • YOLO • PostgreSQL
             </div>
           </div>
-
         </div>
 
-        <!-- scroll hint -->
         <div class="mt-14 flex justify-center">
           <a href="#about" class="group flex flex-col items-center gap-2 text-white/60 hover:text-white transition">
             <span class="text-[11px] tracking-[0.35em] uppercase" data-i18n="nav.scroll">scroll</span>
@@ -391,348 +542,764 @@ animateNet();
             </span>
           </a>
         </div>
-      </div>
-    </section>
-  </main>
-  
-  <!-- SOBRE — EXPERIÊNCIA PREMIUM -->
-<section id="about" class="relative py-32 md:py-40 bg-night-900 overflow-hidden">
 
-  <!-- FUNDO SUTIL -->
-  <div class="absolute inset-0 pointer-events-none">
-    <div class="absolute inset-0 bg-gradient-to-b from-night-900 via-night-800 to-night-900"></div>
-    <div class="absolute inset-0 opacity-30 blur-3xl"
-         style="background:
-           radial-gradient(circle at 25% 30%, rgba(56,189,248,.18), transparent 55%),
-           radial-gradient(circle at 75% 70%, rgba(168,85,247,.16), transparent 55%);">
+      </div>
+    </div>
+
+<!-- =========================
+     ABOUT FULLSCREEN (MESMO BG, HANDOFF PERFEITO)
+========================= -->
+<section id="about" class="aboutFull">
+  <div class="about-content">
+    <div class="about-wrap" id="aboutContent">
+      <h2 class="aboutTitle" data-i18n="about.hero.title">Tecnologia que executa.</h2>
+
+      <p class="aboutLead" data-i18n-html="about.hero.lead.html">
+        Meu nome é <strong class="text-white">Bruno Yudi Kay</strong>. Desenvolvedor focado em
+        <span class="text-sky-300 font-semibold">IA aplicada</span>,
+        <span class="text-cyan-300 font-semibold">Visão Computacional</span> e
+        <span class="text-violet-300 font-semibold">GovTech</span>.
+      </p>
+
+      <p class="text-white/60 mt-4" data-i18n="about.hero.impact">Dados reais. Execução real. Impacto fora do portfólio.</p>
+
+      <a href="#projects"
+         class="inline-flex items-center gap-3 mt-10 px-8 py-4 rounded-xl
+                bg-gradient-to-r from-sky-300 to-cyan-300
+                font-bold text-night-900 shadow-glow hover:shadow-glowStrong transition">
+        <span data-i18n="about.hero.cta">Ver projetos reais</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
     </div>
   </div>
-
-  <div class="relative z-10 mx-auto max-w-6xl px-6">
-
-    <!-- HEADER -->
-    <div class="text-center mb-20">
-      <h2 class="text-4xl md:text-5xl font-black
-                 text-transparent bg-clip-text
-                 bg-gradient-to-r from-sky-300 via-cyan-300 to-violet-300">
-        Sobre Mim
-      </h2>
-      <p class="mt-4 text-white/60 max-w-2xl mx-auto text-lg">
-        Tecnologia aplicada, impacto real e sistemas que funcionam fora do portfólio.
-      </p>
-    </div>
-
-    <!-- GRID -->
-    <div class="grid lg:grid-cols-2 gap-16 items-center">
-
-      <!-- IMAGEM (HUMANA, SEM EFEITÃO) -->
-      <div class="relative">
-        <div class="absolute -inset-10 bg-gradient-to-br
-                    from-sky-400/20 via-cyan-300/20 to-violet-400/20
-                    blur-3xl"></div>
-
-        <div class="relative rounded-3xl overflow-hidden
-                    shadow-[0_40px_100px_rgba(0,0,0,.6)]
-                    parallax-img">
-
-          <img src="imgs/palestra.jpg"
-               alt="Bruno Yudi Kay"
-               class="w-full h-[420px] md:h-[520px] object-cover">
-
-          <div class="absolute inset-0 bg-gradient-to-b
-                      from-white/10 via-transparent to-black/40"></div>
-        </div>
-      </div>
-
-      <!-- TEXTO -->
-      <div class="space-y-6 text-white/85 text-lg leading-relaxed">
-
-        <p>
-          Meu nome é <strong class="text-white">Bruno Yudi Kay</strong>.
-          Sou desenvolvedor Full-Stack focado em
-          <span class="text-sky-300 font-semibold">IA aplicada</span>,
-          <span class="text-cyan-300 font-semibold">Visão Computacional</span> e
-          <span class="text-violet-300 font-semibold">GovTech</span>.
-        </p>
-
-        <p>
-          Desenvolvo sistemas usados por escolas, prefeitura e ecossistemas de inovação,
-          sempre com foco em impacto direto, dados reais e tecnologia que resolve problema.
-        </p>
-
-        <p class="font-semibold text-white text-xl">
-          Tecnologia não é vitrine. É execução.
-        </p>
-
-        <a href="#projects"
-           class="inline-flex items-center gap-2 px-7 py-4 rounded-xl
-                  bg-gradient-to-r from-sky-300 to-cyan-300
-                  font-bold text-night-900
-                  shadow-glow hover:shadow-glowStrong transition">
-          Ver projetos reais
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-      </div>
-
-    </div>
-
-    <!-- MINI TIMELINE (IMPORTADO DE SITES BONS) -->
-    <div class="mt-32 grid md:grid-cols-3 gap-8">
-
-      <div class="about-card">
-        <i class="fa-solid fa-school"></i>
-        <h4>Educação</h4>
-        <p>Sistemas reais usados em escolas e projetos educacionais.</p>
-      </div>
-
-      <div class="about-card">
-        <i class="fa-solid fa-city"></i>
-        <h4>GovTech</h4>
-        <p>Plataformas oficiais para prefeitura e serviços públicos.</p>
-      </div>
-
-      <div class="about-card">
-        <i class="fa-solid fa-brain"></i>
-        <h4>IA Aplicada</h4>
-        <p>Visão computacional, automação e análise de dados em produção.</p>
-      </div>
-
-    </div>
+</section>
 
   </div>
 </section>
 
-<!-- CERTIFICAÇÕES -->
-<section id="awards" class="py-24 md:py-32 relative overflow-hidden fade-start">
-  <div class="absolute inset-0 pointer-events-none opacity-40 blur-3xl"
-       style="background: radial-gradient(circle at 20% 20%, #38bdf833 0%, transparent 60%),
-              radial-gradient(circle at 80% 70%, #a855f733 0%, transparent 60%);"></div>
 
-  <div class="mx-auto max-w-6xl px-6 relative z-10">
-    <div class="text-center mb-16 md:mb-20">
-      <h2 class="text-4xl md:text-5xl font-black tracking-tight
-                 text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-cyan-300 to-violet-300" data-i18n="awards.title">
-        Certificações & Reconhecimentos
-      </h2>
-      <p class="text-white/60 max-w-2xl mx-auto mt-4 text-lg leading-relaxed" data-i18n="awards.subtitle">
-        Conquistas reais em inovação, educação e tecnologia.
-      </p>
-    </div>
 
-    <div class="grid md:grid-cols-3 gap-8 md:gap-12">
+<style>
+/* =========================
+   FUNDO + OVERLAYS FIXOS
+========================= */
+.shared-bg{
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  background-size: cover;
+  background-position: center;
+  will-change: transform, filter, opacity;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
+}
 
-      <!-- Card -->
-      <div class="relative p-[2px] rounded-3xl bg-gradient-to-br from-sky-400/20 via-cyan-300/20 to-violet-400/20">
-        <div class="bg-night-900/60 backdrop-blur-xl p-8 rounded-3xl border border-white/10 shadow-xl tilt3d">
+.shared-bg--hero{
+  background-image: var(--hero-bg);
+  background-position: center top;
+  transform: scale(0.6);
+  filter: blur(18px) brightness(.99);
+  opacity: 1;
+}
+
+
+
+
+
+.shared-overlay{
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
+}
+
+/* HERO overlay */
+.shared-overlay--hero{
+  opacity: var(--heroOverlay);
+  background:
+    radial-gradient(900px 700px at 22% 42%, rgba(0,0,0,.22), rgba(0,0,0,.68)),
+    linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.36), rgba(0,0,0,.70));
+}
+
+
+.shared-grain{
+  position: fixed;
+  inset: -20%;
+  z-index: -1;
+  opacity: .06;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
+}
+
+/* =========================
+   CINEMA (só controla conteúdo, BG é fixo)
+========================= */
+.cinema{
+  position: relative;
+  height: 300vh;   /* mais duração para a transição e seção "Tecnologia que executa" */
+}
+
+.cinema__sticky{
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+}
+
+.cinema__container{
+  width: min(1280px, 92vw);
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.cinema__scene{
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  z-index: 5;
+  will-change: transform, opacity, filter;
+  padding-top: 100px; /* Espaço para header fixo */
+}
+
+/* HERO layout */
+.heroGrid{
+  display:grid;
+  grid-template-columns: 1.08fr .92fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.heroTitle{
+  font-weight: 900;
+  font-size: clamp(2.2rem, 4.2vw, 4.8rem);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.heroAccent{
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-image: linear-gradient(90deg, #7dd3fc, #22d3ee, #a78bfa);
+}
+
+.heroDesc{
+  margin-top: 18px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: rgba(255,255,255,.78);
+  max-width: 60ch;
+}
+
+.heroStats{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 520px;
+}
+
+.heroPhoto{ justify-self: end; }
+.heroOrb{
+  width: min(440px, 82vw);
+  height: min(440px, 82vw);
+}
+
+/* =========================
+   ABOUT (FULLSCREEN REAL)
+========================= */
+.aboutFull{
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+}
+
+.about-content{
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+}
+
+.about-wrap{
+  width: min(1280px, 92vw);
+  margin: 0 auto;
+  padding: 0 10px;
+  max-width: 65ch;
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  will-change: transform, opacity;
+}
+
+.aboutTitle{
+  font-weight: 900;
+  font-size: clamp(2.2rem, 4vw, 4.4rem);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.aboutLead{
+  margin-top: 18px;
+  font-size: 1.18rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,.82);
+  max-width: 65ch;
+}
+/* =========================
+   AWARDS — FUNDO COM SCROLL
+========================= */
+#awards{
+  position: relative;
+  overflow: hidden;
+}
+
+.awards-bg{
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.awards-bg img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.12);
+  filter: blur(3px) brightness(.55);
+}
+
+/* =========================
+   CORTE DO FUNDO FIXO
+========================= */
+#cinema-end{
+  position: relative;
+  z-index: 0;
+}
+
+/* tudo depois disso NÃO usa o bg fixo */
+body.after-cinema .shared-bg,
+body.after-cinema .shared-overlay,
+body.after-cinema .shared-grain{
+  opacity: 0 !important;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Garante que seções após awards ficam acima */
+#projects,
+#stack,
+#skills,
+#testimonials,
+#timeline,
+#contact {
+  position: relative;
+  z-index: 1;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+@media (max-width: 1024px){
+  .heroGrid{ grid-template-columns: 1fr; gap: 28px; }
+  .heroPhoto{ justify-self: center; }
+  .heroStats{ max-width: 520px; }
+}
+
+/* Mobile: desliga sticky e o "filme" pesado */
+@media (max-width: 768px){
+  .cinema{ height: auto; }
+  .cinema__sticky{ 
+    position: relative; 
+    height: auto;
+    padding-top: 100px; /* Espaço para header no mobile */
+  }
+  .cinema__scene{
+    position: relative;
+    min-height: calc(100svh - 100px);
+    padding-top: 0;
+    padding-bottom: 28px;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+  .about-wrap{ opacity: 1; transform: none; } /* mobile já aparece */
+  .animated-bg-grid,
+  .floating-orbs {
+    opacity: 0.1;
+  }
+}
+</style>
+
+
+<script>
+  const home = document.querySelector('#home');
+const about = document.querySelector('#about');
+
+const bgHero  = document.querySelector('.shared-bg--hero');
+const bgAbout = document.querySelector('.shared-bg--about');
+
+const ovHero  = document.querySelector('.shared-overlay--hero');
+const ovAbout = document.querySelector('.shared-overlay--about');
+
+const heroScene    = document.querySelector('#heroScene');
+const aboutContent = document.querySelector('#aboutContent');
+
+const clamp = (v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+const lerp = (a,b,t)=>a+(b-a)*t;
+const smoothstep = (a,b,x)=>{
+  const t = clamp((x-a)/(b-a));
+  return t*t*(3-2*t);
+};
+
+const isDesktop = ()=>window.matchMedia('(min-width:769px)').matches;
+let ticking = false;
+function updateDesktop(){
+  ticking = false;
+  if (!isDesktop()) return;
+
+  const r = home.getBoundingClientRect();
+  const total = r.height - window.innerHeight;
+  const p = total > 0 ? clamp((-r.top) / total) : 0;
+
+  /* =========================
+     🎬 ATO 1 — HERO (IA)
+     0 → 0.65
+  ========================= */
+  const heroProg = smoothstep(0.0, 0.65, p);
+
+  bgHero.style.opacity = 1;
+bgHero.style.transform = `scale(${lerp(0.6, 1.0, heroProg)})`;
+
+  bgHero.style.filter =
+    `blur(${lerp(16, 0, heroProg)}px) brightness(${lerp(.9, 1, heroProg)})`;
+
+  ovHero.style.opacity = lerp(0.72, 0.9, heroProg).toFixed(3);
+
+  /* HERO content permanece até o fim do ato 2 */
+  heroScene.style.opacity = '1';
+  heroScene.style.transform = 'translate3d(0,0,0)';
+
+  /* =========================
+     🎬 ATO 2 — PAUSA CINEMA
+     0.65 → 0.8
+  ========================= */
+  const hold = smoothstep(0.65, 0.8, p);
+
+  /* começa a tirar o conteúdo, mas mantém imagem */
+  heroScene.style.opacity = lerp(1, 0, hold).toFixed(3);
+  heroScene.style.transform =
+    `translate3d(0, ${lerp(0, -24, hold)}px, 0)`;
+
+  /* =========================
+     🎬 ATO 3 — ABOUT (PALESTRA)
+     0.8 → 1
+  ========================= */
+/* =========================
+   🎬 ATO 3 — ABOUT (IA LIMPA)
+   0.8 → 1
+========================= */
+const aboutProg = smoothstep(0.72, 1.0, p);
+
+/* mesma imagem do hero, só que em foco */
+bgHero.style.transform =
+  `scale(${lerp(1.05, 1.0, aboutProg)})`;
+
+bgHero.style.filter =
+  `blur(${lerp(6, 0, aboutProg)}px) brightness(1)`;
+
+/* overlay mais suave */
+ovHero.style.opacity = lerp(0.9, 0.75, aboutProg).toFixed(3);
+
+/* conteúdo do about */
+aboutContent.style.opacity = aboutProg.toFixed(3);
+aboutContent.style.transform =
+  `translate3d(0, ${lerp(24, 0, aboutProg)}px, 0)`;
+
+  aboutContent.style.opacity = aboutProg.toFixed(3);
+  aboutContent.style.transform =
+    `translate3d(0, ${lerp(24, 0, aboutProg)}px, 0)`;
+}
+
+/* LOOP */
+window.addEventListener('scroll', ()=>{
+  if(!ticking){
+    ticking = true;
+    requestAnimationFrame(updateDesktop);
+  }
+},{passive:true});
+
+window.addEventListener('resize', updateDesktop);
+updateDesktop();
+
+
+</script>
+
+
+<section id="awards" class="cinema cinema-awards">
+
+  <div class="cinema__sticky">
+    <!-- CONTEÚDO -->
+    <div class="cinema__scene" id="awardsScene" style="padding-top: 100px;">
+      <div class="mx-auto max-w-6xl px-6 relative z-10">
+
+        <div class="text-center mb-16 fade-start">
+          <h2 class="text-4xl md:text-5xl font-black text-transparent bg-clip-text
+                     bg-gradient-to-r from-sky-300 via-cyan-300 to-violet-300" data-i18n="awards.title">
+            Certificações & Reconhecimentos
+          </h2>
+          <p class="text-white/80 max-w-2xl mx-auto mt-4 text-lg" data-i18n="awards.subtitle">
+            Conquistas reais em inovação, educação e tecnologia.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+    <!-- Card -->
+      <div class="relative p-[2px] rounded-3xl bg-gradient-to-br from-sky-400/30 via-cyan-300/30 to-violet-400/30">
+        <div class="bg-white/10 backdrop-blur-xl p-8 rounded-3xl border border-white/25 shadow-xl tilt3d">
           <i class="fa-solid fa-award text-sky-300 text-3xl mb-5"></i>
           <h3 class="text-xl font-bold text-white mb-2" data-i18n="awards.card1.title">Hackathon Educatech UniFil</h3>
-          <p class="text-white/60 text-sm leading-relaxed" data-i18n="awards.card1.desc">Destaque com o ClassEye na categoria de inovação educacional.</p>
+          <p class="text-white/75 text-sm leading-relaxed" data-i18n="awards.card1.desc">Destaque com o ClassEye na categoria de inovação educacional.</p>
         </div>
       </div>
 
-      <div class="relative p-[2px] rounded-3xl bg-gradient-to-br from-violet-300/20 via-sky-300/20 to-cyan-300/20">
-        <div class="bg-night-900/60 backdrop-blur-xl p-8 rounded-3xl border border-white/10 shadow-xl tilt3d">
+      <div class="relative p-[2px] rounded-3xl bg-gradient-to-br from-violet-300/30 via-sky-300/30 to-cyan-300/30">
+        <div class="bg-white/10 backdrop-blur-xl p-8 rounded-3xl border border-white/25 shadow-xl tilt3d">
           <i class="fa-solid fa-trophy text-violet-300 text-3xl mb-5"></i>
           <h3 class="text-xl font-bold text-white mb-2" data-i18n="awards.card2.title">GreenTech - 2º lugar</h3>
-          <p class="text-white/60 text-sm leading-relaxed" data-i18n="awards.card2.desc">Reconhecimento no maior Hackathon Verde do País-Brasil.</p>
+          <p class="text-white/75 text-sm leading-relaxed" data-i18n="awards.card2.desc">Reconhecimento no maior Hackathon Verde do País-Brasil.</p>
         </div>
       </div>
 
-      <div class="relative p-[2px] rounded-3xl bg-gradient-to-br from-cyan-300/20 via-violet-300/20 to-sky-300/20">
-        <div class="bg-night-900/60 backdrop-blur-xl p-8 rounded-3xl border border-white/10 shadow-xl tilt3d">
+      <div class="relative p-[2px] rounded-3xl bg-gradient-to-br from-cyan-300/30 via-violet-300/30 to-sky-300/30">
+        <div class="bg-white/10 backdrop-blur-xl p-8 rounded-3xl border border-white/25 shadow-xl tilt3d">
           <i class="fa-solid fa-medal text-cyan-300 text-3xl mb-5"></i>
           <h3 class="text-xl font-bold text-white mb-2" data-i18n="awards.card3.title">Prefeitura de Assaí — Tecnologia</h3>
-          <p class="text-white/60 text-sm leading-relaxed" data-i18n="awards.card3.desc">Desenvolvimento de sistemas oficiais como Gov.Assaí e Conecta Assaí.</p>
+          <p class="text-white/75 text-sm leading-relaxed" data-i18n="awards.card3.desc">Desenvolvimento de sistemas oficiais como Gov.Assaí e Conecta Assaí.</p>
         </div>
       </div>
+        </div>
 
+      </div>
     </div>
+
   </div>
 </section>
+<!-- 🔪 CORTA O FUNDO CINEMÁTICO DEFINITIVAMENTE APÓS OS RECONHECIMENTOS -->
+<div id="cinema-end" style="height: 1px; width: 100%; position: relative; z-index: 1;"></div>
+<style>/* =========================
+   AWARDS CINEMÁTICO
+========================= */
+.cinema-awards{
+  height: 180vh;
+  position: relative;
+}
 
+#awards .cinema__scene{
+  z-index: 2;
+}
+</style>
+<script>const awards = document.querySelector('#awards');
+const awardsScene = document.querySelector('#awardsScene');
+const aboutSection = document.querySelector('#about');
+let awardsTicking = false;
 
-<!-- PROJETOS — SISTEMAS EM PRODUÇÃO -->
-<section id="projects" class="relative py-36 overflow-hidden fade-start">
+function syncCinematicBgVisibility(){
+  if(!aboutSection) return;
+  const aboutBottom = aboutSection.getBoundingClientRect().bottom;
+  document.body.classList.toggle('after-cinema', aboutBottom <= 0);
+}
 
-  <!-- transição visual -->
-  <div class="absolute inset-x-0 -top-24 h-24 bg-gradient-to-b from-transparent to-night-900"></div>
+function updateAwards(){
+  if(!awards || !awardsScene) return;
+  if(!isDesktop()){
+    awardsScene.style.opacity = '1';
+    awardsScene.style.transform = 'translate3d(0,0,0)';
+    awardsScene.style.filter = 'blur(0px)';
+    return;
+  }
 
-  <!-- glow integrado ao site -->
-  <div class="absolute inset-0 pointer-events-none blur-3xl opacity-40"
-       style="background:
-         radial-gradient(circle at 25% 25%, rgba(56,189,248,.22), transparent 55%),
-         radial-gradient(circle at 75% 70%, rgba(16,185,129,.20), transparent 55%);">
+  const r = awards.getBoundingClientRect();
+  const total = r.height - innerHeight;
+  const p = total > 0 ? clamp((-r.top)/total) : 0;
+
+  const contentProg = smoothstep(0.05, 0.30, p);
+  awardsScene.style.opacity = lerp(0.78, 1, contentProg).toFixed(3);
+  awardsScene.style.transform = `translate3d(0,${lerp(14,0,contentProg)}px,0)`;
+  awardsScene.style.filter = 'blur(0px)';
+}
+
+window.addEventListener("scroll", ()=>{
+  if(!awardsTicking){
+    awardsTicking = true;
+    requestAnimationFrame(() => {
+      updateAwards();
+      syncCinematicBgVisibility();
+      awardsTicking = false;
+    });
+  }
+},{passive:true});
+
+window.addEventListener("resize", () => {
+  updateAwards();
+  syncCinematicBgVisibility();
+});
+
+updateAwards();
+syncCinematicBgVisibility();
+</script>
+<style>
+  .project-card{
+    position: relative;
+    border-radius: 1.4rem;
+    border: 1px solid rgba(255,255,255,.12);
+    background: linear-gradient(160deg, rgba(18, 24, 42, .72), rgba(12, 18, 34, .56));
+    backdrop-filter: blur(12px);
+    overflow: hidden;
+    transition: transform .35s cubic-bezier(.16,1,.3,1), border-color .35s, box-shadow .35s;
+  }
+  .project-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background: radial-gradient(500px 180px at -15% -10%, rgba(125,211,252,.18), transparent 70%);
+    pointer-events:none;
+    opacity:.85;
+  }
+  .project-card:hover{
+    transform: translateY(-7px);
+    border-color: rgba(125,211,252,.35);
+    box-shadow: 0 24px 68px rgba(2, 8, 24, .5);
+  }
+  .project-card--main{
+    padding: 1.5rem;
+    min-height: 100%;
+  }
+  .project-card--secondary{
+    padding: 1.25rem;
+  }
+  .project-kicker{
+    font-size: .72rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: rgba(186,230,253,.9);
+    font-weight: 700;
+  }
+  .tech-pill{
+    font-size: .72rem;
+    font-weight: 600;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.14);
+    color: rgba(226,232,240,.95);
+    background: rgba(15,23,42,.45);
+    padding: .34rem .68rem;
+  }
+  .project-link{
+    display:inline-flex;
+    align-items:center;
+    gap:.55rem;
+    border-radius:.8rem;
+    font-weight:700;
+    font-size:.9rem;
+    padding:.66rem .98rem;
+    transition: all .25s ease;
+  }
+  .project-link--primary{
+    background: linear-gradient(90deg,#7dd3fc,#22d3ee);
+    color:#0f172a;
+    box-shadow: 0 10px 28px rgba(34,211,238,.26);
+  }
+  .project-link--primary:hover{ transform: translateY(-2px); }
+  .project-link--ghost{
+    border:1px solid rgba(255,255,255,.16);
+    color: rgba(241,245,249,.9);
+    background: rgba(255,255,255,.03);
+  }
+  .project-link--ghost:hover{ background: rgba(255,255,255,.09); }
+
+  .stack-tech-grid{
+    display:grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap:.85rem;
+  }
+  .stack-tech-card{
+    border-radius:1rem;
+    border:1px solid rgba(255,255,255,.1);
+    background: linear-gradient(155deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+    padding: .95rem .9rem;
+    display:flex;
+    align-items:center;
+    gap:.75rem;
+    transition: transform .25s ease, border-color .25s ease, background .25s ease;
+  }
+  .stack-tech-card:hover{
+    transform: translateY(-4px);
+    border-color: rgba(125,211,252,.35);
+    background: linear-gradient(155deg, rgba(125,211,252,.18), rgba(255,255,255,.05));
+  }
+  .stack-tech-card i{
+    font-size: 1.55rem;
+    width: 1.7rem;
+    text-align:center;
+    color: #bae6fd;
+  }
+  .stack-tech-card span{
+    font-size:.92rem;
+    color: rgba(241,245,249,.95);
+    font-weight:600;
+  }
+  @media (min-width: 768px){
+    .project-card--main{ padding: 2rem; }
+    .project-card--secondary{ padding: 1.5rem; }
+    .stack-tech-grid{
+      grid-template-columns: repeat(3,minmax(0,1fr));
+      gap:1rem;
+    }
+  }
+  @media (min-width: 1280px){
+    .stack-tech-grid{ grid-template-columns: repeat(4,minmax(0,1fr)); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .project-card,
+    .stack-tech-card,
+    .project-link{
+      transition: none !important;
+    }
+    .project-card:hover,
+    .stack-tech-card:hover,
+    .project-link--primary:hover{
+      transform: none !important;
+    }
+  }
+</style>
+<section id="projects" class="relative py-20 md:py-28 lg:py-32 overflow-hidden fade-start">
+
+<div class="max-w-7xl mx-auto px-5 md:px-6">
+  <header class="max-w-3xl mb-14 md:mb-20">
+    <p class="project-kicker" data-i18n="projects.kicker">Projetos em Produção</p>
+    <h2 class="mt-4 text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.03] text-white" data-i18n="projects.headline">
+      Sistemas reais com impacto real
+    </h2>
+    <p class="text-white/65 mt-5 text-base sm:text-lg leading-relaxed" data-i18n="projects.lead">
+      Produtos desenvolvidos para educação, governo e visão computacional, com uso real e foco em resultado.
+    </p>
+  </header>
+
+  <div class="grid lg:grid-cols-2 gap-6 md:gap-8 mb-12 md:mb-16">
+    <article class="project-card project-card--main">
+      <div class="relative z-10">
+        <div class="flex items-center justify-between gap-4 mb-5">
+          <span class="project-kicker" data-i18n="projects.ceep.kicker">GovTech • Educação Pública</span>
+          <i class="fa-solid fa-building-columns text-sky-300"></i>
+        </div>
+        <h3 class="text-2xl md:text-3xl font-black text-white">CEEPApp</h3>
+        <p class="text-white/72 mt-4 leading-relaxed text-sm md:text-base" data-i18n="projects.ceep.desc">
+          Sistema institucional para o CEEP Assaí com autenticação, gestão acadêmica, painéis administrativos e integração de dados escolares.
+        </p>
+        <div class="flex flex-wrap gap-2 mt-6">
+          <span class="tech-pill">Laravel</span>
+          <span class="tech-pill">PostgreSQL</span>
+          <span class="tech-pill" data-i18n="projects.tags.auth">Autenticação</span>
+          <span class="tech-pill" data-i18n="projects.tags.dashboard">Dashboards</span>
+        </div>
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a href="https://ceepassai.com.br" target="_blank" class="project-link project-link--primary">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            <span data-i18n="projects.visitSystem">Visitar sistema</span>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <article class="project-card project-card--main">
+      <div class="relative z-10">
+        <div class="flex items-center justify-between gap-4 mb-5">
+          <span class="project-kicker" data-i18n="projects.assahi.kicker">Smart City • Fluxo de Pessoas</span>
+          <i class="fa-solid fa-camera text-emerald-300"></i>
+        </div>
+        <h3 class="text-2xl md:text-3xl font-black text-white">Espaço Assahi</h3>
+        <p class="text-white/72 mt-4 leading-relaxed text-sm md:text-base" data-i18n="projects.assahi.desc">
+          Sistema com IA para monitoramento de fluxo de pessoas usando YOLO, OpenCV e câmeras RTSP, gerando métricas em tempo real.
+        </p>
+        <div class="flex flex-wrap gap-2 mt-6">
+          <span class="tech-pill">Python</span>
+          <span class="tech-pill">YOLO</span>
+          <span class="tech-pill">RTSP</span>
+          <span class="tech-pill">Laravel API</span>
+        </div>
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a href="https://espacoassahi.com.br" target="_blank" class="project-link project-link--primary">
+            <i class="fa-solid fa-globe"></i>
+            <span data-i18n="projects.liveDemo">Site</span>
+          </a>
+          <a href="https://www.linkedin.com/posts/bruno-yudi-kay-383201317_desenvolvi-um-sistema-inteligente-de-monitoramento-activity-7436480307286953985-DhMR" target="_blank" class="project-link project-link--ghost">
+            <i class="fa-brands fa-linkedin"></i>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </article>
   </div>
 
-  <div class="relative z-10 max-w-7xl mx-auto px-6">
-
-    <!-- Header -->
-    <header class="max-w-3xl mb-24">
-      <p class="uppercase tracking-[0.35em] text-xs text-sky-300 font-semibold">
-        Sistemas Reais
-      </p>
-      <h2 class="text-4xl md:text-6xl font-black mt-4 leading-tight">
-        Projetos que funcionam<br>
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-emerald-300">
-          fora do portfólio
-        </span>
-      </h2>
-      <p class="mt-6 text-white/60 text-lg">
-        Educação, segurança pública, agronegócio e GovTech.
-        Sistemas com uso real, dados reais e impacto direto.
-      </p>
-    </header>
-
-    <!-- ========================= -->
-    <!-- BLOCO PRINCIPAL -->
-    <!-- ========================= -->
-    <div class="grid lg:grid-cols-2 gap-16 mb-32">
-
-      <!-- ClassEye -->
-      <article class="glass rounded-3xl p-10 border border-white/10 tilt3d">
-
-        <div class="flex items-center justify-between mb-6">
-          <span class="px-4 py-1.5 rounded-full bg-sky-300/10 text-sky-300 text-sm font-semibold">
-            Educação • Visão Computacional
-          </span>
-          <i class="fa-solid fa-brain text-sky-300 text-xl"></i>
-        </div>
-
-        <h3 class="text-3xl font-black text-white">ClassEye</h3>
-
-        <p class="mt-4 text-white/70 leading-relaxed">
-          Sistema de visão computacional aplicado à educação para análise de atenção
-          em sala de aula, geração de relatórios automáticos e dados reais para tomada
-          de decisão pedagógica. Utilizado no ecossistema CEEP-Assaí.
+  <div class="grid sm:grid-cols-2 xl:grid-cols-3 gap-5 md:gap-6">
+    <article class="project-card project-card--secondary">
+      <div class="relative z-10">
+        <h4 class="text-xl font-bold text-white">ClassEye</h4>
+        <p class="text-white/65 text-sm mt-3 leading-relaxed" data-i18n="projects.classEye.desc">
+          Sistema de visão computacional para análise de atenção em sala e geração de relatórios pedagógicos.
         </p>
-
-        <div class="flex flex-wrap gap-2 mt-6">
-          <span class="tech-tag"><i class="fa-brands fa-python"></i> Python</span>
-          <span class="tech-tag"><i class="fa-solid fa-eye"></i> YOLO</span>
-          <span class="tech-tag"><i class="fa-solid fa-camera"></i> OpenCV</span>
-          <span class="tech-tag"><i class="fa-solid fa-server"></i> Flask</span>
-          <span class="tech-tag"><i class="fa-solid fa-chart-line"></i> Relatórios</span>
+        <div class="flex flex-wrap gap-2 my-5">
+          <span class="tech-pill">Python</span>
+          <span class="tech-pill">YOLO</span>
+          <span class="tech-pill">OpenCV</span>
         </div>
+        <a href="https://github.com/brunoxzr/ClassEye" target="_blank" class="project-link project-link--ghost">
+          <i class="fa-brands fa-github"></i> GitHub
+        </a>
+      </div>
+    </article>
 
-        <!-- Botões -->
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a href="https://github.com/brunoxzr/ClassEye" target="_blank"
-             class="inline-flex items-center gap-2 px-5 py-3 rounded-xl
-                    glass border border-white/10 text-white font-semibold
-                    hover:bg-white/10 transition">
-            <i class="fa-brands fa-github"></i> GitHub
-          </a>
-          <a href="https://brunoxzr.github.io/classeye-pub" target="_blank"
-             class="inline-flex items-center gap-2 px-5 py-3 rounded-xl
-                    bg-gradient-to-r from-sky-300 to-cyan-300
-                    text-night-900 font-extrabold shadow-glow
-                    hover:shadow-glowStrong transition">
-            <i class="fa-solid fa-arrow-up-right-from-square"></i> Visitar
-          </a>
-        </div>
-      </article>
-
-      <!-- UrbanEye -->
-      <article class="glass rounded-3xl p-10 border border-white/10 tilt3d">
-
-        <div class="flex items-center justify-between mb-6">
-          <span class="px-4 py-1.5 rounded-full bg-emerald-300/10 text-emerald-300 text-sm font-semibold">
-            Segurança Pública • IA Urbana
-          </span>
-          <i class="fa-solid fa-shield-halved text-emerald-300 text-xl"></i>
-        </div>
-
-        <h3 class="text-3xl font-black text-white">UrbanEye</h3>
-
-        <p class="mt-4 text-white/70 leading-relaxed">
-          Sistema de vigilância urbana com IA para detecção de perseguição,
-          comportamentos anômalos e riscos em vias públicas, com alertas em
-          tempo real. Projeto apresentado à CMTU Londrina.
+    <article class="project-card project-card--secondary">
+      <div class="relative z-10">
+        <h4 class="text-xl font-bold text-white">Chatbot</h4>
+        <p class="text-white/65 text-sm mt-3 leading-relaxed" data-i18n="projects.chatbot.desc">
+          Automação institucional com Node.js e integração com WhatsApp/wwjs e banco PostgreSQL.
         </p>
-
-        <div class="flex flex-wrap gap-2 mt-6">
-          <span class="tech-tag"><i class="fa-brands fa-python"></i> Python</span>
-          <span class="tech-tag"><i class="fa-solid fa-eye"></i> YOLO</span>
-          <span class="tech-tag"><i class="fa-solid fa-video"></i> OpenCV</span>
-          <span class="tech-tag"><i class="fa-solid fa-server"></i> Flask</span>
-          <span class="tech-tag"><i class="fa-solid fa-tower-broadcast"></i> Real-time</span>
+        <div class="flex flex-wrap gap-2 my-5">
+          <span class="tech-pill">Node.js</span>
+          <span class="tech-pill">wwjs</span>
+          <span class="tech-pill">PostgreSQL</span>
         </div>
+        <a href="https://github.com/brunoxzr/chatbot_assai" target="_blank" class="project-link project-link--ghost">
+          <i class="fa-brands fa-github"></i> GitHub
+        </a>
+      </div>
+    </article>
 
-        <!-- Botões -->
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a href="https://github.com/brunoxzr/UrbanEye" target="_blank"
-             class="inline-flex items-center gap-2 px-5 py-3 rounded-xl
-                    glass border border-white/10 text-white font-semibold
-                    hover:bg-white/10 transition">
-            <i class="fa-brands fa-github"></i> GitHub
-          </a>
-          <a href="#" target="_blank"
-             class="inline-flex items-center gap-2 px-5 py-3 rounded-xl
-                    bg-gradient-to-r from-emerald-300 to-teal-300
-                    text-night-900 font-extrabold shadow-glow
-                    hover:shadow-glowStrong transition">
-            <i class="fa-solid fa-arrow-up-right-from-square"></i> Visitar
-          </a>
-        </div>
-      </article>
-
-    </div>
-
-    <!-- ========================= -->
-    <!-- OUTROS SISTEMAS -->
-    <!-- ========================= -->
-    <div class="grid md:grid-cols-3 gap-10">
-
-      <!-- SCOUTIS -->
-      <article class="glass rounded-2xl p-7 border border-white/10">
-        <h4 class="text-xl font-bold text-white mb-2">SCOUTIS</h4>
-        <p class="text-white/60 text-sm mb-4">
-          Monitoramento autônomo no agronegócio com aprendizado não supervisionado.
+    <article class="project-card project-card--secondary sm:col-span-2 xl:col-span-1">
+      <div class="relative z-10">
+        <h4 class="text-xl font-bold text-white">Scoutis</h4>
+        <p class="text-white/65 text-sm mt-3 leading-relaxed" data-i18n="projects.scoutis.desc">
+          Monitoramento no agronegócio com ML aplicado para detecção de anomalias e análise de dados.
         </p>
-        <div class="flex flex-wrap gap-2 mb-6">
-          <span class="tech-tag"><i class="fa-brands fa-python"></i> Python</span>
-          <span class="tech-tag"><i class="fa-solid fa-brain"></i> ML</span>
-          <span class="tech-tag"><i class="fa-solid fa-database"></i> PostgreSQL</span>
+        <div class="flex flex-wrap gap-2 my-5">
+          <span class="tech-pill">Python</span>
+          <span class="tech-pill">ML</span>
+          <span class="tech-pill">PostgreSQL</span>
         </div>
-        <div class="flex gap-3">
-          <a href="https://github.com/brunoxzr/SCOUTIS" target="_blank" class="btn-gh">GitHub</a>
-        </div>
-      </article>
-
-      <!-- CEEP+ -->
-      <article class="glass rounded-2xl p-7 border border-white/10">
-        <h4 class="text-xl font-bold text-white mb-2">CEEP+</h4>
-        <p class="text-white/60 text-sm mb-4">
-          Portal acadêmico completo com autenticação, painéis e banco de dados real.
-        </p>
-        <div class="flex flex-wrap gap-2 mb-6">
-          <span class="tech-tag"><i class="fa-brands fa-php"></i> Laravel</span>
-          <span class="tech-tag"><i class="fa-solid fa-database"></i> MySQL</span>
-        </div>
-        <div class="flex gap-3">
-          <a href="https://github.com/brunoxzr/CEEPapp-" target="_blank" class="btn-gh">GitHub</a>
-          <a href="EM_BREVE" target="_blank" class="btn-visit">Visitar</a>
-        </div>
-      </article>
-
-      <!-- Chatbot -->
-      <article class="glass rounded-2xl p-7 border border-white/10">
-        <h4 class="text-xl font-bold text-white mb-2">Chatbot Institucional</h4>
-        <p class="text-white/60 text-sm mb-4">
-          Automação conectada a banco de dados usada em ambiente governamental.
-        </p>
-        <div class="flex flex-wrap gap-2 mb-6">
-          <span class="tech-tag"><i class="fa-brands fa-node-js"></i> wwjs</span>
-          <span class="tech-tag"><i class="fa-solid fa-database"></i> PostgreSQL</span>
-        </div>
-        <div class="flex gap-3">
-          <a href="https://github.com/brunoxzr/chatbot_assai" target="_blank" class="btn-gh">GitHub</a>
-        </div>
-      </article>
-
-    </div>
-
+        <a href="https://github.com/brunoxzr/SCOUTIS" target="_blank" class="project-link project-link--ghost">
+          <i class="fa-brands fa-github"></i> GitHub
+        </a>
+      </div>
+    </article>
   </div>
+</div>
 </section>
 
 
@@ -747,44 +1314,23 @@ animateNet();
       <h2 class="text-4xl md:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-cyan-300 to-violet-300" data-i18n="stack.title">
         Tech Stack
       </h2>
-      <p class="text-white/60 max-w-xl mx-auto mt-4 text-lg leading-relaxed" data-i18n="stack.subtitle">
-        Tecnologias que uso diariamente para construir sistemas reais.
+      <p class="text-white/60 max-w-2xl mx-auto mt-4 text-base md:text-lg leading-relaxed" data-i18n="stack.subtitle">
+        Tecnologias principais do meu dia a dia em produtos de IA, web e sistemas reais.
       </p>
     </div>
 
-    <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-8 md:gap-12 text-center">
-
-      <!-- Icons -->
-      <div class="group">
-        <i class="fa-brands fa-python text-5xl text-sky-300 group-hover:text-sky-200 transition"></i>
-        <p class="mt-3 text-white/70 text-sm" data-i18n="stack.tech1">Python</p>
-      </div>
-
-      <div class="group">
-        <i class="fa-brands fa-js text-5xl text-yellow-300 group-hover:text-yellow-200 transition"></i>
-        <p class="mt-3 text-white/70 text-sm" data-i18n="stack.tech2">JavaScript</p>
-      </div>
-
-      <div class="group">
-        <i class="fa-brands fa-php text-5xl text-violet-300 group-hover:text-violet-200 transition"></i>
-        <p class="mt-3 text-white/70 text-sm" data-i18n="stack.tech3">PHP</p>
-      </div>
-
-      <div class="group">
-        <i class="fa-solid fa-database text-5xl text-sky-200 group-hover:text-sky-100 transition"></i>
-        <p class="mt-3 text-white/70 text-sm" data-i18n="stack.tech4">PostgreSQL</p>
-      </div>
-
-      <div class="group">
-        <i class="fa-solid fa-brain text-5xl text-cyan-300 group-hover:text-cyan-200 transition"></i>
-        <p class="mt-3 text-white/70 text-sm" data-i18n="stack.tech5">IA / YOLO</p>
-      </div>
-
-      <div class="group">
-        <i class="fa-solid fa-camera text-5xl text-sky-300 group-hover:text-sky-200 transition"></i>
-        <p class="mt-3 text-white/70 text-sm" data-i18n="stack.tech6">OpenCV</p>
-      </div>
-
+    <div class="stack-tech-grid">
+      <div class="stack-tech-card"><i class="devicon-python-plain"></i><span>Python</span></div>
+      <div class="stack-tech-card"><i class="devicon-laravel-original"></i><span>Laravel</span></div>
+      <div class="stack-tech-card"><i class="devicon-postgresql-plain"></i><span>PostgreSQL</span></div>
+      <div class="stack-tech-card"><i class="devicon-nodejs-plain"></i><span>Node.js</span></div>
+      <div class="stack-tech-card"><i class="fa-solid fa-crosshairs"></i><span>YOLO</span></div>
+      <div class="stack-tech-card"><i class="devicon-opencv-plain"></i><span>OpenCV</span></div>
+      <div class="stack-tech-card"><i class="devicon-flask-original"></i><span>Flask</span></div>
+      <div class="stack-tech-card"><i class="devicon-tailwindcss-original"></i><span>TailwindCSS</span></div>
+      <div class="stack-tech-card"><i class="devicon-javascript-plain"></i><span>JavaScript</span></div>
+      <div class="stack-tech-card"><i class="devicon-html5-plain"></i><span>HTML</span></div>
+      <div class="stack-tech-card"><i class="devicon-css3-plain"></i><span>CSS</span></div>
     </div>
   </div>
 </section>
@@ -810,7 +1356,7 @@ animateNet();
 
       <div class="grid md:grid-cols-2 gap-10 md:gap-12">
 
-        <!-- Linguagens -->
+        <!-- Backend -->
         <div class="group relative">
           <div class="absolute inset-0 bg-gradient-to-br from-sky-300/20 via-cyan-300/20 to-violet-300/20 blur-3xl opacity-50 rounded-3xl"></div>
           <div class="relative bg-night-900/60 backdrop-blur-xl p-8 md:p-10 rounded-3xl border border-white/10 shadow-2xl tilt3d">
@@ -818,38 +1364,24 @@ animateNet();
               <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-sky-300 to-cyan-300 flex items-center justify-center text-night-900 text-2xl shadow-glow">
                 <i class="fa-solid fa-code"></i>
               </div>
-              <h3 class="text-2xl font-bold text-white" data-i18n="skills.lang.title">Linguagens</h3>
+              <h3 class="text-2xl font-bold text-white" data-i18n="skills.backend.title">Backend & APIs</h3>
             </div>
 
-            <div class="space-y-6">
-              <div>
-                <div class="flex justify-between mb-1">
-                  <span>Python</span>
-                  <span class="text-sky-300 font-semibold">90%</span>
-                </div>
-                <div class="skillbar"><div class="skillbar-progress" data-width="90"></div></div>
-              </div>
-
-              <div>
-                <div class="flex justify-between mb-1">
-                  <span>JavaScript</span>
-                  <span class="text-cyan-300 font-semibold">85%</span>
-                </div>
-                <div class="skillbar"><div class="skillbar-progress" data-width="85"></div></div>
-              </div>
-
-              <div>
-                <div class="flex justify-between mb-1">
-                  <span>PHP</span>
-                  <span class="text-violet-300 font-semibold">75%</span>
-                </div>
-                <div class="skillbar"><div class="skillbar-progress" data-width="75"></div></div>
-              </div>
+            <div class="flex flex-wrap gap-3">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Flask</span>
+              <span class="tech-tag">APIs REST</span>
+              <span class="tech-tag" data-i18n="skills.tags.videoProcessing">Processamento de vídeo</span>
+              <span class="tech-tag">PHP</span>
+              <span class="tech-tag">Laravel</span>
+              <span class="tech-tag">Blade</span>
+              <span class="tech-tag">Node.js</span>
+              <span class="tech-tag" data-i18n="skills.tags.whatsAutomation">Automação (WhatsApp / wwjs)</span>
             </div>
           </div>
         </div>
 
-        <!-- Frameworks -->
+        <!-- IA / Visão -->
         <div class="group relative">
           <div class="absolute inset-0 bg-gradient-to-br from-violet-300/20 via-sky-300/20 to-cyan-300/20 blur-3xl opacity-50 rounded-3xl"></div>
           <div class="relative bg-night-900/60 backdrop-blur-xl p-8 md:p-10 rounded-3xl border border-white/10 shadow-2xl tilt3d">
@@ -857,36 +1389,26 @@ animateNet();
               <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-violet-300 to-cyan-300 flex items-center justify-center text-night-900 text-2xl shadow-glow">
                 <i class="fa-solid fa-layer-group"></i>
               </div>
-              <h3 class="text-2xl font-bold text-white" data-i18n="skills.frame.title">Frameworks</h3>
+              <h3 class="text-2xl font-bold text-white" data-i18n="skills.ai.title">IA / Visão Computacional</h3>
             </div>
 
-            <div class="space-y-6">
-              <div>
-                <div class="flex justify-between mb-1">
-                  <span>Laravel</span>
-                  <span class="text-violet-300 font-semibold">80%</span>
-                </div>
-                <div class="skillbar"><div class="skillbar-progress" data-width="80"></div></div>
-              </div>
-              <div>
-                <div class="flex justify-between mb-1">
-                  <span>Flask</span>
-                  <span class="text-cyan-300 font-semibold">85%</span>
-                </div>
-                <div class="skillbar"><div class="skillbar-progress" data-width="85"></div></div>
-              </div>
-              <div>
-                <div class="flex justify-between mb-1">
-                  <span>OpenCV</span>
-                  <span class="text-sky-300 font-semibold">75%</span>
-                </div>
-                <div class="skillbar"><div class="skillbar-progress" data-width="75"></div></div>
-              </div>
+            <div class="flex flex-wrap gap-3">
+              <span class="tech-tag" data-i18n="skills.tags.ai">Inteligência Artificial</span>
+              <span class="tech-tag">YOLO</span>
+              <span class="tech-tag">OpenCV</span>
+              <span class="tech-tag">MediaPipe</span>
+              <span class="tech-tag" data-i18n="skills.tags.appliedMl">Machine Learning aplicado</span>
+              <span class="tech-tag">Computer Vision / Vídeo</span>
+              <span class="tech-tag">RTSP cameras</span>
+              <span class="tech-tag" data-i18n="skills.tags.frameProcessing">Processamento de frames</span>
+              <span class="tech-tag" data-i18n="skills.tags.peopleTracking">Tracking de pessoas</span>
+              <span class="tech-tag" data-i18n="skills.tags.behaviorAnalysis">Análise de comportamento</span>
+              <span class="tech-tag" data-i18n="skills.tags.objectDetection">Detecção de objetos</span>
             </div>
           </div>
         </div>
 
-        <!-- IA & ML -->
+        <!-- Frontend / Dados -->
         <div class="group relative">
           <div class="absolute inset-0 bg-gradient-to-br from-cyan-300/20 via-violet-300/20 to-sky-300/20 blur-3xl opacity-50 rounded-3xl"></div>
           <div class="relative bg-night-900/60 backdrop-blur-xl p-8 md:p-10 rounded-3xl border border-white/10 shadow-2xl tilt3d">
@@ -894,36 +1416,26 @@ animateNet();
               <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-300 to-sky-300 flex items-center justify-center text-night-900 text-2xl shadow-glow">
                 <i class="fa-solid fa-brain"></i>
               </div>
-              <h3 class="text-2xl font-bold text-white" data-i18n="skills.ai.title">IA & ML</h3>
+              <h3 class="text-2xl font-bold text-white" data-i18n="skills.frontData.title">Frontend / Dados</h3>
             </div>
 
-            <div class="space-y-6">
-              <div>
-                <div class="flex justify-between mb-1">
-                  <span>YOLO</span>
-                  <span class="text-sky-300 font-semibold">80%</span>
-                </div>
-                <div class="skillbar"><div class="skillbar-progress" data-width="80"></div></div>
-              </div>
-              <div>
-                <div class="flex justify-between mb-1">
-                  <span>MediaPipe</span>
-                  <span class="text-cyan-300 font-semibold">78%</span>
-                </div>
-                <div class="skillbar"><div class="skillbar-progress" data-width="78"></div></div>
-              </div>
-              <div>
-                <div class="flex justify-between mb-1">
-                  <span>TensorFlow</span>
-                  <span class="text-violet-300 font-semibold">70%</span>
-                </div>
-                <div class="skillbar"><div class="skillbar-progress" data-width="70"></div></div>
-              </div>
+            <div class="flex flex-wrap gap-3">
+              <span class="tech-tag">PostgreSQL</span>
+              <span class="tech-tag">MySQL</span>
+              <span class="tech-tag" data-i18n="skills.tags.reports">Geração de relatórios</span>
+              <span class="tech-tag">Dashboards</span>
+              <span class="tech-tag" data-i18n="skills.tags.flowAnalysis">Análise de fluxo de pessoas</span>
+              <span class="tech-tag" data-i18n="skills.tags.dataExport">Exportação de dados</span>
+              <span class="tech-tag">HTML</span>
+              <span class="tech-tag">CSS</span>
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">TailwindCSS</span>
+              <span class="tech-tag">Blade templates</span>
             </div>
           </div>
         </div>
 
-        <!-- Bancos -->
+        <!-- Infra / DevOps -->
         <div class="group relative">
           <div class="absolute inset-0 bg-gradient-to-br from-sky-300/20 via-violet-300/20 to-cyan-300/20 blur-3xl opacity-50 rounded-3xl"></div>
           <div class="relative bg-night-900/60 backdrop-blur-xl p-8 md:p-10 rounded-3xl border border-white/10 shadow-2xl tilt3d">
@@ -931,42 +1443,31 @@ animateNet();
               <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-sky-300 to-violet-300 flex items-center justify-center text-night-900 text-2xl shadow-glow">
                 <i class="fa-solid fa-database"></i>
               </div>
-              <h3 class="text-2xl font-bold text-white" data-i18n="skills.db.title">Banco de Dados</h3>
+              <h3 class="text-2xl font-bold text-white" data-i18n="skills.devops.title">Infraestrutura / DevOps</h3>
             </div>
 
-            <div class="space-y-6">
-              <div>
-                <div class="flex justify-between mb-1">
-                  <span>PostgreSQL</span>
-                  <span class="text-cyan-300 font-semibold">85%</span>
-                </div>
-                <div class="skillbar"><div class="skillbar-progress" data-width="85"></div></div>
-              </div>
-
-              <div>
-                <div class="flex justify-between mb-1">
-                  <span>SQLite</span>
-                  <span class="text-violet-300 font-semibold">80%</span>
-                </div>
-                <div class="skillbar"><div class="skillbar-progress" data-width="80"></div></div>
-              </div>
+            <div class="flex flex-wrap gap-3">
+              <span class="tech-tag">Linux servers</span>
+              <span class="tech-tag">Nginx</span>
+              <span class="tech-tag" data-i18n="skills.tags.tunneling">Tunelagem / rede</span>
+              <span class="tech-tag" data-i18n="skills.tags.ipCameras">Integração com câmeras IP</span>
+              <span class="tech-tag">APIs</span>
             </div>
           </div>
         </div>
 
       </div>
 
-      <!-- Soft skills -->
+      <!-- Áreas de aplicação -->
       <div class="mt-14 md:mt-16 glass rounded-3xl p-8 md:p-10 border border-white/10 shadow-soft">
-        <h3 class="text-2xl font-bold mb-5 text-white" data-i18n="skills.softskills">Soft Skills</h3>
-        <div class="flex flex-wrap gap-3" id="softskills-tags">
-          <span class="tech-tag" data-i18n="skills.softskills.tags.1">Comunicação clara</span>
-          <span class="tech-tag" data-i18n="skills.softskills.tags.2">Trabalho em equipe</span>
-          <span class="tech-tag" data-i18n="skills.softskills.tags.3">Criatividade</span>
-          <span class="tech-tag" data-i18n="skills.softskills.tags.4">Resolução de problemas</span>
-          <span class="tech-tag" data-i18n="skills.softskills.tags.5">Autonomia</span>
-          <span class="tech-tag" data-i18n="skills.softskills.tags.6">Foco em impacto real</span>
-          <span class="tech-tag" data-i18n="skills.softskills.tags.7">Aprendizado rápido</span>
+        <h3 class="text-2xl font-bold mb-5 text-white" data-i18n="skills.application.title">Áreas de aplicação</h3>
+        <div class="flex flex-wrap gap-3">
+          <span class="tech-tag" data-i18n="skills.application.1">GovTech</span>
+          <span class="tech-tag" data-i18n="skills.application.2">Smart Cities</span>
+          <span class="tech-tag" data-i18n="skills.application.3">Computer Vision</span>
+          <span class="tech-tag" data-i18n="skills.application.4">Educação</span>
+          <span class="tech-tag" data-i18n="skills.application.5">Segurança pública</span>
+          <span class="tech-tag" data-i18n="skills.application.6">Agritech</span>
         </div>
       </div>
     </div>
@@ -1454,12 +1955,76 @@ animateNet();
 
   <!-- JS COMPLETO -->
   <script>
-    // fade-in on load
-    window.addEventListener("load", () => {
-      document.querySelectorAll(".fade-start").forEach(el => {
-        requestAnimationFrame(() => el.classList.add("fade-in"));
-      });
+  // Fade-in por scroll - premium com stagger
+  const fadeEls = document.querySelectorAll(".fade-start");
+
+  const fadeObs = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        requestAnimationFrame(() => {
+          e.target.classList.add("fade-in");
+        });
+        fadeObs.unobserve(e.target);
+      }
     });
+  }, { 
+    threshold: 0.08, 
+    rootMargin: "0px 0px -8% 0px" 
+  });
+
+  fadeEls.forEach(el => fadeObs.observe(el));
+  
+  // Adiciona stagger premium aos cards de awards
+  const awardsCards = document.querySelectorAll('#awards .tilt3d');
+  if(awardsCards.length > 0) {
+    const cardsObs = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          requestAnimationFrame(() => {
+            setTimeout(() => {
+              entry.target.style.opacity = '1';
+              entry.target.style.transform = 'translateY(0) scale(1)';
+            }, index * 120);
+          });
+          cardsObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -10% 0px" });
+    
+    awardsCards.forEach((card) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(40px) scale(0.92)';
+      card.style.transition = 'opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1)';
+      cardsObs.observe(card);
+    });
+  }
+  
+  // Stagger para cards de projetos
+  const projectCards = document.querySelectorAll('#projects .project-card');
+  if(projectCards.length > 0) {
+    const projectObs = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          requestAnimationFrame(() => {
+            setTimeout(() => {
+              entry.target.style.opacity = '1';
+              entry.target.style.transform = 'translateY(0)';
+            }, index * 100);
+          });
+          projectObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    projectCards.forEach((card) => {
+      if(!card.classList.contains('fade-in')) {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1)';
+        projectObs.observe(card);
+      }
+    });
+  }
 
     // scroll top
     document.getElementById("scrollTopBtn").addEventListener("click", () => {
@@ -1630,14 +2195,56 @@ animateNet();
         "about.t2.desc":"Avancei com YOLO, OpenCV e machine learning criando sistemas inteligentes para educação e segurança.",
         "about.t3.title":"Full-Stack & GovTech",
         "about.t3.desc":"Desenvolvo plataformas completas em Laravel + PostgreSQL que ajudam escolas, prefeituras e pessoas.",
+        "about.hero.title":"Tecnologia que executa.",
+        "about.hero.lead.html":"Meu nome é <strong class=\"text-white\">Bruno Yudi Kay</strong>. Desenvolvedor focado em <span class=\"text-sky-300 font-semibold\">IA aplicada</span>, <span class=\"text-cyan-300 font-semibold\">Visão Computacional</span> e <span class=\"text-violet-300 font-semibold\">GovTech</span>.",
+        "about.hero.impact":"Dados reais. Execução real. Impacto fora do portfólio.",
+        "about.hero.cta":"Ver projetos reais",
         "projects.title":"Projetos em Destaque",
         "projects.subtitle":"Sistemas reais que desenvolvi unindo IA, visão computacional, web moderna e impacto social.",
+        "projects.kicker":"Projetos em Produção",
+        "projects.headline":"Sistemas reais com impacto real",
+        "projects.lead":"Produtos desenvolvidos para educação, governo e visão computacional, com uso real e foco em resultado.",
+        "projects.ceep.kicker":"GovTech • Educação Pública",
+        "projects.ceep.desc":"Sistema institucional para o CEEP Assaí com autenticação, gestão acadêmica, painéis administrativos e integração de dados escolares.",
+        "projects.assahi.kicker":"Smart City • Fluxo de Pessoas",
+        "projects.assahi.desc":"Sistema com IA para monitoramento de fluxo de pessoas usando YOLO, OpenCV e câmeras RTSP, gerando métricas em tempo real.",
+        "projects.classEye.desc":"Sistema de visão computacional para análise de atenção em sala e geração de relatórios pedagógicos.",
+        "projects.chatbot.desc":"Automação institucional com Node.js e integração com WhatsApp/wwjs e banco PostgreSQL.",
+        "projects.scoutis.desc":"Monitoramento no agronegócio com ML aplicado para detecção de anomalias e análise de dados.",
+        "projects.tags.auth":"Autenticação",
+        "projects.tags.dashboard":"Dashboards",
+        "projects.visitSystem":"Visitar sistema",
+        "projects.liveDemo":"Site",
         "awards.title": "Certificações & Reconhecimentos",
         "awards.subtitle": "Conquistas reais em inovação, educação e tecnologia.",
         "stack.title": "Tech Stack",
-        "stack.subtitle": "Tecnologias que uso diariamente para construir sistemas reais.",
+        "stack.subtitle": "Tecnologias principais do meu dia a dia em produtos de IA, web e sistemas reais.",
         "skills.title": "Habilidades & Tecnologias",
         "skills.subtitle": "Stack moderna, forte e focada em IA, back-end e web profissional.",
+        "skills.backend.title": "Backend & APIs",
+        "skills.ai.title": "IA / Visão Computacional",
+        "skills.frontData.title": "Frontend / Dados",
+        "skills.devops.title": "Infraestrutura / DevOps",
+        "skills.application.title": "Áreas de aplicação",
+        "skills.application.1": "GovTech",
+        "skills.application.2": "Smart Cities",
+        "skills.application.3": "Computer Vision",
+        "skills.application.4": "Educação",
+        "skills.application.5": "Segurança pública",
+        "skills.application.6": "Agritech",
+        "skills.tags.videoProcessing":"Processamento de vídeo",
+        "skills.tags.whatsAutomation":"Automação (WhatsApp / wwjs)",
+        "skills.tags.ai":"Inteligência Artificial",
+        "skills.tags.appliedMl":"Machine Learning aplicado",
+        "skills.tags.frameProcessing":"Processamento de frames",
+        "skills.tags.peopleTracking":"Tracking de pessoas",
+        "skills.tags.behaviorAnalysis":"Análise de comportamento",
+        "skills.tags.objectDetection":"Detecção de objetos",
+        "skills.tags.reports":"Geração de relatórios",
+        "skills.tags.flowAnalysis":"Análise de fluxo de pessoas",
+        "skills.tags.dataExport":"Exportação de dados",
+        "skills.tags.tunneling":"Tunelagem / rede",
+        "skills.tags.ipCameras":"Integração com câmeras IP",
         "skills.softskills": "Soft Skills",
         "skills.softskills.tags": "Comunicação clara Trabalho em equipe Criatividade Resolução de problemas Autonomia Foco em impacto real Aprendizado rápido",
         "testimonials.title": "Depoimentos",
@@ -1705,14 +2312,56 @@ animateNet();
         "about.t2.desc":"I advanced with YOLO, OpenCV and machine learning, creating intelligent systems for education and security.",
         "about.t3.title":"Full-Stack & GovTech",
         "about.t3.desc":"I build complete Laravel + PostgreSQL platforms that help schools, city halls and people.",
+        "about.hero.title":"Technology that delivers.",
+        "about.hero.lead.html":"My name is <strong class=\"text-white\">Bruno Yudi Kay</strong>. Developer focused on <span class=\"text-sky-300 font-semibold\">Applied AI</span>, <span class=\"text-cyan-300 font-semibold\">Computer Vision</span> and <span class=\"text-violet-300 font-semibold\">GovTech</span>.",
+        "about.hero.impact":"Real data. Real execution. Impact beyond the portfolio.",
+        "about.hero.cta":"See real projects",
         "projects.title":"Featured Projects",
         "projects.subtitle":"Real systems I developed combining AI, computer vision, modern web and social impact.",
+        "projects.kicker":"Live Projects",
+        "projects.headline":"Real systems with real impact",
+        "projects.lead":"Products built for education, government and computer vision, with real usage and measurable results.",
+        "projects.ceep.kicker":"GovTech • Public Education",
+        "projects.ceep.desc":"Institutional platform for CEEP Assaí with authentication, academic management, admin dashboards and school data integration.",
+        "projects.assahi.kicker":"Smart City • People Flow",
+        "projects.assahi.desc":"AI-powered people flow monitoring with YOLO, OpenCV and RTSP cameras, generating real-time urban metrics.",
+        "projects.classEye.desc":"Computer vision system for classroom attention analysis and pedagogical reporting.",
+        "projects.chatbot.desc":"Institutional automation with Node.js, WhatsApp/wwjs integration and PostgreSQL.",
+        "projects.scoutis.desc":"Agritech monitoring with applied ML for anomaly detection and data analysis.",
+        "projects.tags.auth":"Authentication",
+        "projects.tags.dashboard":"Dashboards",
+        "projects.visitSystem":"Visit system",
+        "projects.liveDemo":"Website",
         "awards.title": "Certifications & Recognitions",
         "awards.subtitle": "Real achievements in innovation, education and technology.",
         "stack.title": "Tech Stack",
-        "stack.subtitle": "Technologies I use daily to build real systems.",
+        "stack.subtitle": "Core technologies I use daily for AI products, web platforms and real-world systems.",
         "skills.title": "Skills & Technologies",
         "skills.subtitle": "Modern, strong stack focused on AI, back-end and professional web.",
+        "skills.backend.title": "Backend & APIs",
+        "skills.ai.title": "AI / Computer Vision",
+        "skills.frontData.title": "Frontend / Data",
+        "skills.devops.title": "Infrastructure / DevOps",
+        "skills.application.title": "Application Areas",
+        "skills.application.1": "GovTech",
+        "skills.application.2": "Smart Cities",
+        "skills.application.3": "Computer Vision",
+        "skills.application.4": "Education",
+        "skills.application.5": "Public Safety",
+        "skills.application.6": "Agritech",
+        "skills.tags.videoProcessing":"Video processing",
+        "skills.tags.whatsAutomation":"Automation (WhatsApp / wwjs)",
+        "skills.tags.ai":"Artificial Intelligence",
+        "skills.tags.appliedMl":"Applied Machine Learning",
+        "skills.tags.frameProcessing":"Frame processing",
+        "skills.tags.peopleTracking":"People tracking",
+        "skills.tags.behaviorAnalysis":"Behavior analysis",
+        "skills.tags.objectDetection":"Object detection",
+        "skills.tags.reports":"Report generation",
+        "skills.tags.flowAnalysis":"People flow analysis",
+        "skills.tags.dataExport":"Data export",
+        "skills.tags.tunneling":"Tunneling / network",
+        "skills.tags.ipCameras":"IP camera integration",
         "skills.softskills": "Soft Skills",
         "skills.softskills.tags": "Clear communication Teamwork Creativity Problem solving Autonomy Focus on real impact Fast learning",
         "testimonials.title": "Testimonials",
@@ -1748,15 +2397,24 @@ animateNet();
     };
 
     function applyTranslations(lang){
+      const dict = translations[lang] || translations.pt;
       document.querySelectorAll("[data-i18n]").forEach(el=>{
         const k = el.getAttribute("data-i18n");
-        if(translations[lang][k]) el.textContent = translations[lang][k];
+        const value = dict[k] ?? translations.pt[k];
+        if(value) el.textContent = value;
       });
       // Placeholders
       document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{
         const k = el.getAttribute("data-i18n-placeholder");
-        if(translations[lang][k]) el.placeholder = translations[lang][k];
+        const value = dict[k] ?? translations.pt[k];
+        if(value) el.placeholder = value;
       });
+      document.querySelectorAll("[data-i18n-html]").forEach(el=>{
+        const k = el.getAttribute("data-i18n-html");
+        const value = dict[k] ?? translations.pt[k];
+        if(value) el.innerHTML = value;
+      });
+      document.documentElement.lang = lang === "en" ? "en" : "pt-BR";
     }
 
     // translations init
